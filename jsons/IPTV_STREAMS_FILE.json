@@ -1,0 +1,83 @@
+[
+    {
+        "name": "Unknown",
+        "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/62ba60f059624e000781c436/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c25e430-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=1b7de8e4-d114-4438-b098-6f7aee77b4be",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "playing_now": "Not available",
+        "status": "online"
+    },
+    {
+        "name": "Unknown",
+        "url": "http://178.219.128.68:64888/4FUNDANC",
+        "tvg_id": "4FunDance.pl",
+        "tvg_logo": "https://i.imgur.com/ZEWHe1B.png",
+        "group_title": "Music",
+        "playing_now": "Not available",
+        "status": "online"
+    },
+    {
+        "name": "Unknown",
+        "url": "http://178.219.128.68:64888/4FUNKIDS",
+        "tvg_id": "4FunKids.pl",
+        "tvg_logo": "https://i.imgur.com/2JO5Y8c.png",
+        "group_title": "Kids",
+        "playing_now": "Not available",
+        "status": "online"
+    },
+    {
+        "name": "Unknown",
+        "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/65775e07dfed030008cb3f47/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=6c263251-30d3-11ef-9cf5-e9ddff8ff496&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=9613835c-f568-4f54-a3c9-71d2371228af",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "playing_now": "Not available",
+        "status": "online"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://origin-caf900c010ea8046.live.6cloud.fr/out/v1/29c7a579af3348b48230f76cd75699a5/dash_short_cenc10_6ter_hd_index.mpd",
+        "tvg_id": "6ter.fr",
+        "tvg_logo": "https://i.imgur.com/2nd5Cox.png",
+        "group_title": "Entertainment",
+        "playing_now": "Not available",
+        "status": "online"
+    },
+    {
+        "name": "Unknown",
+        "url": "http://95.46.208.8:24433/art",
+        "tvg_id": "Channel8Belarus.by",
+        "tvg_logo": "https://upload.wikimedia.org/wikipedia/commons/3/33/8channeltv.png",
+        "group_title": "General",
+        "playing_now": "Not available",
+        "status": "online"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://stitcher-ipv4.pluto.tv/v1/stitch/embed/hls/channel/60940a07d88ba90007b9cb71/master.m3u8?advertisingId={PSID}&appVersion=unknown&deviceDNT={TARGETOPT}&deviceId={PSID}&deviceLat=0&deviceLon=0&deviceMake=samsung&deviceModel=samsung&deviceType=samsung-tvplus&deviceVersion=unknown&embedPartner=samsung-tvplus&profileFloor=&profileLimit=&samsung_app_domain={APP_DOMAIN}&samsung_app_name={APP_NAME}&us_privacy=1YNY",
+        "tvg_id": "16AnnieIncinta.it",
+        "tvg_logo": "https://i.imgur.com/Y2pEs8H.png",
+        "group_title": "Series",
+        "playing_now": "Not available",
+        "status": "online"
+    },
+    {
+        "name": "Unknown",
+        "url": "http://185.234.111.229:8000/play/a056",
+        "tvg_id": "24TV.tr",
+        "tvg_logo": "https://i.imgur.com/8FO41es.png",
+        "group_title": "News",
+        "playing_now": "Not available",
+        "status": "online"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://tvpass.org/live/AEEast/sd",
+        "tvg_id": "AEEast.us",
+        "tvg_logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/A%26E_Network_logo.svg/512px-A%26E_Network_logo.svg.png",
+        "group_title": "Entertainment",
+        "playing_now": "Not available",
+        "status": "online"
+    }
+]

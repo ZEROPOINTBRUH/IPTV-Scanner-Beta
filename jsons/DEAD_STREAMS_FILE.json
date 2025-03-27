@@ -1,0 +1,1091 @@
+[
+    {
+        "name": "Unknown",
+        "url": "https://123tv-mx1.flex-cdn.net/index.m3u8",
+        "tvg_id": "123tv.de",
+        "tvg_logo": "https://i.imgur.com/slSUDNX.png",
+        "group_title": "Shop",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://d3472rjicrodic.cloudfront.net/nlpo/clr-nlpo/709d5260/index.m3u8",
+        "tvg_id": "1AlmereTV.nl",
+        "tvg_logo": "https://i.imgur.com/XfkbTrU.png",
+        "group_title": "General",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://cdn.freevisiontv.co.za/sttv/smil:1kzn.stream.smil/playlist.m3u8",
+        "tvg_id": "1KZNTV.za",
+        "tvg_logo": "https://admango.cdn.mangomolo.com/analytics/uploads/188/6544bebaae.jpg",
+        "group_title": "Entertainment;Family;General",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://tv.cdn.xsg.ge/gpb-1tv/index.m3u8",
+        "tvg_id": "1TV.ge",
+        "tvg_logo": "https://i.imgur.com/FSkYLPK.png",
+        "group_title": "General",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://ms2.mx-cd.net/dtv-10/198-989148/1Twente_TV.smil/playlist.m3u8",
+        "tvg_id": "1TwenteTV.nl",
+        "tvg_logo": "https://i.imgur.com/ftiuNK3.png",
+        "group_title": "General",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://cdn.002radio.com:3909/live/radio002live.m3u8",
+        "tvg_id": "002RadioTV.do",
+        "tvg_logo": "https://i.imgur.com/7oNe8xj.png",
+        "group_title": "General",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://2gblive.akamaized.net/hls/live/2033805/2GB/index.m3u8",
+        "tvg_id": "2GB.au",
+        "tvg_logo": "https://i.ibb.co/jwM8DFG/2GB-1.png",
+        "group_title": "News",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://tv.cdn.xsg.ge/gpb-2tv/index.m3u8",
+        "tvg_id": "2TV.ge",
+        "tvg_logo": "https://i.imgur.com/FJBL6zI.png",
+        "group_title": "General",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://directes-tv-int.3catdirectes.cat/live-origin/canal324-hls/master.m3u8",
+        "tvg_id": "324.es",
+        "tvg_logo": "https://static.wikia.nocookie.net/logopedia/images/2/21/324_%28CCMA%29_logo.svg/revision/latest/scale-to-width-down/512",
+        "group_title": "News",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://3abn.bozztv.com/3abncanada/3ABN/master.m3u8",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://3abn.bozztv.com/3abn2/d2d_live/smil:d2d_live.smil/playlist.m3u8",
+        "tvg_id": "DareToDreamNetwork.us",
+        "tvg_logo": "https://i.imgur.com/JwCLwQ2.png",
+        "group_title": "Religious",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://3abn.bozztv.com/3abn2/3abn_live/smil:3abn_live.smil/playlist.m3u8",
+        "tvg_id": "3ABNEnglish.us",
+        "tvg_logo": "https://i.imgur.com/bgJQIyW.png",
+        "group_title": "Religious",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://3abn.bozztv.com/3abn2/Fre_live/smil:Fre_live.smil/playlist.m3u8",
+        "tvg_id": "3ABNFrench.us",
+        "tvg_logo": "https://i.imgur.com/B5gsM7m.png",
+        "group_title": "Religious",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://3abn.bozztv.com/3abn2/Int_live/smil:Int_live.smil/playlist.m3u8",
+        "tvg_id": "3ABNInternational.us",
+        "tvg_logo": "https://i.imgur.com/8YMLPA3.png",
+        "group_title": "Religious",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://3abn.bozztv.com/3abn2/Kids_live/smil:Kids_live.smil/playlist.m3u8",
+        "tvg_id": "3ABNKids.us",
+        "tvg_logo": "https://i.imgur.com/SUPQAok.png",
+        "group_title": "Animation;Kids;Religious",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://3abn.bozztv.com/3abn2/Lat_live/smil:Lat_live.smil/playlist.m3u8",
+        "tvg_id": "3ABNLatino.us",
+        "tvg_logo": "https://i.imgur.com/If6rCuD.png",
+        "group_title": "Religious",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://3abn.bozztv.com/3abn1/PraiseHim/smil:PraiseHim.smil/playlist.m3u8",
+        "tvg_id": "3ABNPraiseHimMusicNetwork.us",
+        "tvg_logo": "https://i.imgur.com/iBcqT8L.png",
+        "group_title": "Music;Religious",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://3abn.bozztv.com/3abn2/Pro_live/smil:Pro_live.smil/playlist.m3u8",
+        "tvg_id": "3ABNProclaimNetwork.us",
+        "tvg_logo": "https://yt3.googleusercontent.com/ytc/AIdro_mb4TLclxAUPvlnV84blg4YSnZYjspMitP_sS2rX_5IYQ=s512-c-k-c0x00ffffff-no-rj",
+        "group_title": "Religious",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://3awlive.akamaized.net/hls/live/2032295/3AW/index.m3u8",
+        "tvg_id": "3AW.au",
+        "tvg_logo": "https://i.imgur.com/Z4MdB0S.png",
+        "group_title": "News",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://lb1-live-mv.v2h-cdn.com/hls/ffae/3hd/3hd.m3u8",
+        "tvg_id": "3HD.th",
+        "tvg_logo": "https://i.imgur.com/YRiulCU.png",
+        "group_title": "General",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://rds3.desdeparaguay.net/4dmasnoticiastv/4dmasnoticiastv/playlist.m3u8",
+        "tvg_id": "4DmasNoticiasTV.py",
+        "tvg_logo": "https://i.ibb.co/1fb5BtN/unnamed.png",
+        "group_title": "News",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "http://eu2.tv4e.gr:554/live/smil:myStream.sdp.smil/playlist.m3u8",
+        "tvg_id": "4E.gr",
+        "tvg_logo": "https://i.imgur.com/Na0UCV7.png",
+        "group_title": "Religious",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://stream.4fun.tv:8888/hls/4f.m3u8",
+        "tvg_id": "4FunTV.pl",
+        "tvg_logo": "https://i.imgur.com/rI1wo2l.png",
+        "group_title": "Undefined",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://streams2.sofast.tv/sofastplayout/33c31ac4-51fa-46ae-afd0-0d1fe5e60a80_0_HLS/master.m3u8",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://hls.4utv.live/hls/stream.m3u8",
+        "tvg_id": "4UTV.tr",
+        "tvg_logo": "https://i.imgur.com/PexhKwp.png",
+        "group_title": "Entertainment",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "http://158.69.124.9:1935/5aabtv/5aabtv/playlist.m3u8",
+        "tvg_id": "5AABTV.ca",
+        "tvg_logo": "https://i.imgur.com/jrGrfof.png",
+        "group_title": "Entertainment",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://5a13fe32ef748.streamlock.net/mmplay/5plus/playlist.m3u8",
+        "tvg_id": "5Plus.mm",
+        "tvg_logo": "https://i.imgur.com/4EHL2mH.png",
+        "group_title": "Entertainment",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "http://www.coninfo.net:1935/tvcinco/live1/playlist.m3u8",
+        "tvg_id": "5tv.ar",
+        "tvg_logo": "https://i.imgur.com/mSn7ACs.png",
+        "group_title": "General",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://6prlive.akamaized.net/hls/live/2033806/6PR/index.m3u8",
+        "tvg_id": "6PR.au",
+        "tvg_logo": "https://i.imgur.com/Q9iCxg1.png",
+        "group_title": "News",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://play.cdn.enetres.net/9E9557EFCEBB43A89CEC8FBD3C500247022/028/playlist.m3u8",
+        "tvg_id": "Canal7TeleValencia.es",
+        "tvg_logo": "https://i.imgur.com/ILfXDRs.png",
+        "group_title": "General",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://rtv-murcia-live.globalmest.com/principal/smil:principal.smil/playlist.m3u8",
+        "tvg_id": "La7.es",
+        "tvg_logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/La_7_logo.svg/150px-La_7_logo.svg.png",
+        "group_title": "General",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://streaming005.gestec-video.com/hls/canal24.m3u8",
+        "tvg_id": "8LaMarinaTV.es",
+        "tvg_logo": "https://i.imgur.com/BTJvvBK.png",
+        "group_title": "General",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "http://185.189.225.150:85/8madrid/index.m3u8",
+        "tvg_id": "8madridTV.es",
+        "tvg_logo": "https://i.imgur.com/ZjnlY3D.jpeg",
+        "group_title": "Movies",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://60417ddeaf0d9.streamlock.net/ntv/videontv/playlist.m3u8",
+        "tvg_id": "8NTV.mx",
+        "tvg_logo": "https://i.imgur.com/7ecgGIG.png",
+        "group_title": "General",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://amg01281-9xmediapvtltd-9xjalwa-samsungin-goszf.amagi.tv/playlist/amg01281-9xmediapvtltd-9xjalwa-samsungin/playlist.m3u8",
+        "tvg_id": "9XJalwa.in",
+        "tvg_logo": "https://i.imgur.com/qubgOi5.png",
+        "group_title": "Music",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://amg01281-9xmediapvtltd-9xjhakaas-samsungin-ci2cs.amagi.tv/playlist/amg01281-9xmediapvtltd-9xjhakaas-samsungin/playlist.m3u8",
+        "tvg_id": "9XJhakaas.in",
+        "tvg_logo": "https://i.imgur.com/aZ0f85I.png",
+        "group_title": "Music",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://amg01281-9xmediapvtltd-9xtashan-samsungin-xz1sd.amagi.tv/playlist/amg01281-9xmediapvtltd-9xtashan-samsungin/playlist.m3u8",
+        "tvg_id": "9XTashan.in",
+        "tvg_logo": "https://i.imgur.com/MMR1RMF.png",
+        "group_title": "Music",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://d35j504z0x2vu2.cloudfront.net/v1/manifest/0bc8e8376bd8417a1b6761138aa41c26c7309312/9xm/23886666-8fc5-470f-aab1-bd637ed607b1/3.m3u8",
+        "tvg_id": "9XM.in",
+        "tvg_logo": "https://i.imgur.com/F17QtN2.png",
+        "group_title": "Music",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://dce3793146fef017.mediapackage.us-west-2.amazonaws.com/out/v1/55cdf73af7894775ba6de8f57482b66a/CMAF_HLS/index.m3u8",
+        "tvg_id": "10BoldAdelaide.au",
+        "tvg_logo": "https://i.imgur.com/2xglh33.png",
+        "group_title": "Lifestyle;Relax",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://5929b138b139d.streamlock.net/12TVParma/livestream/playlist.m3u8",
+        "tvg_id": "12TVParma.it",
+        "tvg_logo": "https://i.imgur.com/mBYxWOg.png",
+        "group_title": "General",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://12channel.bonus-tv.ru/cdn/12channel/playlist.m3u8",
+        "tvg_id": "Channel12.ru",
+        "tvg_logo": "https://i.imgur.com/OA9hm6e.png",
+        "group_title": "General",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://origin.dpsgo.com/ssai/event/GI-9cp_bT8KcerLpZwkuhw/master.m3u8",
+        "tvg_id": "13C.cl",
+        "tvg_logo": "https://i.ibb.co/3fbvkZ3/13cultura.png",
+        "group_title": "General",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://origin.dpsgo.com/ssai/event/BBp0VeP6QtOOlH8nu3bWTg/master.m3u8",
+        "tvg_id": "13E.cl",
+        "tvg_logo": "https://i.imgur.com/utI1tJV.png",
+        "group_title": "Entertainment",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://origin.dpsgo.com/ssai/event/Nftd0fM2SXasfDlRphvUsg/master.m3u8",
+        "tvg_id": "13Festival.cl",
+        "tvg_logo": "https://i.imgur.com/hTUe0Pw.png",
+        "group_title": "Music",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://origin.dpsgo.com/ssai/event/cKWySXKgSK-SzlJmESkOWw/master.m3u8",
+        "tvg_id": "13Humor.cl",
+        "tvg_logo": "https://i.imgur.com/KvMuTzN.png",
+        "group_title": "Comedy",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://origin.dpsgo.com/ssai/event/LhHrVtyeQkKZ-Ye_xEU75g/master.m3u8",
+        "tvg_id": "13Kids.cl",
+        "tvg_logo": "https://i.imgur.com/8WJUbSD.png",
+        "group_title": "Kids",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "http://coninfo.net:1935/13maxhd/live13maxtvnuevo_720p/playlist.m3u8",
+        "tvg_id": "13MaxTelevision.ar",
+        "tvg_logo": "https://i.imgur.com/QvF4l2t.png",
+        "group_title": "General",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://origin.dpsgo.com/ssai/event/p4mmBxEzSmKAxY1GusOHrw/master.m3u8",
+        "tvg_id": "13P.cl",
+        "tvg_logo": "https://i.imgur.com/R6D228s.png",
+        "group_title": "Lifestyle",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://origin.dpsgo.com/ssai/event/g7_JOM0ORki9SR5RKHe-Kw/master.m3u8",
+        "tvg_id": "13Realities.cl",
+        "tvg_logo": "https://i.imgur.com/snqCYWP.png",
+        "group_title": "Entertainment",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://live.x2.co.th/live/13livetv-th.m3u8",
+        "tvg_id": "13SiamThai.th",
+        "tvg_logo": "https://i.imgur.com/FvEp1S2.png",
+        "group_title": "News",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://origin.dpsgo.com/ssai/event/f4TrySe8SoiGF8Lu3EIq1g/master.m3u8",
+        "tvg_id": "13T.cl",
+        "tvg_logo": "https://i.imgur.com/Agtfbfi.png",
+        "group_title": "Series",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "http://109.233.89.166/13_Ulica_HD/index.m3u8",
+        "tvg_id": "13Ulica.pl",
+        "tvg_logo": "https://i.imgur.com/0gCNnLq.png",
+        "group_title": "Entertainment",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://cloudfront44.lexanetwork.com:1344/freerelay/16tv.sdp/playlist.m3u8",
+        "tvg_id": "16tvBudapest.hu",
+        "tvg_logo": "https://i.imgur.com/04fCzHl.png",
+        "group_title": "General",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://lives.digiteka.com/stream/86d3e867-a272-496b-8412-f59aa0104771/index.m3u8",
+        "tvg_id": "20MinutesTV.fr",
+        "tvg_logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/20_Minutes_TV_IDF_logo_%282023%29.png/320px-20_Minutes_TV_IDF_logo_%282023%29.png",
+        "group_title": "General",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://content.uplynk.com/channel/ff809e6d9ec34109abfb333f0d4444b5.m3u8",
+        "tvg_id": "KERODT1.us",
+        "tvg_logo": "https://i.imgur.com/CMANZWk.png",
+        "group_title": "General",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://panel.dattalive.com/6605140/6605140/playlist.m3u8",
+        "tvg_id": "247CanaldeNoticias.ar",
+        "tvg_logo": "https://i.imgur.com/4hDCB1M.png",
+        "group_title": "News",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://rtvelivestream.akamaized.net/rtvesec/24h/24h_main_dvr.m3u8",
+        "tvg_id": "24HorasInternacional.es",
+        "tvg_logo": "https://i.imgur.com/IUVRm5L.png",
+        "group_title": "News",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://d1j2u714xk898n.cloudfront.net/scheduler/scheduleMaster/145.m3u8",
+        "tvg_id": "24HourFreeMovies.us",
+        "tvg_logo": "https://i.imgur.com/iSVnzR1.png",
+        "group_title": "Movies",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://streamvideol1.luxnet.ua/news24/smil:news24.stream.smil/playlist.m3u8",
+        "tvg_id": "Channel24.ua",
+        "tvg_logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/24_Group_Ukraine_04.png/512px-24_Group_Ukraine_04.png",
+        "group_title": "News",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://30a-tv.com/darcizzle.m3u8",
+        "tvg_id": "30ADarcizzleOffshore.us",
+        "tvg_logo": "https://i.imgur.com/Q4l2uao.png",
+        "group_title": "Outdoor",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://30a-tv.com/gh.m3u8",
+        "tvg_id": "30AGeorgiaHollywoodReview.us",
+        "tvg_logo": "https://images.axios.com/JiG3RuYBwpU_WZFeU6HHjt03FAU=/111x0:1191x1080/320x320/2023/11/09/1699558891265.jpg",
+        "group_title": "Entertainment;News",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://30a-tv.com/feeds/vidaa/golf.m3u8",
+        "tvg_id": "30AGolfKingdom.us",
+        "tvg_logo": "https://golfkingdom.net/wp-content/uploads/2022/04/golf-kingdom-st.jpg",
+        "group_title": "Sports",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://30a-tv.com/feeds/xodglobal/30atv.m3u8",
+        "tvg_id": "30AInvestmentPitch.us",
+        "tvg_logo": "https://i.imgur.com/CKCtZo7.png",
+        "group_title": "Business",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://30a-tv.com/ln.m3u8",
+        "tvg_id": "30ALionelNation.us",
+        "tvg_logo": "https://m.media-amazon.com/images/I/71dgsQwVcNL.png",
+        "group_title": "News",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://30a-tv.com/loomer.m3u8",
+        "tvg_id": "30ALoomeredTV.us",
+        "tvg_logo": "https://cbs12.com/resources/media/0c1ecad8-fb09-4bb2-beaa-fc561dfe624a-small21x9_LoomerStill.jpg?1603419052801",
+        "group_title": "Documentary;News",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://30a-tv.com/feeds/vidaa/luxelife.m3u8",
+        "tvg_id": "30ALuxeLifeDiscovered.us",
+        "tvg_logo": "https://m.media-amazon.com/images/I/51FJ5A0mEyL.jpg",
+        "group_title": "Lifestyle",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://30a-tv.com/music.m3u8",
+        "tvg_id": "30AMusic.us",
+        "tvg_logo": "https://i.imgur.com/gNWg9tl.png",
+        "group_title": "Music",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://30a-tv.com/feeds/720p/63.m3u8",
+        "tvg_id": "30ARidiculousTV.us",
+        "tvg_logo": "https://30a.media/wp-content/uploads/2023/08/pzaz-30atv-2-230x366-ridiculous.jpg",
+        "group_title": "Comedy",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://30a-tv.com/feeds/pzaz/30atvmovies.m3u8",
+        "tvg_id": "30ATVClassicMovies.us",
+        "tvg_logo": "https://babaktv.com/wp-content/uploads/2023/09/30A-Classi-Movies.jpeg",
+        "group_title": "Movies",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://30a-tv.com/feeds/vidaa/cars.m3u8",
+        "tvg_id": "30AWeLoveCars.us",
+        "tvg_logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxroqfE_hvEApKMQx03sSYXPeEh4ClaF5QSa8XfRwJW_So3vfSN0CjqzxN30H-qEBswqU&usqp=CAU",
+        "group_title": "Auto",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "http://wms.shared.streamshow.it/canale51/canale51/playlist.m3u8",
+        "tvg_id": "51RadioTV.it",
+        "tvg_logo": "https://www.51news.it/images/loghi/logo_tv_radio_51news.png",
+        "group_title": "Music",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "http://k3.usastreams.com/CableLatino/88stereo/playlist.m3u8",
+        "tvg_id": "88Stereo.cr",
+        "tvg_logo": "https://i.imgur.com/i3YwORV.png",
+        "group_title": "Music",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "http://92news.vdn.dstreamone.net/92newshd/92hd/playlist.m3u8",
+        "tvg_id": "92NewsHD.pk",
+        "tvg_logo": "https://yt3.googleusercontent.com/sJ8nMAbzs2lreEaBW2viL9VCvud_FkkDmFRa4es3Y5zOht6PpBNM56pNIAoh395B6FhYaxTFiVM=s512-c-k-c0x00ffffff-no-rj",
+        "group_title": "News",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://live2.tensila.com/pearl-v-1.pearlfm/hls/live/mystream.m3u8",
+        "tvg_id": "981PearlFM.sx",
+        "tvg_logo": "https://i.imgur.com/GY750xh.jpg",
+        "group_title": "Music",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://amg02162-newenconnect-amg02162c2-rakuten-us-1981.playouts.now.amagi.tv/playlist/amg02162-newenconnect-100pour100docs-rakutenus/playlist.m3u8",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://www.streaming101tv.es:19360/axarquia/axarquia.m3u8",
+        "tvg_id": "101tvAxarquia.es",
+        "tvg_logo": "https://i.imgur.com/GzI3RC4.png",
+        "group_title": "General",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "http://176.126.166.43:1935/live/312kino/playlist.m3u8",
+        "tvg_id": "312Kino.kg",
+        "tvg_logo": "https://i.ibb.co/3m9LrLj/k7gIibH.png",
+        "group_title": "Movies",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "http://49.0.87.24:1936/HDAttv/Attv/playlist.m3u8",
+        "tvg_id": "AtTV.th",
+        "tvg_logo": "https://files.catbox.moe/6rj9aw.jpg",
+        "group_title": "Undefined",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://tv.a2news.com/live/smil:a2cnnweb.stream.smil/playlist.m3u8",
+        "tvg_id": "A2CNN.al",
+        "tvg_logo": "https://i.imgur.com/TgO3Lzi.png",
+        "group_title": "News",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://qp-pldt-live-grp-02-prod.akamaized.net/out/u/tv5.m3u8",
+        "tvg_id": "A2Z.ph",
+        "tvg_logo": "https://i.imgur.com/1zsdloF.png",
+        "group_title": "General",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://video1.getstreamhosting.com:1936/8420/8420/playlist.m3u8",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://autopilot.catcast.tv/content/37909/index.m3u8",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "http://51.222.9.192:3589/stream/play.m3u8",
+        "tvg_id": "ARCanal.pa",
+        "tvg_logo": "https://i.imgur.com/ejRJqSI.png",
+        "group_title": "Religious",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://ch2-tva.duin.dev/hls/stream.m3u8",
+        "tvg_id": "APlusGuate.gt",
+        "tvg_logo": "https://i.imgur.com/BtGK7iZ.png",
+        "group_title": "General",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://abaitv-stream.qazcdn.com/abaitv/abaitv/playlist.m3u8",
+        "tvg_id": "AbaiTV.kz",
+        "tvg_logo": "https://i.imgur.com/Nw2R7Dq.png",
+        "group_title": "Culture",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://public.apsny.camera/tv_abaza_tv_to_site/index.m3u8",
+        "tvg_id": "AbazaTV.ru",
+        "tvg_logo": "https://i.imgur.com/7Jo7UAf.png",
+        "group_title": "General",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://apollo.production-public.tubi.io/live/ac-wmar.m3u8",
+        "tvg_id": "WMARDT1.us",
+        "tvg_logo": "https://upload.wikimedia.org/wikipedia/en/d/db/2_ABC_WMAR_Baltimore.png",
+        "group_title": "Undefined",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://apollo.production-public.tubi.io/live/ac-wtae.m3u8",
+        "tvg_id": "WTAEDT1.us",
+        "tvg_logo": "https://i.imgur.com/4iEFQjd.png",
+        "group_title": "Undefined",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://apollo.production-public.tubi.io/live/ac-wisn.m3u8",
+        "tvg_id": "WISNDT1.us",
+        "tvg_logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ABC-2021-LOGO.svg/512px-ABC-2021-LOGO.svg.png",
+        "group_title": "Undefined",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://apollo.production-public.tubi.io/live/ac-wpbf.m3u8",
+        "tvg_id": "WPBFDT1.us",
+        "tvg_logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ABC-2021-LOGO.svg/512px-ABC-2021-LOGO.svg.png",
+        "group_title": "News",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://abc-news-dmd-streams-1.akamaized.net/out/v1/701126012d044971b3fa89406a440133/index.m3u8",
+        "tvg_id": "ABCAustralia.au",
+        "tvg_logo": "https://i.imgur.com/qQ33TVM.png",
+        "group_title": "General",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://mediaserver.abnvideos.com/streams/abnafrica.m3u8",
+        "tvg_id": "ABNAfrica.us",
+        "tvg_logo": "https://yt3.googleusercontent.com/BhFbqwxiQN89UGI2cpoffye2UuKtblDDUwJHce0fzjpdrMkb0CtKf_42ZVTiLX2Ulwbjey4YZQ=s512-c-k-c0x00ffffff-no-rj",
+        "group_title": "Religious",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://abplivetv.akamaized.net/hls/live/2043010/hindi/master.m3u8",
+        "tvg_id": "ABPNews.in",
+        "tvg_logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/ABP_News_logo.svg/512px-ABP_News_logo.svg.png",
+        "group_title": "News",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://vo-live-media.cdb.cdn.orange.com/Content/Channel/AbuDhabiSportsChannel1/HLS/index.m3u8",
+        "tvg_id": "AbuDhabiSports1.ae",
+        "tvg_logo": "https://i.imgur.com/6BVWk8z.png",
+        "group_title": "Sports",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://vo-live.cdb.cdn.orange.com/Content/Channel/AbuDhabiSportsChannel2/HLS/index.m3u8",
+        "tvg_id": "AbuDhabiSports2.ae",
+        "tvg_logo": "https://i.imgur.com/4rVm3oZ.png",
+        "group_title": "Sports",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://reflect-access-sacramento.cablecast.tv/live-7/live/live.m3u8",
+        "tvg_id": "AccessSacramentoChannel17.us",
+        "tvg_logo": "https://i.imgur.com/j0UC4ke.png",
+        "group_title": "General",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://amg00684-accuweather-accuweather-rokuus-0endj.amagi.tv/playlist.m3u8",
+        "tvg_id": "AccuWeatherNOW.us",
+        "tvg_logo": "https://i.imgur.com/M8wbVYK.png",
+        "group_title": "Weather",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://cdn.igocast.com/channel3_hls/channel3_master.m3u8",
+        "tvg_id": "KCKSLD3.us",
+        "tvg_logo": "https://i.imgur.com/KtXQeeZ.png",
+        "group_title": "Entertainment",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://1815337252.rsc.cdn77.org/HLS/CORNHOLETV.m3u8",
+        "tvg_id": "ACLCornholeTV.us",
+        "tvg_logo": "https://i.imgur.com/lBIq2ZD.png",
+        "group_title": "Sports",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "http://actionlive.siliconweb.com/actionabr/actiontv/playlist.m3u8",
+        "tvg_id": "Action24.gr",
+        "tvg_logo": "https://upload.wikimedia.org/wikipedia/commons/8/88/Action24-logo-small.png",
+        "group_title": "Movies",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://helga.iptv2022.com/ACTU_NGOLO_TV_HD/index.m3u8",
+        "tvg_id": "ACTUNGOLOTVHD.cd",
+        "tvg_logo": "https://i.imgur.com/TCATnqt.jpeg",
+        "group_title": "News",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://rrsatrtmp.tulix.tv/addis1/addis1multi.smil/playlist.m3u8",
+        "tvg_id": "AddisTV.et",
+        "tvg_logo": "https://i.imgur.com/kqHWrZ9.png",
+        "group_title": "General",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://samsunguk-adn-samsung-fre-qfrlc.amagi.tv/playlist/samsunguk-adn-samsung-fre/playlist.m3u8",
+        "tvg_id": "ADNTVPlus.fr",
+        "tvg_logo": "https://i.imgur.com/HQZQyWt.png",
+        "group_title": "Animation",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://adultswim-vodlive.cdn.turner.com/live/test-2/stream_de.m3u8",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://adultswim-vodlive.cdn.turner.com/live/squidbillies/stream_de.m3u8",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://adultswim-vodlive.cdn.turner.com/tim-and-eric/stream_de.m3u8",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://adultswim-vodlive.cdn.turner.com/tim-and-eric/stream.m3u8",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://bozztv.com/1gbw5/tintv2/tintv2/chunklist.m3u8",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://edge17.vedge.infomaniak.com/livecast/ik:africa24sport/manifest.m3u8",
+        "tvg_id": "Africa24English.fr",
+        "tvg_logo": "https://i.imgur.com/YWIJdai.png",
+        "group_title": "News",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://helga.iptv2022.com/sh/Afroculture/index.m3u8",
+        "tvg_id": "AfrocultureTV.ci",
+        "tvg_logo": "https://i.imgur.com/bjaZ3kO.png",
+        "group_title": "Culture",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://weyyak-live.akamaized.net/weyyak_afrokiddos/index.m3u8",
+        "tvg_id": "Afrokiddos.za",
+        "tvg_logo": "https://admango.cdn.mangomolo.com/analytics/uploads/188/66758af777.png",
+        "group_title": "Undefined",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://alt-al.otteravision.com/alt/al/al.m3u8",
+        "tvg_id": "AfroLandTV.us",
+        "tvg_logo": "https://i.imgur.com/jvnkrEF.png",
+        "group_title": "Entertainment",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://lenz.splus.ir/PLTV/88888888/224/3221226899/index.m3u8",
+        "tvg_id": "AftabTV.ir",
+        "tvg_logo": "https://upload.wikimedia.org/wikipedia/fa/thumb/6/6e/Arak_AFTAB.svg/274px-Arak_AFTAB.svg.png",
+        "group_title": "Undefined",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://linear-46.frequency.stream/dist/plex/46/hls/master/playlist.m3u8",
+        "tvg_id": "AFVEspanol.us",
+        "tvg_logo": "https://i.imgur.com/HUK4WXC.png",
+        "group_title": "Comedy",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://cloudflare.streamgato.us:3148/live/agenda56tvlive.m3u8",
+        "tvg_id": "Agenda56TV.do",
+        "tvg_logo": "https://i.imgur.com/G7zIVB7.png",
+        "group_title": "General",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://cp.panelchs.com:1936/8156/8156/playlist.m3u8",
+        "tvg_id": "AgendaAlDiaTV.co",
+        "tvg_logo": "https://i.imgur.com/JFEFVwV.jpg",
+        "group_title": "News",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://restr2.bgtv.bg/agro/hls/agro.m3u8",
+        "tvg_id": "AgroTV.bg",
+        "tvg_logo": "https://i.imgur.com/tPMNDtD.png",
+        "group_title": "Outdoor",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://streamtv.intervenhosting.net:3040/hybrid/play.m3u8",
+        "tvg_id": "AguacateTV.ve",
+        "tvg_logo": "https://i.ibb.co/wpWBsgf/IMG-20230705-154622.jpg",
+        "group_title": "Entertainment",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://cdn5.iqsat.net/iqb02/35fae546b99b61a038d52353487e8190.sdp/playlist.m3u8",
+        "tvg_id": "AhlulbaytTV.uk",
+        "tvg_logo": "https://i.imgur.com/lNGJGjy.png",
+        "group_title": "Religious",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://cdn1.logichost.in/ajmantv/live/playlist.m3u8",
+        "tvg_id": "AjmanTV.ae",
+        "tvg_logo": "https://i.imgur.com/hVNIwgE.png",
+        "group_title": "General",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Unknown",
+        "url": "https://broadcast.blivenyc.com/speed/broadcast/22/desktop-playlist.m3u8",
+        "tvg_id": "AKCTV.us",
+        "tvg_logo": "https://i.imgur.com/XRTfoSp.png",
+        "group_title": "Outdoor",
+        "playing_now": "Not available",
+        "status": "offline"
+    }
+]
