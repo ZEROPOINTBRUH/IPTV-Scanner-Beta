@@ -1,7 +1,9 @@
 ## Project Slowing back into motion
 > Hello, today is 3/14/2026, i wanted to let everyone know i am slowly bringing this project back in the light.
 > It will take some time for me to reevaluate this project and start getting to work on everything i would need to fix up and prepare to release.
-> Sorry for randomly abandoning this project. I wasn't in the best of mood witih the last year and a half but I am back! 
+> Sorry for randomly abandoning this project. I wasn't in the best of mood witih the last year and a half but I am back!
+
+-# any questions, please email me at wegj1@hotmail.com or write up an issue asking your questions, i will do my best to awnser them best i can.
 
 
 # IPTV Scanner
