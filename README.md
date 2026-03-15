@@ -1,14 +1,7 @@
-## 📌 Depreciation Notice
-
-**This project is no longer being maintained.**
-
-Due to a lack of interest and available time, I’ve decided to stop development on this project in favor of smaller, less time-consuming efforts.
-
-For a more active and up-to-date alternative, I highly recommend checking out the following project by [dillionhuston](https://github.com/dillionhuston):
-
-🔗 [IPTV-Scanner-Beta](https://github.com/dillionhuston/IPTV-Scanner-Beta)
-
-Thanks for your understanding!
+## Project Slowing back into motion
+> Hello, today is 3/14/2026, i wanted to let everyone know i am slowly bringing this project back in the light.
+> It will take some time for me to reevaluate this project and start getting to work on everything i would need to fix up and prepare to release.
+> Sorry for randomly abandoning this project. I wasn't in the best of mood witih the last year and a half but I am back! 
 
 
 # IPTV Scanner
