@@ -18,6 +18,30 @@ class IPTVScanner {
         this.init();
     }
 
+    downloadAllIcons() {
+        this.showNotification('Starting icon download...', 'info');
+        
+        fetch('/download-icons')
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    this.showNotification(data.message, 'success');
+                    this.showNotification(`Downloaded: ${data.downloaded}, Failed: ${data.failed}`, 'info');
+                    
+                    // Reload channels after a short delay to get updated icon URLs
+                    setTimeout(() => {
+                        this.loadChannels(false);
+                    }, 2000);
+                } else if (data.error) {
+                    this.showNotification(`Error: ${data.error}`, 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error downloading icons:', error);
+                this.showNotification('Failed to download icons', 'error');
+            });
+    }
+
     init() {
         this.setupEventListeners();
         this.startLiveUpdates();
@@ -94,8 +118,8 @@ class IPTVScanner {
             if (!preserveFilters) {
                 this.showLoading(true);
             }
-            // Request all channels without pagination
-            const response = await fetch('/channels?group_by=none&limit=10000');
+            // Request all channels without expensive info loading and WITHOUT icon preloading for speed
+            const response = await fetch('/channels?group_by=none&limit=10000&include_info=false&preload_icons=false');
             const data = await response.json();
             
             console.log('API Response:', data); // Debug log
@@ -187,28 +211,12 @@ class IPTVScanner {
             return;
         }
 
-        // Group channels if grouped view
-        const groupFilter = document.getElementById('groupFilter').value;
-        if (groupFilter === '') {
-            // Show all channels with group headers
-            const grouped = this.groupChannels(this.filteredChannels);
-            grouped.forEach(group => {
-                const groupHeader = this.createGroupHeader(group.name);
-                channelsList.appendChild(groupHeader);
-                
-                group.channels.forEach(channel => {
-                    const channelCard = this.createChannelCard(channel);
-                    channelsList.appendChild(channelCard);
-                });
-            });
-        } else {
-            // Show filtered channels
-            this.filteredChannels.forEach(channel => {
-                const channelCard = this.createChannelCard(channel);
-                channelsList.appendChild(channelCard);
-            });
-        }
-
+        // Always show channels flat (no grouping) for better performance
+        this.filteredChannels.forEach(channel => {
+            const channelCard = this.createChannelCard(channel);
+            channelsList.appendChild(channelCard);
+        });
+        
         this.updateVisibleCount();
         this.restoreScrollPosition();
     }
@@ -243,13 +251,26 @@ class IPTVScanner {
             card.classList.add('active');
         }
 
-        const logo = channel.name.charAt(0).toUpperCase();
+        // Check if icon exists and create logo element
+        let logoElement;
+        if (channel.icon_url && channel.icon_url !== null) {
+            // Use cached icon URL from backend
+            logoElement = `<img src="${channel.icon_url}" alt="${channel.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" loading="lazy"><span>${channel.name.charAt(0).toUpperCase()}</span>`;
+        } else if (channel.tvg_logo && channel.tvg_logo !== '') {
+            // Show text initially, then check for icon and replace when available
+            const channelId = channel.name.replace(/[^a-zA-Z0-9]/g, '');
+            logoElement = `<span class="channel-text-logo" data-channel-id="${channelId}" data-tvg-logo="${channel.tvg_logo}">${channel.name.charAt(0).toUpperCase()}</span>`;
+        } else {
+            // Fallback to first letter
+            logoElement = channel.name.charAt(0).toUpperCase();
+        }
+        
         const status = channel.status || 'unknown';
         const playingNow = channel.playing_now || 'Loading...';
 
         card.innerHTML = `
             <div class="channel-header">
-                <div class="channel-logo">${logo}</div>
+                <div class="channel-logo">${logoElement}</div>
                 <div class="channel-name">${channel.name}</div>
                 <div class="channel-status ${status}"></div>
             </div>
@@ -272,7 +293,7 @@ class IPTVScanner {
 
         // Add click handler for channel selection
         card.addEventListener('click', (e) => {
-            // Only handle clicks on the card itself, not buttons
+            // Only handle clicks on card itself, not buttons
             if (e.target === card || e.target.closest('.channel-header') || e.target.closest('.channel-info')) {
                 this.selectChannel(channel);
             }
@@ -386,7 +407,6 @@ class IPTVScanner {
             video.pause();
             video.src = '';
         }
-        
         this.currentPreviewChannel = null;
     }
 
@@ -398,15 +418,18 @@ class IPTVScanner {
         currentChannelName.textContent = name;
         currentChannelInfo.textContent = `Streaming from ${new URL(url).hostname}`;
         
-        // Use proxy for YouTube and Twitch to work with HTML5 video player
+        // Use proxy for YouTube and Twitch to get proper embed URLs
         if (url.includes('youtube.com') || url.includes('youtu.be') || url.includes('twitch.tv')) {
             const proxyUrl = `/proxy/stream?url=${encodeURIComponent(url)}`;
             videoPlayer.innerHTML = `
-                <video controls autoplay>
-                    <source src="${proxyUrl}" type="application/x-mpegURL">
-                    <source src="${proxyUrl}" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
+                <iframe 
+                    width="100%" 
+                    height="100%" 
+                    src="${proxyUrl}" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" 
+                    allowfullscreen>
+                </iframe>
             `;
         } else {
             // Default video player for other streams
@@ -414,7 +437,7 @@ class IPTVScanner {
                 <video controls autoplay>
                     <source src="${url}" type="application/x-mpegURL">
                     <source src="${url}" type="video/mp4">
-                    Your browser does not support the video tag.
+                    Your browser does not support video tag.
                 </video>
             `;
         }
@@ -629,23 +652,13 @@ class IPTVScanner {
         setTimeout(() => {
             notification.style.animation = 'fadeOut 0.3s ease-out';
             setTimeout(() => {
-                if (document.body.contains(notification)) {
-                    document.body.removeChild(notification);
-                }
+                document.body.removeChild(notification);
             }, 300);
         }, 3000);
     }
 }
 
-// Initialize the application
-const iptvScanner = new IPTVScanner();
-
-// Add CSS for notifications
-const notificationStyles = document.createElement('style');
-notificationStyles.textContent = `
-    .notification {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        font-size: 14px;
-    }
-`;
-document.head.appendChild(notificationStyles);
+// Initialize the scanner when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+    window.iptvScanner = new IPTVScanner();
+});

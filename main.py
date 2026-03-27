@@ -1,18 +1,24 @@
 import os
+import re
 import json
 import time
-import re
-from threading import Thread
+import logging
 import asyncio
 import aiohttp
 import requests
-from flask import Flask, render_template, jsonify, request, Response, stream_with_context
+import threading
+from flask import Flask, jsonify, request, Response, stream_with_context, send_file, render_template
 from flask_cors import CORS
-from features.channel_checker import check_channels
-from features.stream_validator import validate_stream
-import logging
+from threading import Thread
+import time
+import re
+from urllib.parse import quote
 import urllib.parse
 from urllib.request import urlopen
+import subprocess
+import tempfile
+import yt_dlp
+from pathlib import Path
 
 # constants
 M3U_URL = "https://raw.githubusercontent.com/Free-TV/IPTV/master/playlist.m3u8"
@@ -33,11 +39,13 @@ last_update_count = 0
 # Ensure required directories and files exist
 for directory in DIRECTORIES:
     os.makedirs(directory, exist_ok=True)
-    for file in FILES.values():
-        if not os.path.exists(file):
-            with open(file, 'w') as f:
-                json.dump([], f)
+for file in FILES.values():
+    if not os.path.exists(file):
+        with open(file, 'w') as f:
+            json.dump([], f)
 
+# Create icons directory for channel logos
+os.makedirs('webroot/icons', exist_ok=True)
 
 # Initialize Flask app
 app = Flask(__name__, template_folder='webroot', static_folder='webroot')
@@ -236,6 +244,176 @@ def get_status():
     except Exception as e:
         return jsonify({'error': str(e)})
 
+def download_channel_icon(channel_name, channel_url, tvg_logo):
+    """Download and cache channel icon/logo with multiple sources."""
+    try:
+        # Create a safe filename from channel name
+        safe_name = re.sub(r'[^\w\-_\.]', '', channel_name.lower())
+        icon_path = f'webroot/icons/{safe_name}.png'
+        
+        # If icon already exists, return URL
+        if os.path.exists(icon_path):
+            return f'/icons/{safe_name}.png'
+        
+        # Source 1: Try tvg_logo from M3U playlist
+        if tvg_logo and tvg_logo != '':
+            try:
+                response = requests.get(tvg_logo, timeout=10, headers=HEADERS)
+                if response.status_code == 200:
+                    with open(icon_path, 'wb') as f:
+                        f.write(response.content)
+                    logging.info(f"Downloaded icon for {channel_name} from tvg_logo")
+                    return f'/icons/{safe_name}.png'
+            except Exception as e:
+                logging.warning(f"Failed to download tvg_logo for {channel_name}: {e}")
+        
+        # Source 2: YouTube Channel Icons
+        if 'youtube.com' in channel_url or 'youtu.be' in channel_url:
+            icon_url = get_youtube_channel_icon(channel_url)
+            if icon_url:
+                try:
+                    response = requests.get(icon_url, timeout=10, headers=HEADERS)
+                    if response.status_code == 200:
+                        with open(icon_path, 'wb') as f:
+                            f.write(response.content)
+                        logging.info(f"Downloaded YouTube icon for {channel_name}")
+                        return f'/icons/{safe_name}.png'
+                except Exception as e:
+                    logging.warning(f"Failed to download YouTube icon for {channel_name}: {e}")
+        
+        # Source 3: TV Logo Sources (Similar to Excel logo systems)
+        icon_sources = [
+            # TV Logos database
+            f"https://raw.githubusercontent.com/tv-logo/tv-logos/main/data/logos/{safe_name}.png",
+            f"https://raw.githubusercontent.com/tv-logo/tv-logos/main/data/logos/{safe_name}.jpg",
+            # IPTV Logos repository
+            f"https://raw.githubusercontent.com/iptv-org/epg/master/logos/{safe_name}.png",
+            f"https://raw.githubusercontent.com/iptv-org/epg/master/logos/{safe_name}.jpg",
+            # Alternative TV logos
+            f"https://raw.githubusercontent.com/fanmixco/IPTV_Logos/master/{safe_name}.png",
+            f"https://raw.githubusercontent.com/fanmixco/IPTV_Logos/master/{safe_name}.jpg",
+        ]
+        
+        for icon_url in icon_sources:
+            try:
+                response = requests.get(icon_url, timeout=5, headers=HEADERS)
+                if response.status_code == 200 and len(response.content) > 100:
+                    with open(icon_path, 'wb') as f:
+                        f.write(response.content)
+                    logging.info(f"Downloaded logo for {channel_name} from {icon_url}")
+                    return f'/icons/{safe_name}.png'
+            except:
+                continue
+        
+        # Source 4: Domain Favicons
+        domain_icon = get_domain_favicon(channel_url)
+        if domain_icon:
+            try:
+                response = requests.get(domain_icon, timeout=5, headers=HEADERS)
+                if response.status_code == 200 and len(response.content) > 100:
+                    with open(icon_path, 'wb') as f:
+                        f.write(response.content)
+                    logging.info(f"Downloaded favicon for {channel_name}")
+                    return f'/icons/{safe_name}.png'
+            except Exception as e:
+                logging.warning(f"Failed to download favicon for {channel_name}: {e}")
+        
+        # Source 5: Google Favicon API
+        try:
+            from urllib.parse import urlparse
+            parsed_url = urlparse(channel_url)
+            domain = parsed_url.netloc
+            
+            google_favicon = f"https://www.google.com/s2/favicons?domain={domain}&sz=128"
+            response = requests.get(google_favicon, timeout=5, headers=HEADERS)
+            if response.status_code == 200 and len(response.content) > 100:
+                with open(icon_path, 'wb') as f:
+                    f.write(response.content)
+                logging.info(f"Downloaded Google favicon for {channel_name}")
+                return f'/icons/{safe_name}.png'
+        except Exception as e:
+            logging.warning(f"Failed to download Google favicon for {channel_name}: {e}")
+        
+        # Source 6: DuckDuckGo Icon API
+        try:
+            from urllib.parse import urlparse
+            parsed_url = urlparse(channel_url)
+            domain = parsed_url.netloc
+            
+            ddg_icon = f"https://icons.duckduckgo.com/ip3/{domain}.ico"
+            response = requests.get(ddg_icon, timeout=5, headers=HEADERS)
+            if response.status_code == 200 and len(response.content) > 100:
+                with open(icon_path, 'wb') as f:
+                    f.write(response.content)
+                logging.info(f"Downloaded DuckDuckGo icon for {channel_name}")
+                return f'/icons/{safe_name}.png'
+        except Exception as e:
+            logging.warning(f"Failed to download DuckDuckGo icon for {channel_name}: {e}")
+        
+        # If all else fails, return None
+        logging.info(f"No icon found for {channel_name}, will use text fallback")
+        return None
+        
+    except Exception as e:
+        logging.error(f"Error downloading icon for {channel_name}: {e}")
+        return None
+
+def get_youtube_channel_icon(channel_url):
+    """Extract YouTube channel icon using yt-dlp."""
+    try:
+        ydl_opts = {
+            'quiet': True,
+            'no_warnings': True,
+            'extract_flat': True,
+        }
+        
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            info = ydl.extract_info(channel_url, download=False)
+            if info and info.get('thumbnail'):
+                return info['thumbnail']
+    except Exception as e:
+        logging.warning(f"Failed to get YouTube icon: {e}")
+        return None
+
+def get_domain_favicon(channel_url):
+    """Get favicon from channel domain."""
+    try:
+        from urllib.parse import urlparse
+        parsed_url = urlparse(channel_url)
+        domain = parsed_url.netloc
+        
+        # Try common favicon locations
+        favicon_urls = [
+            f"https://{domain}/favicon.ico",
+            f"https://{domain}/favicon.png",
+            f"https://{domain}/apple-touch-icon.png",
+            f"https://{domain}/android-chrome-192x192.png",
+        ]
+        
+        for favicon_url in favicon_urls:
+            try:
+                response = requests.head(favicon_url, timeout=3, headers=HEADERS)
+                if response.status_code == 200:
+                    return favicon_url
+            except:
+                continue
+    except Exception as e:
+        logging.warning(f"Failed to get domain favicon: {e}")
+        return None
+
+@app.route('/icons/<filename>')
+def serve_icon(filename):
+    """Serve cached channel icons."""
+    try:
+        icon_path = f'webroot/icons/{filename}'
+        if os.path.exists(icon_path):
+            return send_file(icon_path, mimetype='image/png')
+        else:
+            return "Icon not found", 404
+    except Exception as e:
+        logging.error(f"Error serving icon {filename}: {e}")
+        return "Error serving icon", 500
+
 def get_channel_info(channel_name, channel_url):
     """Get current program information for a channel."""
     try:
@@ -324,10 +502,24 @@ def get_channels():
             if status_filter and status_filter in ['online', 'offline', 'error']:
                 channels = [ch for ch in channels if ch.get('status') == status_filter]
             
-            # Add playing_now info to channels
+            # Pre-cache all channel logos in background (non-blocking)
+            if request.args.get('preload_icons') != 'false':
+                threading.Thread(target=preload_all_channel_icons, args=(channels,), daemon=True).start()
+            
+            # Add cached icon URLs to channels
             for channel in channels:
-                if not channel.get('playing_now') or channel['playing_now'] == 'Not available':
-                    channel['playing_now'] = get_channel_info(channel['name'], channel['url'])
+                icon_url = get_cached_icon_url(channel['name'], channel['url'], channel.get('tvg_logo', ''))
+                if icon_url:
+                    channel['icon_url'] = icon_url
+                else:
+                    channel['icon_url'] = None
+            
+            # Skip expensive operations for fast loading
+            # Only add playing_now info if explicitly requested
+            if request.args.get('include_info') == 'true':
+                for channel in channels:
+                    if not channel.get('playing_now') or channel['playing_now'] == 'Not available':
+                        channel['playing_now'] = get_channel_info(channel['name'], channel['url'])
             
             # Safe sorting with fallback
             def sort_key(channel):
@@ -429,9 +621,100 @@ def get_channels():
     except json.JSONDecodeError:
         logging.error("Invalid JSON in streams file")
         return jsonify([])
+    except Exception as e:
         logging.error(f"Error loading channels: {e}")
         return jsonify([])
 
+def get_cached_icon_url(channel_name, channel_url, tvg_logo):
+    """Get cached icon URL for a channel."""
+@app.route('/proxy/image')
+def proxy_image():
+    """Proxy image requests with caching and rate limiting."""
+    global image_cache, last_cache_clear
+    try:
+        image_url = request.args.get('url')
+        if not image_url:
+            return "No URL provided", 400
+        
+        # Check cache first
+        if image_url in image_cache:
+            cached_data = image_cache[image_url]
+            if time.time() - cached_data['timestamp'] < 3600:  # Cache for 1 hour
+                return Response(
+                    cached_data['content'],
+                    mimetype=cached_data['mimetype'],
+                    headers={
+                        'Cache-Control': 'public, max-age=3600',
+                        'Access-Control-Allow-Origin': '*'
+                    }
+                )
+        
+        # Rate limiting - clear old cache entries periodically
+        if time.time() - last_cache_clear > 300:  # Clear cache every 5 minutes
+            # Keep only recent entries
+            current_time = time.time()
+            image_cache = {k: v for k, v in image_cache.items() 
+                          if current_time - v['timestamp'] < 1800}  # Keep entries < 30 minutes
+            last_cache_clear = current_time
+        
+        # Fetch the image with proper headers
+        response = requests.get(image_url, timeout=5, headers=HEADERS)
+        
+        if response.status_code == 200:
+            # Cache the response
+            image_cache[image_url] = {
+                'content': response.content,
+                'mimetype': response.headers.get('content-type', 'image/png'),
+                'timestamp': time.time()
+            }
+            
+            # Return the image with proper headers
+            return Response(
+                response.content,
+                mimetype=response.headers.get('content-type', 'image/png'),
+                headers={
+                    'Cache-Control': 'public, max-age=3600',  # Cache for 1 hour
+                    'Access-Control-Allow-Origin': '*'
+                }
+            )
+        else:
+            return f"Failed to fetch image: {response.status_code}", response.status_code
+            
+    except Exception as e:
+        logging.error(f"Error proxying image {image_url}: {e}")
+        return f"Error: {str(e)}", 500
+
+@app.route('/download-icons')
+def download_all_icons():
+    """Download icons for all channels."""
+    try:
+        with open(FILES['streams'], 'r') as f:
+            channels = json.load(f)
+        
+        downloaded = 0
+        failed = 0
+        
+        for channel in channels:
+            try:
+                icon_url = download_channel_icon(channel['name'], channel['url'], channel.get('tvg_logo', ''))
+                if icon_url:
+                    downloaded += 1
+                    logging.info(f"✅ Downloaded icon for {channel['name']}")
+                else:
+                    failed += 1
+                    logging.info(f"❌ No icon found for {channel['name']}")
+            except Exception as e:
+                failed += 1
+                logging.error(f"Error downloading icon for {channel['name']}: {e}")
+        
+        return jsonify({
+            'message': f'Icon download complete',
+            'downloaded': downloaded,
+            'failed': failed,
+            'total': len(channels)
+        })
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/search')
 def search_channels():
@@ -445,96 +728,236 @@ def search_channels():
         logging.error(f"Error searching channels: {e}")
         return jsonify([])
 
+def get_youtube_stream_url(url):
+    """Extract actual stream URL from YouTube using yt-dlp for reliable extraction."""
+    try:
+        logging.info(f"Attempting to extract YouTube stream from URL: {url}")
+        
+        # Use yt-dlp for reliable YouTube stream extraction
+        import yt_dlp
+        
+        # Configure yt-dlp options
+        ydl_opts = {
+            'quiet': True,
+            'no_warnings': True,
+            'extract_flat': False,
+            'format': 'best[height<=720]',  # Limit to 720p for performance
+            'noplaylist': True,
+        }
+        
+        try:
+            with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                # Extract video info
+                info = ydl.extract_info(url, download=False)
+                
+                if info:
+                    # For live streams, get the best format
+                    if info.get('is_live'):
+                        logging.info(f"Detected live stream: {info.get('title', 'Unknown')}")
+                        # Get the best format URL for live streams
+                        formats = info.get('formats', [])
+                        if formats:
+                            # Find the best format for streaming
+                            best_format = None
+                            for fmt in formats:
+                                if fmt.get('vcodec') != 'none' and fmt.get('acodec') != 'none':
+                                    if not best_format or fmt.get('height', 0) > best_format.get('height', 0):
+                                        best_format = fmt
+                            
+                            if best_format and best_format.get('url'):
+                                stream_url = best_format['url']
+                                logging.info(f"Extracted live stream URL: {stream_url}")
+                                return stream_url
+                    else:
+                        # For regular videos, get the best format
+                        formats = info.get('formats', [])
+                        if formats:
+                            best_format = None
+                            for fmt in formats:
+                                if fmt.get('vcodec') != 'none' and fmt.get('acodec') != 'none':
+                                    if not best_format or fmt.get('height', 0) > best_format.get('height', 0):
+                                        best_format = fmt
+                            
+                            if best_format and best_format.get('url'):
+                                stream_url = best_format['url']
+                                logging.info(f"Extracted video stream URL: {stream_url}")
+                                return stream_url
+                    
+                    # Fallback to embed URL if no direct stream found
+                    video_id = info.get('id')
+                    if video_id:
+                        embed_url = f"https://www.youtube.com/embed/{video_id}?autoplay=1&rel=0"
+                        logging.info(f"Falling back to embed URL: {embed_url}")
+                        return embed_url
+                
+        except Exception as e:
+            logging.warning(f"yt-dlp extraction failed: {e}")
+            # Fallback to basic extraction
+            return extract_youtube_url_basic(url)
+        
+    except ImportError:
+        logging.error("yt-dlp not installed, falling back to basic extraction")
+        return extract_youtube_url_basic(url)
+    except Exception as e:
+        logging.error(f"Error extracting YouTube URL: {e}")
+        logging.error(f"Exception details: {type(e).__name__}: {str(e)}")
+        return None
+
+def extract_youtube_url_basic(url):
+    """Basic YouTube URL extraction as fallback."""
+    try:
+        logging.info(f"Using basic YouTube extraction for: {url}")
+        
+        # Extract video ID with better regex patterns
+        video_id = None
+        
+        # Pattern 1: youtube.com/watch?v=
+        if 'youtube.com/watch?v=' in url:
+            video_id = url.split('v=')[1].split('&')[0]
+            logging.info(f"Extracted video ID using pattern 1: {video_id}")
+        # Pattern 2: youtu.be/
+        elif 'youtu.be/' in url:
+            video_id = url.split('youtu.be/')[1].split('?')[0]
+            logging.info(f"Extracted video ID using pattern 2: {video_id}")
+        # Pattern 3: youtube.com/embed/
+        elif 'youtube.com/embed/' in url:
+            video_id = url.split('embed/')[1].split('?')[0]
+            logging.info(f"Extracted video ID using pattern 3: {video_id}")
+        # Pattern 4: YouTube channel live streams
+        elif '/live' in url:
+            logging.info(f"Detected YouTube live stream URL: {url}")
+            # For live streams, we need to extract channel handle and convert to embed
+            if '/@' in url:
+                # Handle format: https://www.youtube.com/@EuronewsAlbania/live
+                channel_handle = url.split('/@')[1].split('/')[0]
+                logging.info(f"Extracted channel handle: {channel_handle}")
+                # For live channels, use channel URL in iframe
+                return f"https://www.youtube.com/embed/live_stream?channel={channel_handle}"
+            elif '/channel/' in url:
+                # Handle format: https://www.youtube.com/channel/UCU1i6qBMjY9El6q5L2OK8hA/live
+                channel_id = url.split('/channel/')[1].split('/')[0]
+                logging.info(f"Extracted channel ID: {channel_id}")
+                # For live channels, use channel URL in iframe
+                return f"https://www.youtube.com/embed/live_stream?channel={channel_id}"
+            elif '/c/' in url:
+                # Handle format: https://www.youtube.com/c/channelname/live
+                channel_name = url.split('/c/')[1].split('/')[0]
+                logging.info(f"Extracted channel name: {channel_name}")
+                # For live channels, use channel URL in iframe
+                return f"https://www.youtube.com/embed/live_stream?channel={channel_name}"
+            elif '/user/' in url:
+                # Handle format: https://www.youtube.com/user/username/live
+                username = url.split('/user/')[1].split('/')[0]
+                logging.info(f"Extracted username: {username}")
+                # For live channels, use channel URL in iframe
+                return f"https://www.youtube.com/embed/live_stream?channel={username}"
+            else:
+                logging.warning(f"Unknown live stream format: {url}")
+                return None
+        # Pattern 5: Handle various YouTube URL formats
+        else:
+            import re
+            # Try to extract video ID using regex
+            patterns = [
+                r'(?:youtube\.com/watch\?v=|youtu\.be/|youtube\.com/embed/)([a-zA-Z0-9_-]{11})',
+                r'youtube\.com.*[?&]v=([a-zA-Z0-9_-]{11})'
+            ]
+            for i, pattern in enumerate(patterns):
+                match = re.search(pattern, url)
+                if match:
+                    video_id = match.group(1)
+                    logging.info(f"Extracted video ID using regex pattern {i+1}: {video_id}")
+                    break
+        
+        if video_id:
+            # Validate video ID format (should be 11 characters)
+            if len(video_id) != 11:
+                logging.warning(f"Invalid video ID format: {video_id} (length: {len(video_id)})")
+                return None
+            
+            logging.info(f"Valid video ID extracted: {video_id}")
+            
+            # Return embed URL directly - this is most reliable approach
+            embed_url = f"https://www.youtube.com/embed/{video_id}?autoplay=1&rel=0"
+            logging.info(f"Generated embed URL: {embed_url}")
+            return embed_url
+        else:
+            logging.warning(f"Could not extract video ID from URL: {url}")
+            logging.warning(f"URL patterns checked: youtube.com/watch?v=, youtu.be/, youtube.com/embed/, /live, regex patterns")
+            return None
+        
+    except Exception as e:
+        logging.error(f"Error in basic YouTube extraction: {e}")
+        return None
+
+def get_twitch_stream_url(url):
+    """Extract actual stream URL from Twitch using direct API approach."""
+    try:
+        # Extract channel name
+        if 'twitch.tv/' in url:
+            channel = url.split('twitch.tv/')[1].split('/')[0]
+        else:
+            return None
+        
+        if not channel:
+            return None
+        
+        # Return Twitch embed URL for iframe
+        # This will work with the frontend iframe approach
+        return f"https://player.twitch.tv/?channel={channel}&parent=localhost&parent=127.0.0.1&autoplay=true"
+        
+    except Exception as e:
+        logging.error(f"Error extracting Twitch URL: {e}")
+        return None
+
 @app.route('/proxy/stream')
 def proxy_stream():
     """Proxy YouTube and Twitch streams to work with HTML5 video player."""
     try:
         stream_url = request.args.get('url')
         if not stream_url:
+            logging.error("No URL provided to proxy/stream endpoint")
             return jsonify({'error': 'No URL provided'}), 400
+        
+        logging.info(f"Proxy stream request for URL: {stream_url}")
+        logging.info(f"URL type check - YouTube: {'youtube.com' in stream_url or 'youtu.be' in stream_url}, Twitch: {'twitch.tv' in stream_url}")
         
         # YouTube handling
         if 'youtube.com' in stream_url or 'youtu.be' in stream_url:
-            return proxy_youtube_stream(stream_url)
+            logging.info(f"Processing YouTube URL: {stream_url}")
+            direct_url = get_youtube_stream_url(stream_url)
+            if direct_url:
+                logging.info(f"YouTube extraction successful, redirecting to: {direct_url}")
+                return redirect(direct_url, code=302)
+            else:
+                logging.error(f"YouTube extraction failed for URL: {stream_url}")
+                return jsonify({'error': 'Failed to extract YouTube stream'}), 500
         
         # Twitch handling
         elif 'twitch.tv' in stream_url:
-            return proxy_twitch_stream(stream_url)
+            logging.info(f"Processing Twitch URL: {stream_url}")
+            direct_url = get_twitch_stream_url(stream_url)
+            if direct_url:
+                logging.info(f"Twitch extraction successful, redirecting to: {direct_url}")
+                return redirect(direct_url, code=302)
+            else:
+                logging.error(f"Twitch extraction failed for URL: {stream_url}")
+                return jsonify({'error': 'Failed to extract Twitch stream'}), 500
         
         # Direct stream for other sources
         else:
+            logging.info(f"Processing direct stream URL: {stream_url}")
             return proxy_direct_stream(stream_url)
             
     except Exception as e:
         logging.error(f"Error proxying stream: {e}")
+        logging.error(f"Exception details: {type(e).__name__}: {str(e)}")
         return jsonify({'error': str(e)}), 500
-
-def proxy_youtube_stream(url):
-    """Proxy YouTube stream by extracting direct video URL."""
-    try:
-        # Extract video ID
-        video_id = None
-        if 'youtube.com/watch?v=' in url:
-            video_id = url.split('v=')[1].split('&')[0]
-        elif 'youtu.be/' in url:
-            video_id = url.split('youtu.be/')[1].split('?')[0]
-        elif 'youtube.com/embed/' in url:
-            video_id = url.split('embed/')[1].split('?')[0]
-        
-        if not video_id:
-            return jsonify({'error': 'Invalid YouTube URL'}), 400
-        
-        # For now, create an M3U8 playlist that points to YouTube
-        # In a production environment, you'd use youtube-dl or yt-dlp
-        playlist_content = f"""#EXTM3U
-#EXT-X-VERSION:3
-#EXT-X-TARGETDURATION:10
-#EXT-X-MEDIA-SEQUENCE:0
-#EXTINF:10.0,YouTube Stream
-https://rr1---sn-8pxxvh5vxa-cxge.googlevideo.com/videoplayback?expire=1714400000&ei=XXXX&itag=18&source=youtube&id={video_id}
-#EXTINF:10.0,YouTube Stream
-https://rr1---sn-8pxxvh5vxa-cxge.googlevideo.com/videoplayback?expire=1714400000&ei=XXXX&itag=22&source=youtube&id={video_id}
-#EXT-X-ENDLIST
-"""
-        
-        return Response(playlist_content, mimetype='application/vnd.apple.mpegurl')
-        
-    except Exception as e:
-        logging.error(f"Error proxying YouTube: {e}")
-        return jsonify({'error': 'Failed to proxy YouTube stream'}), 500
-
-def proxy_twitch_stream(url):
-    """Proxy Twitch stream by extracting direct video URL."""
-    try:
-        # Extract channel name
-        if 'twitch.tv/' in url:
-            channel = url.split('twitch.tv/')[1].split('/')[0]
-        else:
-            return jsonify({'error': 'Invalid Twitch URL'}), 400
-        
-        # Create M3U8 playlist for Twitch stream
-        # In production, you'd use Twitch API or stream extraction
-        playlist_content = f"""#EXTM3U
-#EXT-X-VERSION:3
-#EXT-X-TARGETDURATION:6
-#EXT-X-MEDIA-SEQUENCE:0
-#EXTINF:6.0,Twitch Stream - {channel}
-https://video-weaver.fra05.hls.ttvnw.net/v1/playlist/{channel}.m3u8
-#EXTINF:6.0,Twitch Stream - {channel}
-https://video-weaver.fra05.hls.ttvnw.net/v1/playlist/{channel}_720p.m3u8
-#EXT-X-ENDLIST
-"""
-        
-        return Response(playlist_content, mimetype='application/vnd.apple.mpegurl')
-        
-    except Exception as e:
-        logging.error(f"Error proxying Twitch: {e}")
-        return jsonify({'error': 'Failed to proxy Twitch stream'}), 500
 
 def proxy_direct_stream(url):
     """Proxy direct streams."""
     try:
-        # For direct streams, we can redirect or proxy the content
+        # For direct streams, we can redirect or proxy content
         response = requests.get(url, headers=HEADERS, stream=True, timeout=10)
         
         def generate():
@@ -548,6 +971,8 @@ def proxy_direct_stream(url):
     except Exception as e:
         logging.error(f"Error proxying direct stream: {e}")
         return jsonify({'error': 'Failed to proxy stream'}), 500
+
+from flask import redirect
 
 def run_flask():
     app.run(host='127.0.0.1', port=40006, use_reloader=False)
