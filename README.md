@@ -1,3 +1,5 @@
+![](https://i.imgur.com/e1b4KL7.gif)
+
 ## Project Slowing back into motion
 > Hello, today is 3/14/2026, i wanted to let everyone know i am slowly bringing this project back in the light.
 > It will take some time for me to reevaluate this project and start getting to work on everything i would need to fix up and prepare to release.

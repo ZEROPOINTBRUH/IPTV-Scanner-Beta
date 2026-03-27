@@ -2,57 +2,120 @@ import aiohttp
 from m3u8 import M3U8
 import time
 import logging
+import re
+import ssl
 
 async def validate_stream(session, url, timeout=15):
     """
-    Validate if a stream is active, accessible, and stable.
-    Returns True if the stream is stable, False otherwise.
+    Enhanced stream validation with better error handling and retry logic.
+    Returns True if the stream is likely accessible, False otherwise.
     """
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "Accept": "*/*",
+        "Accept-Encoding": "gzip, deflate",
+        "Connection": "keep-alive"
+    }
+    
     try:
-        # Check if the URL is accessible
-        async with session.get(url, timeout=timeout) as response:
-            if response.status != 200:
-                logging.warning(f"Stream not accessible: {url}")
+        # Skip problematic protocols
+        if url.startswith('rtmp://') or url.startswith('rtsp://'):
+            logging.debug(f"Skipping unsupported protocol: {url}")
+            return False
+            
+        # First attempt: Basic HEAD request to check accessibility
+        try:
+            async with session.head(url, timeout=8, headers=headers, ssl=False) as head_response:
+                if head_response.status in {200, 302, 206}:
+                    logging.debug(f"Stream accessible via HEAD: {url}")
+                elif head_response.status in {403, 429}:
+                    logging.debug(f"Access denied for {url}, will try full GET")
+                else:
+                    logging.debug(f"HEAD request failed for {url}: {head_response.status}")
+        except Exception as e:
+            logging.debug(f"HEAD request failed for {url}: {e}")
+        
+        # Main validation with GET request - shorter timeout to avoid hanging
+        async with session.get(url, timeout=10, headers=headers, ssl=False) as response:
+            if response.status not in {200, 206, 302}:
+                logging.debug(f"Stream not accessible: {url} (status: {response.status})")
                 return False
 
-            # Parse the M3U8 playlist (if it's an HLS stream)
-            if url.endswith('.m3u8'):
+            content_type = response.headers.get('content-type', '').lower()
+            
+            # Handle different stream types
+            if '.m3u8' in url or 'application/vnd.apple.mpegurl' in content_type:
+                return await validate_hls_stream(session, response, url, timeout)
+            elif any(ct in content_type for ct in ['video/mp4', 'video/mpeg', 'video/quicktime']):
+                logging.info(f"Direct video stream detected: {url}")
+                return True
+            elif 'application/octet-stream' in content_type or 'binary' in content_type:
+                logging.info(f"Binary stream detected: {url}")
+                return True
+            else:
+                # For unknown content types, try to read a small chunk
                 try:
-                    text = await response.text()
-                    playlist = M3U8(text)
-                    if not playlist.segments:
-                        logging.warning(f"No segments found in playlist: {url}")
-                        return False  # No segments found, stream is invalid
-
-                    # Check the bitrate of the first segment
-                    first_segment = playlist.segments[0]
-                    if not first_segment.bitrate:
-                        logging.warning(f"No bitrate information in first segment: {url}")
-                        return False  # No bitrate information, stream may be unstable
-
-                    # Check if the stream is playable by fetching the first segment
-                    segment_url = first_segment.absolute_uri
-                    async with session.get(segment_url, timeout=timeout) as segment_response:
-                        if segment_response.status != 200:
-                            logging.warning(f"First segment not accessible: {segment_url}")
-                            return False  # First segment is not accessible
-
-                        # Optional: Check for buffering by timing the download of a segment
-                        start_time = time.time()
-                        async for _ in segment_response.content.iter_chunked(1024):
-                            break  # Download a small chunk to measure speed
-                        download_time = time.time() - start_time
-                        if download_time > 5:  # If it takes more than 5 seconds to download a chunk, the stream may be unstable
-                            logging.warning(f"Segment download time too long: {url}")
-                            return False
-
-                    return True  # Stream is stable
+                    chunk = await response.content.read(512)
+                    if chunk and len(chunk) > 0:
+                        # Check if it looks like stream data
+                        if any(pattern in chunk[:100].lower() for pattern in [b'#extm3u', b'#ext-x', b'ftyp']):
+                            logging.info(f"Stream data detected in chunk: {url}")
+                            return True
+                        logging.debug(f"Data received for {url}, assuming stream is valid")
+                        return True
+                    else:
+                        logging.debug(f"No data received for {url}")
+                        return False
                 except Exception as e:
-                    logging.error(f"Failed to parse playlist or fetch segments: {url}, Error: {e}")
-                    return False  # Failed to parse the playlist or fetch segments
+                    logging.debug(f"Error reading stream chunk for {url}: {e}")
+                    return False
 
-        # For non-HLS streams, assume they are stable if accessible
-        return True
+    except aiohttp.TimeoutError:
+        logging.debug(f"Timeout accessing stream: {url}")
+        return False
+    except aiohttp.ClientError as e:
+        logging.debug(f"Client error accessing stream {url}: {e}")
+        return False
     except Exception as e:
-        logging.error(f"Stream not accessible: {url}, Error: {e}")
-        return False  # Stream is not accessible
+        logging.debug(f"Unexpected error validating stream {url}: {e}")
+        return False
+
+async def validate_hls_stream(session, response, url, timeout):
+    """
+    Specialized HLS stream validation with more lenient checks.
+    """
+    try:
+        text = await response.text()
+        
+        # Basic M3U validation
+        if not text.strip().startswith('#EXTM3U'):
+            logging.debug(f"Invalid M3U format: {url}")
+            return False
+            
+        playlist = M3U8(text)
+        
+        # Check if we have segments or variant playlists
+        if playlist.segments:
+            # Just check if we have segments, don't validate each one (too slow)
+            if len(playlist.segments) > 0:
+                logging.info(f"HLS stream has {len(playlist.segments)} segments: {url}")
+                return True
+            else:
+                logging.debug(f"No segments found in playlist: {url}")
+                return False
+                
+        elif playlist.playlists:
+            # Variant playlist - just check if we have variants
+            if len(playlist.playlists) > 0:
+                logging.info(f"HLS variant playlist with {len(playlist.playlists)} variants: {url}")
+                return True
+            else:
+                logging.debug(f"No variants found in playlist: {url}")
+                return False
+        else:
+            logging.debug(f"No segments or variants found in playlist: {url}")
+            return False
+            
+    except Exception as e:
+        logging.debug(f"Failed to parse HLS playlist {url}: {e}")
+        return False

@@ -3,33 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IPTV Streams</title>
+    <title>IPTV Scanner - Modern TV Guide</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1><i class="fas fa-tv"></i> IPTV Streams</h1>
-            <div class="search-box">
-                <input type="text" id="search" placeholder="Search channels...">
-                <button onclick="searchChannels()"><i class="fas fa-search"></i></button>
+    <div class="tv-container">
+        <!-- Header -->
+        <header class="tv-header">
+            <div class="header-left">
+                <h1><i class="fas fa-tv"></i> IPTV Scanner</h1>
+                <div class="status-indicator">
+                    <span id="channelCount">0</span> channels found
+                    <span id="scanStatus" class="scanning">Scanning...</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="search-box">
+                    <input type="text" id="search" placeholder="Search channels...">
+                    <i class="fas fa-search"></i>
+                </div>
+                <button id="toggleGuide" class="toggle-btn">
+                    <i class="fas fa-list"></i> Guide
+                </button>
             </div>
         </header>
-        <div class="tv-guide">
-            <div class="guide-header">
-                <div class="header-item">Channel</div>
-                <div class="header-item">What's On Now</div>
-                <div class="header-item">Actions</div>
+
+        <!-- Main Content -->
+        <main class="tv-main">
+            <!-- Video Player Section -->
+            <section class="player-section">
+                <div id="videoPlayer" class="video-player">
+                    <div class="player-placeholder">
+                        <i class="fas fa-play-circle"></i>
+                        <p>Select a channel to start watching</p>
+                    </div>
+                </div>
+                <div class="player-info">
+                    <h2 id="currentChannelName">No Channel Selected</h2>
+                    <p id="currentChannelInfo">Choose a channel from the guide to begin streaming</p>
+                    <div id="loadingIndicator" class="loading">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p>Loading channels...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Channel Guide Section -->
+            <section id="channelGuide" class="guide-section">
+                <div class="guide-header">
+                    <div class="guide-controls">
+                        <select id="groupFilter">
+                            <option value="">All Groups</option>
+                        </select>
+                        <select id="sortFilter">
+                            <option value="name">Sort by Name</option>
+                            <option value="group_title">Sort by Group</option>
+                        </select>
+                    </div>
+                    <div class="guide-stats">
+                        <span id="visibleChannels">0</span> channels visible
+                    </div>
+                </div>
+                <div id="channelsList" class="channels-grid"></div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Channel Preview Modal -->
+    <div id="previewModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="previewChannelName">Channel Preview</h3>
+                <button class="close-btn" onclick="closePreview()">&times;</button>
             </div>
-            <div id="channels" class="channels-list"></div>
-        </div>
-        <div class="pagination">
-            <button onclick="changePage(currentPage - 1)" id="prevPage"><i class="fas fa-chevron-left"></i> Previous</button>
-            <span id="pageInfo">Page 1</span>
-            <button onclick="changePage(currentPage + 1)" id="nextPage">Next <i class="fas fa-chevron-right"></i></button>
+            <div class="modal-body">
+                <div id="previewPlayer" class="preview-player">
+                    <div class="preview-placeholder">
+                        <i class="fas fa-play-circle"></i>
+                        <p>Loading preview...</p>
+                    </div>
+                </div>
+                <div class="preview-info">
+                    <p id="previewChannelInfo"></p>
+                    <div class="preview-actions">
+                        <button id="watchNowBtn" class="primary-btn">Watch Now</button>
+                        <button id="closePreviewBtn" class="secondary-btn">Close</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
     <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
 </body>
 </html>
