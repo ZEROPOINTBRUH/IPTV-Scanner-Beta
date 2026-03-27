@@ -4,10 +4,6 @@ class IPTVScanner {
         this.channels = [];
         this.filteredChannels = [];
         this.currentChannel = null;
-        this.scrollPosition = 0;
-        this.isGuideVisible = true;
-        this.updateInterval = null;
-        this.searchTimeout = null;
         
         // User state preservation
         this.currentSearch = '';
@@ -256,10 +252,6 @@ class IPTVScanner {
         if (channel.icon_url && channel.icon_url !== null) {
             // Use cached icon URL from backend
             logoElement = `<img src="${channel.icon_url}" alt="${channel.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" loading="lazy"><span>${channel.name.charAt(0).toUpperCase()}</span>`;
-        } else if (channel.tvg_logo && channel.tvg_logo !== '') {
-            // Show text initially, then check for icon and replace when available
-            const channelId = channel.name.replace(/[^a-zA-Z0-9]/g, '');
-            logoElement = `<span class="channel-text-logo" data-channel-id="${channelId}" data-tvg-logo="${channel.tvg_logo}">${channel.name.charAt(0).toUpperCase()}</span>`;
         } else {
             // Fallback to first letter
             logoElement = channel.name.charAt(0).toUpperCase();
@@ -425,7 +417,7 @@ class IPTVScanner {
                 <iframe 
                     width="100%" 
                     height="100%" 
-                    src="${proxyUrl}" 
+                    src="${proxyUrl}&autoplay=1" 
                     frameborder="0" 
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" 
                     allowfullscreen>
@@ -434,12 +426,21 @@ class IPTVScanner {
         } else {
             // Default video player for other streams
             videoPlayer.innerHTML = `
-                <video controls autoplay>
+                <video controls autoplay muted>
                     <source src="${url}" type="application/x-mpegURL">
                     <source src="${url}" type="video/mp4">
                     Your browser does not support video tag.
                 </video>
             `;
+            
+            // Add event listener to unmute after playback starts (browsers often block unmuted autoplay)
+            const video = videoPlayer.querySelector('video');
+            if (video) {
+                video.addEventListener('canplay', () => {
+                    video.muted = false;
+                    video.play().catch(e => console.log('Autoplay blocked, user interaction required'));
+                });
+            }
         }
     }
 
