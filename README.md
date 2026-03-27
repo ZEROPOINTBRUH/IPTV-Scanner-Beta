@@ -1,4 +1,4 @@
-g# IPTV Scanner
+# IPTV Scanner
 
 **Advanced IPTV channel scanner with Jellyfin-compatible sources and research-verified streams.**
 
