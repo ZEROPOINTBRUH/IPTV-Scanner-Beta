@@ -11365,5 +11365,1769 @@
         "url": "https://streamtv12.ddns.net:5443/LiveApp/streams/193945633734205616732920.m3u8",
         "playing_now": "Stream error: URL not accessible",
         "status": "offline"
+    },
+    {
+        "name": "Metropole",
+        "tvg_id": "Metropole.ht@SD",
+        "tvg_logo": "https://i.imgur.com/Ei1Su4V.png",
+        "group_title": "Music",
+        "url": "https://dvrfl03.bozztv.com/hdirect/hdirect-telemetrolple2/index.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MGI TV (720p) [Geo-blocked]",
+        "tvg_id": "MGITV.id@SD",
+        "tvg_logo": "https://i.imgur.com/xrNtabe.png",
+        "group_title": "Religious",
+        "url": "https://tv.rodja.live/tasik/ngrp:mgitv_all/playlist.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MGR TV (1080p) [Not 24/7]",
+        "tvg_id": "MGRTV.gr@SD",
+        "tvg_logo": "https://i.imgur.com/E9KpMOP.png",
+        "group_title": "Undefined",
+        "url": "https://vod.streams.ovh:3876/stream/play.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MGS TV (720p) [Not 24/7]",
+        "tvg_id": "MGSTV.id@SD",
+        "tvg_logo": "https://i.imgur.com/MYU7dsZ.png",
+        "group_title": "General",
+        "url": "https://cdn.gunadarma.ac.id/streams/mgstv/ingestmgstv.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MH One Dil Se (576p)",
+        "tvg_id": "MHOneDilSe.in@SD",
+        "tvg_logo": "https://dilse.mhone.in/wp-content/uploads/2022/02/MH-ONE-dil-se-LOGO-white-copy.png",
+        "group_title": "Entertainment",
+        "url": "https://mumt01.tangotv.in/MHONEDILSE/index.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MH One Movies (576p)",
+        "tvg_id": "MHOneMovies.in@SD",
+        "tvg_logo": "https://www.lyngsat.com/logo/tv/mm/mh-1-movies-in.png",
+        "group_title": "Movies",
+        "url": "https://mumt03.tangotv.in/MHONEMOVIE/index.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MH One Shraddha (360p)",
+        "tvg_id": "MHOneShraddha.in@SD",
+        "tvg_logo": "https://i.imgur.com/Lrm8qTO.png",
+        "group_title": "Religious",
+        "url": "https://paramount.jswk.online/shraddhamhone/index.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Mi Gente TV (720p) [Geo-blocked]",
+        "tvg_id": "MiGenteTV.co@SD",
+        "tvg_logo": "https://i.imgur.com/CSbmQlu.png",
+        "group_title": "Music",
+        "url": "https://byecableiptvnew3.ddns.net/ENVIVOMIGENTE/video.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Micto (360p)",
+        "tvg_id": "MistoPlus.ua@SD",
+        "tvg_logo": "https://i.imgur.com/NHjg1Jm.png",
+        "group_title": "General",
+        "url": "http://93.78.206.172:8080/stream3/stream.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Mikuba TV (480p) [Not 24/7]",
+        "tvg_id": "MikubaTV.cd@SD",
+        "tvg_logo": "https://i.imgur.com/yJehCQM.png",
+        "group_title": "General",
+        "url": "http://51.254.199.122:8080/MIKUBATV/index.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Milenio Televisi\u00f3n (720p) [Not 24/7]",
+        "tvg_id": "MilenioTelevision.mx@SD",
+        "tvg_logo": "https://i.imgur.com/TG1T5Oh.png",
+        "group_title": "News",
+        "url": "https://mdstrm.com/live-stream-playlist/610178c7db32a4112d994650.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Milennio TV (720p)",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "url": "https://videostream.shockmedia.com.ar:19360/milenniotv/milenniotv.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Milyon TV (720p)",
+        "tvg_id": "MilyonTV.tr@SD",
+        "tvg_logo": "https://i.imgur.com/lEIFDwo.png",
+        "group_title": "Entertainment",
+        "url": "https://sosyoapp-live.cdnnew.com/sosyo/buraya-bir-isim-verin.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Minika Cocuk (480p)",
+        "tvg_id": "MinikaCocuk.tr@SD",
+        "tvg_logo": "https://i.imgur.com/VCywMTv.png",
+        "group_title": "Kids",
+        "url": "https://tgn.bozztv.com/dvrfl05/gin-minikacocuk/index.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Minika Go (480p)",
+        "tvg_id": "MinikaGo.tr@SD",
+        "tvg_logo": "https://i.imgur.com/qIoipDq.png",
+        "group_title": "Kids",
+        "url": "https://tgn.bozztv.com/dvrfl05/gin-minikago/index.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "M\u00edrame TV (360p) [Not 24/7]",
+        "tvg_id": "MirameTV.es@SD",
+        "tvg_logo": "https://i.imgur.com/LK4pLgT.png",
+        "group_title": "News",
+        "url": "https://bit.controlstreams.com:5443/LiveApp/streams/mirametv.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MIS Televizija (720p) [Not 24/7]",
+        "tvg_id": "MISTelevizija.au@SD",
+        "tvg_logo": "https://i.imgur.com/qvrNVFg.png",
+        "group_title": "Culture",
+        "url": "https://5afd52b55ff79.streamlock.net/MISTV/myStream/playlist.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Mithila Nepal TV (1080p)",
+        "tvg_id": "MithilaNepalTV.np@SD",
+        "tvg_logo": "https://i.ibb.co/CWn3fH9/1689333550464.jpg",
+        "group_title": "General",
+        "url": "http://150.107.205.212:1935/live/mithila/playlist.m3u8?DVR=",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MKK Web TV (720p) [Not 24/7]",
+        "tvg_id": "MKKWebTV.br@SD",
+        "tvg_logo": "https://i.imgur.com/A8Yhtid.png",
+        "group_title": "General",
+        "url": "https://video01.logicahost.com.br/mkkwebtv/mkkwebtv/playlist.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MMC TV USA (720p)",
+        "tvg_id": "MMCTVUSA.us@SD",
+        "tvg_logo": "https://i.imgur.com/0MwrSYE.png",
+        "group_title": "Religious",
+        "url": "https://live.relentlessinnovations.net:1936/rspe-tv/rspe-tv/playlist.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MN TV (720p)",
+        "tvg_id": "MNTV.mm@SD",
+        "tvg_logo": "https://i.imgur.com/nssm7QK.png",
+        "group_title": "General",
+        "url": "https://l1-xl1.myanmarnet.com/relay/mntv/ch1/stream.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MNCTV (720p)",
+        "tvg_id": "MNCTV.id@SD",
+        "tvg_logo": "https://i.imgur.com/SK8pjQy.png",
+        "group_title": "General",
+        "url": "https://cdn10jtedge.indihometv.com/atm/DASH/mnctv/manifest.mpd",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "MNM (720p)",
+        "tvg_id": "MNM.be@SD",
+        "tvg_logo": "https://i.imgur.com/L4cD18H.png",
+        "group_title": "Music",
+        "url": "https://live-radio-cf-vrt.akamaized.net/groupa/live/bac277a1-306d-44a0-8e2e-e5b9c07fa270/live.isml/.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MNX (576p)",
+        "tvg_id": "MNX.in@SD",
+        "tvg_logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_MNX/images/LOGO_HD/image.png",
+        "group_title": "Movies",
+        "url": "http://103.161.153.165:8000/play/a059/index.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Moca Vision Canal 48 (720p) [Not 24/7]",
+        "tvg_id": "MocaVisionCanal48.do@SD",
+        "tvg_logo": "https://i.imgur.com/vclDXV7.jpeg",
+        "url": "https://stream.castr.com/5da89a909db964293ad13301/live_0950055006c111f18f43137dc9c9d153/index.fmp4.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline",
+        "group_title": "Unknown"
+    },
+    {
+        "name": "Modern Marvels (1080p)",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "url": "https://277b8244.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/Um9rdV9Nb2Rlcm5NYXJ2ZWxzX0hMUw/playlist.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MOGPA TV (720p)",
+        "tvg_id": "MOGPATV.gh@SD",
+        "tvg_logo": "https://i.imgur.com/34PmVAq.png",
+        "group_title": "Religious",
+        "url": "https://livestream.anojed.com/ablazetv/f7b44cfafd5c52223d5498196c8a2e7b.sdp/playlist.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MOGPA TV Plus",
+        "tvg_id": "MOGPATVPlus.gh@SD",
+        "tvg_logo": "https://i.imgur.com/0YLSM3R.png",
+        "group_title": "Religious",
+        "url": "https://bk7l2r2nyx53-hls-live.5centscdn.com/mogpatvplus/2567a5ec9705eb7ac2c984033e06189d.sdp/playlist.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Moji [Geo-blocked]",
+        "tvg_id": "Moji.id@SD",
+        "tvg_logo": "https://i.imgur.com/mM9zapJ.png",
+        "url": "https://op-group1-swiftservehd-1.dens.tv/h/h207/index.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline",
+        "group_title": "Unknown"
+    },
+    {
+        "name": "Molahits TV (720p)",
+        "tvg_id": "MolahitsTV.es@SD",
+        "tvg_logo": "https://i.imgur.com/FYcLtqT.png",
+        "group_title": "Music",
+        "url": "http://ventdelnord.tv:8080/mola/directe.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Monagas Visi\u00f3n (720p) [Not 24/7]",
+        "tvg_id": "MonagasVision.ve@SD",
+        "tvg_logo": "https://i.imgur.com/yfgTa2d.png",
+        "group_title": "General",
+        "url": "https://cloud2.streaminglivehd.com:1936/monagasvision-2/monagasvision-2/playlist.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Monara TV (720p) [Not 24/7]",
+        "tvg_id": "MonaraTV.lk@SD",
+        "tvg_logo": "https://i.imgur.com/EB99mzR.png",
+        "group_title": "Entertainment",
+        "url": "https://jk3lz8xklw79-hls-live.5centscdn.com/lpl/d0dbe915091d400bd8ee7f27f0791303.sdp/playlist.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Monster Jam",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "url": "https://jmp2.uk/plu-65bcc9c8d77d450008b34c6b.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Monster Jam",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "url": "https://jmp2.uk/plu-65c33fd4dc10a40008f26af8.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Monster Jam",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "url": "https://jmp2.uk/plu-65c340383a116800078c8454.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Monster Jam",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "url": "https://jmp2.uk/plu-65c340983ba51e00083988e8.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Montreal Greek TV (480p)",
+        "tvg_id": "MontrealGreekTV.ca@SD",
+        "tvg_logo": "https://i.imgur.com/Y5YnUit.png",
+        "group_title": "Culture",
+        "url": "http://live.greektv.ca/hls1/greektv.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Moon TV (720p)",
+        "tvg_id": "MoonTV.in@SD",
+        "tvg_logo": "https://i.imgur.com/3l25EZI.png",
+        "group_title": "News",
+        "url": "https://player.mslivestream.net/mslive/e10bb900976df9177b9a080314f26f86.sdp/index.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Moorpark Government Channel (360p)",
+        "tvg_id": "MPTV.us@SD",
+        "tvg_logo": "https://i.imgur.com/OOQqMQz.png",
+        "group_title": "Legislative",
+        "url": "https://cdn3.wowza.com/5/cXdyRHF0Z3kxN0k2/moorpark/G0086_003/playlist.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Mooz Ro!",
+        "tvg_id": "MoozRo.ro@SD",
+        "tvg_logo": "https://i.imgur.com/Ft24x5T.png",
+        "group_title": "Music",
+        "url": "https://rtmp.digitalbroadcast.ro/moozro/moozro.m3u8",
+        "playing_now": "Stream error: Validation error: Server disconnected",
+        "status": "offline"
+    },
+    {
+        "name": "More Grace TV (410p) [Not 24/7]",
+        "tvg_id": "MoreGraceTV.ng@SD",
+        "tvg_logo": "https://i.imgur.com/DNTeCQt.png",
+        "group_title": "Religious",
+        "url": "https://atechgroupuk.site/ETV.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Mostanad",
+        "tvg_id": "IRIBMostanad.ir@SD",
+        "tvg_logo": "https://upload.wikimedia.org/wikipedia/fa/8/89/Mostanad-tv.png",
+        "group_title": "General",
+        "url": "https://ncdn.telewebion.ir/mostanad/live/playlist.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Motor Trend",
+        "tvg_id": "MotorTrend.us@SD",
+        "tvg_logo": "https://i.imgur.com/hKDccCL.png",
+        "group_title": "Auto",
+        "url": "http://104.255.88.155/motortrend/index.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Motorracing France",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "url": "https://d46c0ebf9ef94053848fdd7b1f2f6b90.mediatailor.eu-central-1.amazonaws.com/v1/master/81bfcafb76f9c947b24574657a9ce7fe14ad75c0/live-prod/7b971242-c5fe-11ec-967f-401ac48a6867/0/master.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Movies for Gamers",
+        "tvg_id": "MoviesforGamers.us@SD",
+        "tvg_logo": "https://i.imgur.com/aqjzEkb.png",
+        "group_title": "Animation",
+        "url": "https://jmp2.uk/plu-6008ddf24ef92b00079d61cf.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Movies Now + (1080p)",
+        "tvg_id": "MoviesNowPlus.in@SD",
+        "tvg_logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_MNSYMPLUS/images/LOGO_HD/image.png",
+        "group_title": "Movies",
+        "url": "http://116.90.120.151:8000/play/a0i4/index.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Movies Now HD (1080p)",
+        "tvg_id": "MoviesNow.in@HD",
+        "tvg_logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_MOVIES_NOW/images/LOGO_HD/image.png",
+        "group_title": "Movies",
+        "url": "http://116.90.120.151:8000/play/a0ib/index.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MovieSmart Turk (576p)",
+        "tvg_id": "MovieSmartTurk.tr@SD",
+        "tvg_logo": "https://i.imgur.com/DWN9ulT.png",
+        "group_title": "Movies",
+        "url": "http://playhdnewjj.xyz:8080/recc121412/KVqfhtdJ2nQ7/174",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Movify Kino (576p)",
+        "tvg_id": "MovifyKino.lv@SD",
+        "tvg_logo": "https://i.imgur.com/XIk5EJN.png",
+        "group_title": "Classic;Movies",
+        "url": "https://void.greenhosting.ru/MovifyKino_Mpeg4/index.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MRT 1 (480p)",
+        "tvg_id": "MRT1.mk@SD",
+        "tvg_logo": "https://i.imgur.com/EkkyAE0.png",
+        "group_title": "General",
+        "url": "https://s1.teve.mk/tvstanici/6/playlist.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MRT 2 [Geo-blocked]",
+        "tvg_id": "MRT2.mk@SD",
+        "tvg_logo": "https://i.imgur.com/YvOrUnN.png",
+        "group_title": "Culture",
+        "url": "https://vipottbpkstream.vip.hr/Content/onevip-hls/Live/Channel(MRT_2)/index.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MRT Sobraniski kanal [Geo-blocked]",
+        "tvg_id": "MRTSobraniskikanal.mk@SD",
+        "tvg_logo": "https://i.imgur.com/fyNQ8Nf.png",
+        "group_title": "Legislative",
+        "url": "https://vipottbpkstream.vip.hr/Content/onevip-hls/Live/Channel(Sobraniski_Kanal)/index.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MRTV (720p)",
+        "tvg_id": "MRTV.mm@HD",
+        "tvg_logo": "https://i.imgur.com/uyv7oJH.png",
+        "group_title": "General",
+        "url": "https://asia.sipradius.net/cache/SEAGames4/master.m3u8",
+        "playing_now": "Stream error: HTTP 407",
+        "status": "offline"
+    },
+    {
+        "name": "MRTV",
+        "tvg_id": "MRTV.mm@SD",
+        "tvg_logo": "https://i.imgur.com/uyv7oJH.png",
+        "group_title": "General",
+        "url": "https://mrtvott.com/cache/MRTV-HD/master.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MRTV 4 (720p)",
+        "tvg_id": "MRTV4.mm@SD",
+        "tvg_logo": "https://i.imgur.com/J4i1VBb.png",
+        "group_title": "General",
+        "url": "https://cdn-live-pyone.secureswiftcontent.com/han/MRTV4/MRTV4/LiveOutput/manifest.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MRTV Entertainment",
+        "tvg_id": "MRTVEntertainment.mm@SD",
+        "tvg_logo": "https://i.imgur.com/c9q6oT0.png",
+        "group_title": "Entertainment",
+        "url": "https://mrtvott.com/cache/MRTV-Ent-HD/master.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MRTV NRC",
+        "tvg_id": "MRTVNRC.mm@SD",
+        "tvg_logo": "https://i.imgur.com/5aLFslk.jpg",
+        "group_title": "Culture",
+        "url": "https://mrtvott.com/cache/MRTV-NRC-HD/master.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MS NOW (720p)",
+        "tvg_id": "MSNOW.us@SD",
+        "tvg_logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/MS_NOW_logo.svg/960px-MS_NOW_logo.svg.png",
+        "group_title": "News",
+        "url": "http://41.205.93.154/MSNBC/index.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MSG Plus (720p) [Not 24/7]",
+        "tvg_id": "MSGPlus.us@SD",
+        "tvg_logo": "https://i.imgur.com/7suDpSK.png",
+        "group_title": "Sports",
+        "url": "https://tvpass.org/live/msg-plus/hd",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "MST3K",
+        "tvg_id": "MST3K.us@UK",
+        "tvg_logo": "https://i.imgur.com/2LSdcga.png",
+        "group_title": "Series",
+        "url": "https://jmp2.uk/plu-5ad8d44cfd87eb3a2717afc5.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Mtavari Arkhi",
+        "tvg_id": "MtavariArkhi.ge@SD",
+        "tvg_logo": "https://i.imgur.com/tLtGnJW.png",
+        "group_title": "General",
+        "url": "https://live20.bozztv.com/dvrfl05/gin-mtavariarxi/index.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MTM 1 [Geo-blocked]",
+        "tvg_id": "MTM.mk@SD",
+        "tvg_logo": "https://i.ibb.co/HCRZVVz/images-4.png",
+        "group_title": "General",
+        "url": "https://vipottbpkstream.vip.hr/Content/onevip-hls/Live/Channel(MTM)/index.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MTN (720p)",
+        "tvg_id": "MTN.kr@SD",
+        "tvg_logo": "https://i.imgur.com/MS0lqoG.png",
+        "group_title": "Undefined",
+        "url": "http://183.110.27.87/mtnlive/720/playlist.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MTV Ava (720p)",
+        "tvg_id": "MTVAva.fi@SD",
+        "tvg_logo": "https://i.imgur.com/WxNCiAk.png",
+        "group_title": "Entertainment",
+        "url": "https://live-fi.tvkaista.net/ava/live.m3u8",
+        "playing_now": "Stream error: No media segments found",
+        "status": "offline"
+    },
+    {
+        "name": "MTV Catfish",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "url": "https://jmp2.uk/plu-61780d4267bf4d00077ddd73.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MTV Chontales (720p) [Not 24/7]",
+        "tvg_id": "MTVChontales.ni@SD",
+        "tvg_logo": "https://i.imgur.com/zgUPYdv.png",
+        "group_title": "General",
+        "url": "https://altair.hostingnica.net/hls/mtv_stream/index.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MTV Classic",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "url": "https://jmp2.uk/plu-654100b4bdf3cf0008aa49c7.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MTV Classic",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "url": "https://jmp2.uk/plu-66a11a21a79dea0008aa90ca.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MTV Cribs+",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "url": "https://jmp2.uk/plu-5f5a0a5ea82f7200075cb926.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MTV Dating",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "url": "https://jmp2.uk/plu-6851bb3426beced4f2f67ee6.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MTV Dating",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "url": "https://jmp2.uk/plu-6851407c21f49d1b9d177493.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MTV Dating",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "url": "https://jmp2.uk/plu-6851b909954170e0128bc71d.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MTV Dating",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "url": "https://jmp2.uk/plu-685140bd21f49d1b9d177e21.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MTV Dating",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "url": "https://jmp2.uk/plu-685140f121f49d1b9d178249.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MTV Dating",
+        "tvg_id": "MTVDating.us@Germany",
+        "tvg_logo": "https://i.imgur.com/dD7WbQC.png",
+        "group_title": "Series",
+        "url": "https://jmp2.uk/plu-5caf330ea5068259a32320fd.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MTV Flow Latino",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "url": "https://jmp2.uk/plu-62b218fc511d4b00070ddc0c.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MTV Flow Latino",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "url": "https://jmp2.uk/plu-5d3609cd6a6c78d7672f2a81.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MTV HD (1080p)",
+        "tvg_id": "MTV.in@HD",
+        "tvg_logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_MTV/images/LOGO_HD/image.png",
+        "group_title": "Entertainment",
+        "url": "http://116.90.120.151:8000/play/a0ig/index.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MTV Japan (544p)",
+        "tvg_id": "MTV.jp@SD",
+        "tvg_logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/MTV_2021_%28brand_version%29.svg/960px-MTV_2021_%28brand_version%29.svg.png",
+        "group_title": "Entertainment",
+        "url": "http://cdns.jp-primehome.com:8000/zhongying/live/playlist.m3u8?cid=cs18",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MTV Jovens e M\u00e3es",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "url": "https://jmp2.uk/plu-620fdc7d8a36fc000710e3ba.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MTV Pluto TV",
+        "tvg_id": "PlutoTVMTV.us@SD",
+        "tvg_logo": "https://i.imgur.com/lTBim20.png",
+        "group_title": "Music",
+        "url": "https://jmp2.uk/plu-624edee2d6394a0007efcac4.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MTV Reality",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "url": "https://jmp2.uk/plu-6851bdfc9ac48fde5e07f5ae.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MTV Ridiculousness",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "url": "https://jmp2.uk/plu-62cd9e0d10bb020007005628.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MTV Ridiculousness",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "url": "https://jmp2.uk/plu-62cda0dfddc1040008fccacc.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MTV Ridiculousness",
+        "tvg_id": "MTVRidiculousness.us@Germany",
+        "tvg_logo": "https://i.imgur.com/GIKkbjT.png",
+        "group_title": "Entertainment",
+        "url": "https://jmp2.uk/plu-5f9847fd513250000728a9a5.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MTV Spankin' New",
+        "tvg_id": "MTVSpankinNew.us@US",
+        "tvg_logo": "https://i.imgur.com/thbvJd1.png",
+        "group_title": "Music",
+        "url": "https://jmp2.uk/plu-5d14fdb8ca91eedee1633117.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MTV Teen Mom",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "url": "https://jmp2.uk/plu-604f81a49ef73300070e554f.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MTV Teen Mom",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "url": "https://jmp2.uk/plu-620fd9f4afb9a80007a9c6d5.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MTV Teen Mom",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "url": "https://jmp2.uk/plu-61c09342b3a6230007a45119.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Multimania (Latvia) (576p)",
+        "tvg_id": "Multimania.lv@SD",
+        "tvg_logo": "https://i.imgur.com/J9Lwc0T.png",
+        "group_title": "Animation;Kids",
+        "url": "https://void.greenhosting.ru/Multimania_Mpeg4/index.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Multimedios Baj\u00edo (720p) [Not 24/7]",
+        "tvg_id": "MultimediosBajio.mx@SD",
+        "tvg_logo": "https://i.imgur.com/4IGzNdq.png",
+        "group_title": "General",
+        "url": "https://mdstrm.com/live-stream-playlist/5d4b0fec848918070128c8cb.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Multimedios CDMX (720p) [Not 24/7]",
+        "tvg_id": "MultimediosCDMX.mx@SD",
+        "tvg_logo": "https://i.imgur.com/4IGzNdq.png",
+        "group_title": "General",
+        "url": "https://mdstrm.com/live-stream-playlist/5f2d9d6ff17144074bd8a284.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Multimedios Ciudad Ju\u00e1rez (720p) [Not 24/7]",
+        "tvg_id": "MultimediosCiudadJuarez.mx@SD",
+        "tvg_logo": "https://i.imgur.com/4IGzNdq.png",
+        "group_title": "General",
+        "url": "https://mdstrm.com/live-stream-playlist/5d9e440d675235586a92be7f.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Multimedios Guadalajara (720p) [Not 24/7]",
+        "tvg_id": "MultimediosGuadalajara.mx@SD",
+        "tvg_logo": "https://i.imgur.com/4IGzNdq.png",
+        "group_title": "General",
+        "url": "https://mdstrm.com/live-stream-playlist/5c54d38ca392a5119bb0aa0d.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Multimedios Laguna (720p) [Not 24/7]",
+        "tvg_id": "MultimediosLaguna.mx@SD",
+        "tvg_logo": "https://i.imgur.com/4IGzNdq.png",
+        "group_title": "General",
+        "url": "https://mdstrm.com/live-stream-playlist/57bf686a61ff39e1085d43e1.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Multimedios Monterrey (720p) [Not 24/7]",
+        "tvg_id": "MultimediosMonterrey.mx@SD",
+        "tvg_logo": "https://i.imgur.com/4IGzNdq.png",
+        "group_title": "General",
+        "url": "https://mdstrm.com/live-stream-playlist/57b4dbf5dbbfc8f16bb63ce1.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Multimedios Puebla (720p) [Not 24/7]",
+        "tvg_id": "MultimediosPuebla.mx@SD",
+        "tvg_logo": "https://i.imgur.com/4IGzNdq.png",
+        "group_title": "General",
+        "url": "https://mdstrm.com/live-stream-playlist/5d56ed29c92dd106ff01543b.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Multimedios Saltillo (720p) [Not 24/7]",
+        "tvg_id": "MultimediosSaltillo.mx@SD",
+        "tvg_logo": "https://i.imgur.com/4IGzNdq.png",
+        "group_title": "General",
+        "url": "https://mdstrm.com/live-stream-playlist/5d5d51a4e9a40e25f4a0332c.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Multivision Federal",
+        "tvg_id": "MultivisionFederal.ar@SD",
+        "tvg_logo": "https://i.imgur.com/jX0lqy3.png",
+        "group_title": "News",
+        "url": "https://panel.host-live.com:19360/8250/8250.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Mundo Mas (720p)",
+        "tvg_id": "MundoMas.co@SD",
+        "tvg_logo": "https://i.imgur.com/CREs19T.png",
+        "group_title": "General",
+        "url": "https://edge.teveo.net/live/AeAAAgA_AALTA1IAyADIUDAAAAGAAAAAAmnFPGG-RDKFAAAA/playlist.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Mundo Peque\u00f1o",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "url": "https://stream.ads.ottera.tv/playlist.m3u8?network_id=3366",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Munnaaru",
+        "tvg_id": "Munnaaru.mv@SD",
+        "tvg_logo": "https://i.imgur.com/Adhr5xq.png",
+        "group_title": "Religious",
+        "url": "https://customer-ujex1meek7koqd9x.cloudflarestream.com/6a46f90ca384c7419efdbef3ff1892a9/manifest/video.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Museum TV [Geo-blocked]",
+        "tvg_id": "MuseumTVFrench.fr@SD",
+        "tvg_logo": "https://i.imgur.com/WbjURLo.png",
+        "group_title": "Culture",
+        "url": "https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg01492-secomsasmediart-museumtv-eng-samsungit/playlist.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Music Japan TV (544p)",
+        "tvg_id": "MusicJapanTV.jp@SD",
+        "tvg_logo": "https://i.imgur.com/DkF8YZq.jpeg",
+        "group_title": "Music",
+        "url": "http://cdns.jp-primehome.com:8000/zhongying/live/playlist.m3u8?cid=cs06",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MUTV (720p)",
+        "tvg_id": "MUTV.uk@SD",
+        "tvg_logo": "https://d2n0069hmnqmmx.cloudfront.net/epgdata/1.0/newchanlogos/512/512/skychb1834.png",
+        "group_title": "Sports",
+        "url": "https://bcovlive-a.akamaihd.net/r2d2c4ca5bf57456fb1d16255c1a535c8/eu-west-1/6058004203001/playlist.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Muugi TV (480p) [Not 24/7]",
+        "tvg_id": "MuugiTV.ke@SD",
+        "tvg_logo": "https://i.imgur.com/7XCR2Wi.jpg",
+        "group_title": "Religious",
+        "url": "https://goliveafrica.media:9998/live/62b3ffb71a3d6/index.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MV Lao TV",
+        "tvg_id": "MVLaoTV.la@SD",
+        "tvg_logo": "https://i.imgur.com/oVlQUKM.png",
+        "group_title": "Entertainment",
+        "url": "https://edge2a.v2h-cdn.com/live_mvhub/mvlao.stream/playlist.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MV Mall DD (1080p)",
+        "tvg_id": "DramaChannel.th@SD",
+        "tvg_logo": "https://i.imgur.com/ill1Ux6.png",
+        "group_title": "Series",
+        "url": "https://lb1-live-mv.v2h-cdn.com/hls/fdee/mvmalldd/mvmalldd.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "MVS TV [Geo-blocked]",
+        "tvg_id": "MVSTV.mx@SD",
+        "tvg_logo": "https://i.imgur.com/TcB37yV.png",
+        "group_title": "General",
+        "url": "https://dish.akamaized.net/Content/HLS_HLS_CLR/Live/channel(mvs)/variant.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Mwangaza TV (720p) [Not 24/7]",
+        "tvg_id": "MwangazaTV.ke@SD",
+        "tvg_logo": "https://i.imgur.com/GjXfuSh.png",
+        "group_title": "Religious",
+        "url": "https://goliveafrica.media:9998/live/6516be24a6bac/index.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "My Cinema [Geo-blocked]",
+        "tvg_id": "MyCinema.id@SD",
+        "tvg_logo": "https://i.imgur.com/BTmcTQO.png",
+        "url": "https://op-group1-swiftservehd-1.dens.tv/h/h192/index.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline",
+        "group_title": "Unknown"
+    },
+    {
+        "name": "My Cinema Europe [Geo-blocked]",
+        "tvg_id": "MyCinemaEurope.ch@SD",
+        "tvg_logo": "https://i.imgur.com/jz0d8tH.png",
+        "url": "https://op-group1-swiftservehd-1.dens.tv/h/h18/index.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline",
+        "group_title": "Unknown"
+    },
+    {
+        "name": "My Family [Geo-blocked]",
+        "tvg_id": "MyFamily.id@SD",
+        "tvg_logo": "https://i.imgur.com/IaCmCt9.png",
+        "url": "https://op-group1-swiftservehd-1.dens.tv/h/h194/index.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline",
+        "group_title": "Unknown"
+    },
+    {
+        "name": "My Kidz [Geo-blocked]",
+        "tvg_id": "MyKidz.id@SD",
+        "tvg_logo": "https://i.imgur.com/qzZFU6d.png",
+        "url": "https://op-group1-swiftservehd-1.dens.tv/h/h191/index.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline",
+        "group_title": "Unknown"
+    },
+    {
+        "name": "My Righteous TV",
+        "tvg_id": "MyRighteousTV.cm@SD",
+        "tvg_logo": "https://i.imgur.com/wKSLNHB.png",
+        "group_title": "Religious",
+        "url": "https://live20.bozztv.com/ssh101/ssh101/myrighteous/playlist.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "My TV",
+        "tvg_id": "MyTV.kh@SD",
+        "tvg_logo": "https://i.imgur.com/lhxRefQ.png",
+        "group_title": "Entertainment",
+        "url": "http://live.happywatch99.com/livehd11/90ecf35382a7597e553200692c3fc384.sdp/playlist.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "N4 (360p) [Not 24/7]",
+        "tvg_id": "N4.md@SD",
+        "tvg_logo": "https://i.imgur.com/W9UwCv7.png",
+        "group_title": "General",
+        "url": "https://web.sats.gstv.tech/cpl11/da8df281-1165-440a-8c86-959f71b695b6/N4web.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Nabaa TV (720p) [Not 24/7]",
+        "tvg_id": "NabaaTV.lb@SD",
+        "tvg_logo": "https://i.imgur.com/p8eRgSs.png",
+        "group_title": "News",
+        "url": "http://31.14.40.237:1935/live/Nabaa/playlist.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Nama TV",
+        "tvg_id": "NamaTV.ir@SD",
+        "tvg_logo": "https://i.ibb.co/WvrqnrZ5/nama.png",
+        "group_title": "General",
+        "url": "https://ncdn.telewebion.ir/nama/live/playlist.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Namayesh",
+        "tvg_id": "NamayeshTV.ir@SD",
+        "tvg_logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Namayesh_TV_logo.svg/960px-Namayesh_TV_logo.svg.png",
+        "group_title": "Entertainment",
+        "url": "https://ncdn.telewebion.ir/namayesh/live/playlist.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Nanchang News & Generalist Channel",
+        "tvg_id": "NanchangNewsGeneralistChannel.cn@SD",
+        "tvg_logo": "https://www.tvchinese.net/uploads/tv/nctv1.jpg",
+        "group_title": "General",
+        "url": "https://play-live-hls.jxtvcn.com.cn/live-city/tv_nanchang.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Narodna TV (720p)",
+        "tvg_id": "NarodnaTV.rs@SD",
+        "tvg_logo": "https://i.imgur.com/dua57HD.png",
+        "group_title": "Undefined",
+        "url": "https://edge8.pink.rs/narodnatv/index.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Na\u0161a TV (1080p) [Not 24/7]",
+        "tvg_id": "NasaTV.mk@SD",
+        "tvg_logo": "https://i.imgur.com/9rB4VZy.png",
+        "group_title": "General",
+        "url": "https://stream.nasatv.com.mk/hls/nasatv_live.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Nash Bridges",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "url": "https://jmp2.uk/plu-666021cccb3ea10008406866.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Nash Bridges",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "url": "https://jmp2.uk/plu-6675c742ca74680008566b88.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Nasim",
+        "tvg_id": "Nasim.ir@SD",
+        "tvg_logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Nasim_TV_logo.svg/960px-Nasim_TV_logo.svg.png",
+        "group_title": "Entertainment",
+        "url": "https://ncdn.telewebion.ir/nasim/live/playlist.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Nation TV",
+        "tvg_id": "NationTV.th@SD",
+        "tvg_logo": "https://i.imgur.com/h3TY38F.png",
+        "group_title": "News",
+        "url": "https://nationtv-1jdcjo.cdn.byteark.com/fleetstream/nationtvlive/index.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "National Geographic (1080p) [Geo-blocked]",
+        "tvg_id": "NationalGeographic.tr@SD",
+        "tvg_logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Natgeologo.svg/960px-Natgeologo.svg.png",
+        "group_title": "Documentary",
+        "url": "https://saran-live.ercdn.net/natgeohd/index.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "National Geographic (Finland) (720p) [Geo-blocked]",
+        "tvg_id": "NationalGeographic.fi@SD",
+        "tvg_logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Natgeologo.svg/960px-Natgeologo.svg.png",
+        "group_title": "Documentary",
+        "url": "https://live-fi.tvkaista.net/national-geographic/live.m3u8?hd=true",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "National Geographic HD",
+        "tvg_id": "NationalGeographic.in@HD",
+        "tvg_logo": "https://dtil.tmsimg.com/assets/s143574_ld_h15_aa.png?lock",
+        "group_title": "Documentary",
+        "url": "http://116.90.120.151:8000/play/a0in/index.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "National Geographic Japan (1080p)",
+        "tvg_id": "NationalGeographic.jp@SD",
+        "tvg_logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Natgeologo.svg/960px-Natgeologo.svg.png",
+        "group_title": "Documentary",
+        "url": "http://cdns.jp-primehome.com:8000/zhongying/live/playlist.m3u8?cid=cs10",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "National Geographic Wild (1080p) [Geo-blocked]",
+        "tvg_id": "NationalGeographicWild.tr@SD",
+        "tvg_logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/National_Geographic_Wild_logo.svg/960px-National_Geographic_Wild_logo.svg.png",
+        "group_title": "Documentary",
+        "url": "https://saran-live.ercdn.net/natgeowild/index.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "National Geographic Wild HD (1080p)",
+        "tvg_id": "NationalGeographicWild.in@HD",
+        "tvg_logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_NAT_GEO_WILD/images/LOGO_HD/image.png",
+        "group_title": "Documentary",
+        "url": "http://116.90.120.151:8000/play/a0ie/index.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Nativa TV",
+        "tvg_id": "NativaTV.cl@SD",
+        "tvg_logo": "https://i.imgur.com/0SFE2Fr.png",
+        "group_title": "General",
+        "url": "https://stmv5.voxtvhd.com.br/nativatv/nativatv/playlist.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Natural TV (720p) [Not 24/7]",
+        "tvg_id": "NaturalTV.tr@SD",
+        "tvg_logo": "https://i.imgur.com/rfcJ674.png",
+        "group_title": "Culture",
+        "url": "http://broadcasttr.com:1935/naturaltv/bant1/playlist.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Naturaleza Salvaje (1080p) [Geo-blocked]",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "url": "https://amg00376-amg00376c21-firetv-us-3433.playouts.now.amagi.tv/playlist.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Nazali's HDTV (1080p)",
+        "tvg_id": "NazalisHDTV.cg@SD",
+        "tvg_logo": "https://i.imgur.com/SrdRtqn.png",
+        "group_title": "Entertainment",
+        "url": "http://194.163.135.238:5080/WebRTCApp/streams/590264631485484547459082.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "NBA TV Canada (1080p)",
+        "tvg_id": "NBATVCanada.ca@SD",
+        "tvg_logo": "https://upload.wikimedia.org/wikipedia/en/a/a4/NBA_TV_Canada_2020.png",
+        "group_title": "Sports",
+        "url": "http://user.scalecdn.co:8080/live/54706135/09221986/3092.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "NBC 8 Lima OH (WLIO-DT1) (720p) [Not 24/7]",
+        "tvg_id": "WLIODT1.us@SD",
+        "tvg_logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/NBC_logo_2022_%28vertical%29.svg/960px-NBC_logo_2022_%28vertical%29.svg.png",
+        "group_title": "Undefined",
+        "url": "https://live.field59.com/wlio/wlio1/playlist.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "NCI (1080p)",
+        "tvg_id": "NCI.ci@SD",
+        "tvg_logo": "https://i.imgur.com/I3pv69r.png",
+        "group_title": "General",
+        "url": "https://cdnapisec.kaltura.com/p/5571652/sp/5571652/playManifest/entryId/1_no7nfr0h/deliveryProfileId/672/protocol/https/format/applehttp/a.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "NCM Educational & Kids Channel",
+        "tvg_id": "NCMEducationalKidsChannel.us@SD",
+        "tvg_logo": "https://i.imgur.com/3YPvfPn.png",
+        "group_title": "Education;Kids",
+        "url": "https://reflect-npa.cablecast.tv/live-9/live/live.m3u8",
+        "playing_now": "Stream error: No media segments found",
+        "status": "offline"
+    },
+    {
+        "name": "NCM Government & Politics",
+        "tvg_id": "NCMGovernmentPoliticsChannel.us@SD",
+        "tvg_logo": "https://i.imgur.com/3YPvfPn.png",
+        "group_title": "Legislative",
+        "url": "https://reflect-npa.cablecast.tv/live-8/live/live.m3u8",
+        "playing_now": "Stream error: No media segments found",
+        "status": "offline"
+    },
+    {
+        "name": "NCM Main Channel",
+        "tvg_id": "NCMMainChannel.us@SD",
+        "tvg_logo": "https://i.imgur.com/3YPvfPn.png",
+        "group_title": "General",
+        "url": "https://reflect-npa.cablecast.tv/live-6/live/live.m3u8",
+        "playing_now": "Stream error: No media segments found",
+        "status": "offline"
+    },
+    {
+        "name": "Ndurumeni TV (480p) [Not 24/7]",
+        "tvg_id": "NdurumeniTV.ke@SD",
+        "tvg_logo": "https://i.imgur.com/OvmySNw.jpg",
+        "group_title": "Religious",
+        "url": "https://goliveafrica.media:9998/live/6389d571d20af/index.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Nei Monggol TV 2 Mongolian Culture Channel",
+        "tvg_id": "NeiMonggolTV2MongolianCultureChannel.cn@SD",
+        "tvg_logo": "https://i.imgur.com/kpsjahG.png",
+        "group_title": "Culture",
+        "url": "http://1.24.190.98:10080/hls/40/index.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Nelonen (720p)",
+        "tvg_id": "Nelonen.fi@SD",
+        "tvg_logo": "https://i.imgur.com/BFbCyfY.png",
+        "group_title": "General",
+        "url": "https://live-fi.tvkaista.net/nelonen/live.m3u8",
+        "playing_now": "Stream error: No media segments found",
+        "status": "offline"
+    },
+    {
+        "name": "Neo News (1080p)",
+        "tvg_id": "NeoNews.pk@SD",
+        "tvg_logo": "https://i.imgur.com/9mrbPRs.png",
+        "group_title": "News",
+        "url": "http://103.250.28.74:8000/play/a01p/index.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "NET [Geo-blocked]",
+        "tvg_id": "NET.mt@SD",
+        "tvg_logo": "https://i.imgur.com/K4Uve1n.png",
+        "group_title": "General",
+        "url": "http://80.79.6.221:25461/smash/public/22",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Nethra TV (360p)",
+        "tvg_id": "NethraTV.lk@SD",
+        "tvg_logo": "https://i.imgur.com/vSrIN1U.jpg",
+        "group_title": "General",
+        "url": "https://edge3-moblive.yuppcdn.net/transsd/smil:chii02.smil/playlist.m3u8?dvr=",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Netmax TV (720p)",
+        "tvg_id": "NetmaxTV.gr@SD",
+        "tvg_logo": "https://i.imgur.com/dLvRD4k.png",
+        "group_title": "Entertainment",
+        "url": "https://live.netmaxtv.com:1936/live/live/chunklist_w1671867540.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "NETV Toronto (720p)",
+        "tvg_id": "NETVToronto.ca@SD",
+        "tvg_logo": "https://i.imgur.com/WXRBuOW.png",
+        "group_title": "Movies",
+        "url": "https://eu1.vectromdigital.com:1936/netvtoronto/netvtoronto/playlist.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "News India 24X7 (720p)",
+        "tvg_id": "NewsIndia24x7.in@SD",
+        "tvg_logo": "https://dtil.tmsimg.com/assets/GNLZZGG002N1TXH.png?lock",
+        "url": "https://d35j504z0x2vu2.cloudfront.net/v1/master/0bc8e8376bd8417a1b6761138aa41c26c7309312/news-india-24x7/index.m3u8?ads.vf=4diMqEgh9hm",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline",
+        "group_title": "Unknown"
+    },
+    {
+        "name": "NewsTime Bangla (576p)",
+        "tvg_id": "NewsTimeBangla.in@SD",
+        "tvg_logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_NEWS_TIME_BANGLA/images/LOGO_HD/image.png",
+        "group_title": "News",
+        "url": "https://cdn-2.pishow.tv/live/1494/master.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Next TV (1080p) [Not 24/7]",
+        "tvg_id": "NextTV.kg@SD",
+        "tvg_logo": "https://i.imgur.com/9MiwdgD.png",
+        "group_title": "Undefined",
+        "url": "http://gohoski.fvds.ru:3000/mediabay/601/playlist.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "NHK BS",
+        "tvg_id": "NHKBS.jp@SD",
+        "tvg_logo": "https://i.imgur.com/t0uZcSR.png",
+        "group_title": "General",
+        "url": "http://cdns.jp-primehome.com:8000/zhongying/live/playlist.m3u8?cid=bs11",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "NHK BSP4K (1080p)",
+        "tvg_id": "NHKBSP4K.jp@SD",
+        "tvg_logo": "https://i.imgur.com/uvPpFo5.png",
+        "group_title": "Entertainment",
+        "url": "http://cdns.jp-primehome.com:8000/zhongying/live/playlist.m3u8?cid=bs01",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "NHK G (Osaka) (544p)",
+        "tvg_id": "JOBKDTV.jp@SD",
+        "tvg_logo": "https://i.imgur.com/fAZ2BEZ.png",
+        "group_title": "General",
+        "url": "http://cdns.jp-primehome.com:8000/zhongying/live/playlist.m3u8?cid=gx06",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Nice TV (1080p)",
+        "tvg_id": "NiceTV.kh@SD",
+        "tvg_logo": "https://i.imgur.com/6usooLc.png",
+        "group_title": "General",
+        "url": "http://43.252.18.195:5080/live/streams/Netflix.playlist.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Nice TV Kenya (720p) [Not 24/7]",
+        "tvg_id": "NiceTVKenya.ke@SD",
+        "tvg_logo": "https://i.imgur.com/UawxLTW.jpg",
+        "group_title": "General",
+        "url": "https://goliveafrica.media:9998/live/64ada04aa7678/index.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Nick Germany (1080p) [Geo-blocked]",
+        "tvg_id": "Nickelodeon.de@SD",
+        "tvg_logo": "https://i.imgur.com/E84jnP8.png",
+        "group_title": "Kids",
+        "url": "https://0d26a00dfbb1.airspace-cdn.cbsivideo.com/nick1999/master/nick1999.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Nick HD+ (1080p)",
+        "tvg_id": "NickHDPlus.in@HD",
+        "tvg_logo": "https://dtil.tmsimg.com/assets/s159121_ld_h15_aa.png?lock",
+        "group_title": "Kids",
+        "url": "http://116.90.120.151:8000/play/a0i3/index.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Nick Jr. (576p)",
+        "tvg_id": "NickJr.in@SD",
+        "tvg_logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_NICK_JUNIOR/images/LOGO_HD/image.png",
+        "group_title": "Kids",
+        "url": "http://116.90.120.151:8000/play/a0h5/index.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Nick Jr. Club",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "url": "https://jmp2.uk/plu-5f121460b73ac6000719fbaf.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Nick Jr. Club",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "url": "https://jmp2.uk/plu-6824ce95f09106f4b18f4114.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Nick Jr. Club",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "url": "https://jmp2.uk/plu-67f3eb1c443f0671bc03ece8.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Nick Jr. Club",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "url": "https://jmp2.uk/plu-5ddd7cb2cbb9010009b4fe32.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Nick Jr. Pluto TV",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "url": "https://jmp2.uk/plu-5ca6748a37b88b269472dad9.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Nickelodeon (576p)",
+        "tvg_id": "Nickelodeon.ee@SD",
+        "tvg_logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Nickelodeon_2023_logo_%28outline%29.svg/960px-Nickelodeon_2023_logo_%28outline%29.svg.png",
+        "group_title": "Animation;Kids",
+        "url": "http://195.64.140.147:10121/121",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Nickelodeon (576p)",
+        "tvg_id": "Nickelodeon.in@SD",
+        "tvg_logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_NICK/images/LOGO_HD/image.png",
+        "group_title": "Kids",
+        "url": "http://116.90.120.151:8000/play/a0hj/index.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Nickelodeon",
+        "tvg_id": "Nickelodeon.us@East",
+        "tvg_logo": "https://i.imgur.com/E84jnP8.png",
+        "group_title": "Kids",
+        "url": "http://23.237.104.106:8080/USA_NICKELODEON/index.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Nickelodeon Cl\u00e1sico",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "url": "https://jmp2.uk/plu-6824cda00101510f9eeaa011.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Nickelodeon Cl\u00e1ssico",
+        "tvg_id": "NickClassico.us@Brazil",
+        "tvg_logo": "https://i.imgur.com/Crip6wT.png",
+        "group_title": "Kids",
+        "url": "https://jmp2.uk/plu-5f12151794c1800007a8ae63.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Nickelodeon Classics",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "url": "https://jmp2.uk/plu-67f3eb800a1beb98767ca748.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Nickelodeon Latin America (720p)",
+        "tvg_id": "NickelodeonLatinAmerica.us@Panregional",
+        "tvg_logo": "https://i.imgur.com/E84jnP8.png",
+        "group_title": "Kids",
+        "url": "http://179.51.136.19:8000/play/a0q4/index.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Nickelodeon Pluto TV",
+        "tvg_id": "NickPlutoTV.us@US",
+        "tvg_logo": "https://i.imgur.com/N7rQyzN.png",
+        "group_title": "Kids",
+        "url": "https://jmp2.uk/plu-5ca673e0d0bd6c2689c94ce3.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Nicktoons (576p)",
+        "tvg_id": "Nicktoons.uk@SD",
+        "tvg_logo": "https://upload.wikimedia.org/wikipedia/commons/d/d8/Nicktoons_UK_Logo_2014.png",
+        "group_title": "Kids",
+        "url": "https://a1xs.vip/100054",
+        "playing_now": "Not available",
+        "status": "offline"
+    },
+    {
+        "name": "Nihon Eiga Senmon (544p)",
+        "tvg_id": "NihonEigaSenmonChannel.jp@SD",
+        "tvg_logo": "https://i.imgur.com/B2wzA67.png",
+        "group_title": "Movies",
+        "url": "http://cdns.jp-primehome.com:8000/zhongying/live/playlist.m3u8?cid=bs23",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Nippon TV (540p) [Not 24/7]",
+        "tvg_id": "JOAXDTV.jp@SD",
+        "tvg_logo": "https://i.imgur.com/IxD8V5X.png",
+        "group_title": "General",
+        "url": "https://ntv4.mov3.co/hls/ntv.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Nittele G Plus (544p)",
+        "tvg_id": "NitteleGPlus.jp@SD",
+        "tvg_logo": "https://i.imgur.com/7237pCC.png",
+        "group_title": "Sports",
+        "url": "http://cdns.jp-primehome.com:8000/zhongying/live/playlist.m3u8?cid=cs02",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Njata TV (576p) [Not 24/7]",
+        "tvg_id": "NjataTV.ke@SD",
+        "tvg_logo": "https://i.imgur.com/246CBAW.png",
+        "group_title": "General",
+        "url": "https://goliveafrica.media:9998/live/625816e585a2b/index.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "NK TV 24x7 (1080p)",
+        "tvg_id": "NKTV24x7.in@SD",
+        "tvg_logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_NK_TV_PLUS/images/LOGO_HD/image.png",
+        "group_title": "News",
+        "url": "https://nktv.smartstream.video/smartstream-us/nktvplus/nktvplus/chunks.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "No Reservations",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "url": "https://jmp2.uk/plu-66ff0cf663292d0008320cf8.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Noroc TV (576p) [Not 24/7]",
+        "tvg_id": "NorocTV.md@SD",
+        "tvg_logo": "https://i.imgur.com/XvYqpqG.png",
+        "group_title": "Music",
+        "url": "https://live.noroc.tv/noroc/noroc.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Northern Exposure",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "url": "https://jmp2.uk/plu-677fb0e93a225c2d0d8a45bf.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Nos TV Bonaire (1080p)",
+        "tvg_id": "NosTVBonaire.bq@SD",
+        "tvg_logo": "https://i.ibb.co/R6kb44B/cropped-LOGO-NOSTV-WEBSITE-2019-1.png",
+        "group_title": "General",
+        "url": "http://streaming.flamingotv.net/nostv/live.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Noticias 16 (720p) [Not 24/7]",
+        "tvg_id": "Noticias16.do@SD",
+        "tvg_logo": "https://www.lyngsat.com/logo/tv/nn/noticias-16-do.png",
+        "group_title": "News",
+        "url": "https://mlb.essastream.com:8081/noticias16/playlist.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "NotiUno TV (854p) [Not 24/7]",
+        "tvg_id": "NotiUnoTV.pr@SD",
+        "tvg_logo": "https://i.imgur.com/qNdywBT.png",
+        "group_title": "News",
+        "url": "https://59a564764e2b6.streamlock.net/notiunotv/notiunotv/playlist.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Novela Channel (720p) [Not 24/7]",
+        "tvg_id": "NovelaChannel.ci@SD",
+        "tvg_logo": "https://i.ibb.co/V3pfjfB/novela-channel-telepack.jpg",
+        "group_title": "Series",
+        "url": "https://video1.getstreamhosting.com:1936/8284/8284/playlist.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Novelas Turcas",
+        "tvg_id": "",
+        "tvg_logo": "",
+        "group_title": "Undefined",
+        "url": "https://stream.ads.ottera.tv/playlist.m3u8?network_id=5088",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "Novelisima",
+        "tvg_id": "Novelisima.us@SD",
+        "tvg_logo": "https://i.imgur.com/8dUS3Ih.png",
+        "group_title": "Series",
+        "url": "https://stream.ads.ottera.tv/playlist.m3u8?network_id=2380",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "NRK 1 (1080i) [Geo-blocked]",
+        "tvg_id": "NRK1.no@SD",
+        "tvg_logo": "https://i.imgur.com/9tj8ds7.png",
+        "group_title": "General",
+        "url": "https://nrk-live-no.akamaized.net/nrk1/muxed.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "NRK 2 (1080i) [Geo-blocked]",
+        "tvg_id": "NRK2.no@SD",
+        "tvg_logo": "https://i.imgur.com/SiAdoK9.png",
+        "group_title": "General",
+        "url": "https://nrk-live-no.akamaized.net/nrk2/muxed.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "NRK 3 (1080i) [Geo-blocked]",
+        "tvg_id": "NRK3.no@SD",
+        "tvg_logo": "https://i.imgur.com/TNhV2I7.png",
+        "group_title": "Entertainment",
+        "url": "https://nrk-live-no.akamaized.net/nrk3/muxed.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "NRK Super (1080i) [Geo-blocked]",
+        "tvg_id": "NRKSuper.no@SD",
+        "tvg_logo": "https://i.imgur.com/xIATe2T.png",
+        "group_title": "Kids",
+        "url": "https://nrk-live-no.akamaized.net/nrksuper/muxed.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "NRK Tegnspr\u00e5k (1080i) [Geo-blocked]",
+        "tvg_id": "NRKTegnsprak.no@SD",
+        "tvg_logo": "https://i.imgur.com/VCpWG3h.png",
+        "group_title": "General",
+        "url": "https://nrk-live-no.akamaized.net/nrk_tegnspraak/muxed.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
+    },
+    {
+        "name": "NRT TV (720p) [Not 24/7]",
+        "tvg_id": "NRTTV.iq@SD",
+        "tvg_logo": "https://i.imgur.com/uGKGtbW.png",
+        "group_title": "News",
+        "url": "https://media.streambrothers.com:1936/8226/8226/playlist.m3u8",
+        "playing_now": "Stream error: URL not accessible",
+        "status": "offline"
     }
 ]
