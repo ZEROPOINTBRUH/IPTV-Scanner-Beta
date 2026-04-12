@@ -1,3 +1,7 @@
+## Try for yourself
+> https://iptv.bbyte.app/
+
+
 # IPTV Scanner
 
 **Advanced IPTV channel scanner with Jellyfin-compatible sources and research-verified streams.**
