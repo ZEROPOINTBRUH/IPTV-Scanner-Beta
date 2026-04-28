@@ -4,7 +4,7 @@
 
 # IPTV Scanner
 
-**Advanced IPTV channel scanner with Jellyfin-compatible sources and research-verified streams.**
+**IPTV channel scanner.**
 
 IPTV Scanner is a powerful tool designed to scan, validate, and organize live TV channels from multiple sources including [iptv-org](https://github.com/iptv-org/iptv) and [Free-TV](https://github.com/Free-TV/IPTV). It features automatic channel validation, categorization, and a modern web interface for easy access to working streams.
 
