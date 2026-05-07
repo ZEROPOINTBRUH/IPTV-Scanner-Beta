@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>{{ channel_name }} | Live stream | {{ site_name }}</title>
+    <meta name="description" content="{{ description }}">
+    <link rel="canonical" href="{{ canonical }}">
+    <meta name="robots" content="index,follow,max-image-preview:large">
+    <meta name="keywords" content="{{ channel_name }}, live TV, IPTV stream, {{ group_title }}, {{ country }}">
+    <meta property="og:type" content="video.other">
+    <meta property="og:title" content="{{ channel_name }} — Live | {{ site_name }}">
+    <meta property="og:description" content="{{ description }}">
+    <meta property="og:url" content="{{ canonical }}">
+    {% if og_image %}<meta property="og:image" content="{{ og_image }}">{% endif %}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ channel_name }}">
+    <meta name="twitter:description" content="{{ description }}">
+    {% if og_image %}<meta name="twitter:image" content="{{ og_image }}">{% endif %}
+    <meta name="theme-color" content="#050812">
+    <link rel="alternate" type="application/rss+xml" title="{{ site_name }} (RSS)" href="{{ home_url }}/feed.xml">
+    <link rel="alternate" type="application/atom+xml" title="{{ site_name }} (Atom)" href="{{ home_url }}/atom.xml">
+    <script type="application/ld+json">{{ json_ld | safe }}</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;600;700&family=Lexend:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #050812;
+            --panel: rgba(16,24,42,.75);
+            --edge: rgba(120,170,255,.18);
+            --accent: #2d9dff;
+            --text: #eef2fb;
+            --muted: #8b93a8;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: 'DM Sans', system-ui, sans-serif;
+            background: radial-gradient(800px 400px at 20% -10%, rgba(45,157,255,.12), transparent 55%), linear-gradient(180deg, var(--bg), #02040a);
+            color: var(--text);
+        }
+        .wrap { max-width: 1100px; margin: 0 auto; padding: 20px 16px 40px; }
+        .crumb {
+            font-size: 13px;
+            color: var(--muted);
+            margin-bottom: 16px;
+        }
+        .crumb a { color: var(--accent); text-decoration: none; }
+        h1 {
+            font-family: Lexend, sans-serif;
+            font-size: clamp(1.4rem, 4vw, 2rem);
+            letter-spacing: -0.03em;
+            margin: 0 0 8px;
+            line-height: 1.2;
+        }
+        .meta-line { font-size: 14px; color: var(--muted); margin-bottom: 18px; }
+        .bez {
+            padding: 3px;
+            border-radius: 14px;
+            background: linear-gradient(145deg, rgba(130,180,255,.35), rgba(35,44,74,.65));
+            box-shadow: 0 22px 50px rgba(0,0,0,.5);
+            margin-bottom: 20px;
+        }
+        .player {
+            aspect-ratio: 16/9;
+            background: #000;
+            border-radius: 11px;
+            overflow: hidden;
+            position: relative;
+        }
+        video, iframe { width: 100%; height: 100%; border: none; object-fit: contain; background: #000; position: absolute; inset: 0; }
+        .cta-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 16px; }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            cursor: pointer;
+            border: 1px solid var(--edge);
+        }
+        .btn-primary { background: linear-gradient(180deg, #4db2ff, var(--accent)); color: #fff; border-color: transparent; }
+        .btn-outline { background: rgba(255,255,255,.06); color: var(--text); }
+        summary.info { cursor: pointer; color: var(--muted); margin-top: 12px; font-size: 13px; }
+        details { margin-top: 8px; }
+        .desc-text { margin-top: 12px; line-height: 1.55; color: #c9cedd; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="crumb"><a href="{{ home_url }}/">← {{ site_name }}</a> · <span>Channel · {{ slug }}</span></div>
+        <article>
+            <h1>{{ channel_name }}</h1>
+            <p class="meta-line">{% if group_title %}{{ group_title }}{% else %}Uncategorized{% endif %}{% if country %} · {{ country }}{% endif %} · Indexed stream page</p>
+            <div class="bez">
+                <div id="stage" class="player">
+                    {% if embed_player %}
+                    <iframe
+                        src="{{ stream_url_encoded }}&autoplay=1"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                        allowfullscreen loading="lazy" title="{{ channel_name }}"></iframe>
+                    {% else %}
+                    <video id="mainVideo" controls playsinline autoplay muted></video>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="cta-row">
+                <a class="btn btn-primary" href="{{ home_url }}/">Open full TV guide</a>
+                <a class="btn btn-outline" href="{{ canonical }}">Permalink for this channel</a>
+            </div>
+
+            <p class="desc-text">{{ description }}</p>
+
+            <details class="info-block">
+                <summary class="info">Technical / SEO notes</summary>
+                <div class="desc-text">
+                    Crawlers discover this URL via <a href="{{ home_url }}/sitemap.xml" style="color:var(--accent)">sitemap.xml</a>
+                    and <a href="{{ home_url }}/feed.xml" style="color:var(--accent)">RSS</a>/<a href="{{ home_url }}/atom.xml" style="color:var(--accent)">Atom</a>.
+                    Playback uses same-origin relay where needed for HLS.
+                </div>
+            </details>
+        </article>
+    </div>
+
+{% if not embed_player %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.15/hls.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+(function () {
+    var playSrc = "{{ stream_url_encoded }}";
+    var video = document.getElementById("mainVideo");
+    if (!video) return;
+
+    {% if progressive %}
+    video.src = playSrc;
+    video.addEventListener("canplay", function () {
+        video.muted = false;
+        video.play().catch(function(){});
+    });
+    {% else %}
+    function goNative(src) {
+        video.src = src;
+        return true;
+    }
+    var mime = video.canPlayType("application/vnd.apple.mpegurl") || video.canPlayType("application/x-mpegURL");
+    if (mime) {
+        goNative(playSrc);
+    } else if (typeof Hls !== "undefined" && Hls.isSupported()) {
+        var hls = new Hls({ enableWorker: true, lowLatencyMode: false, maxBufferLength: 30 });
+        hls.loadSource(playSrc);
+        hls.attachMedia(video);
+        hls.on(Hls.Events.ERROR, function (_, data) {
+            if (data && data.fatal && data.type === Hls.ErrorTypes.NETWORK_ERROR) hls.startLoad();
+            else if (data && data.fatal && data.type === Hls.ErrorTypes.MEDIA_ERROR) hls.recoverMediaError();
+        });
+    } else {
+        goNative(playSrc);
+    }
+
+    video.addEventListener("canplay", function () {
+        video.muted = false;
+        video.play().catch(function(){});
+    });
+    {% endif %}
+})();
+    </script>
+{% endif %}
+
+    <div style="margin-top:20px;text-align:center">
+        <a class="btn btn-outline" href="{{ home_url }}/">{{ site_name }} — full guide</a>
+    </div>
+</body>
+</html>

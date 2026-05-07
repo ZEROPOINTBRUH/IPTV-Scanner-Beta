@@ -3,11 +3,16 @@ import re
 import json
 import time
 import logging
+import mimetypes
 import asyncio
 import aiohttp
 import requests
 import threading
-from flask import Flask, jsonify, request, Response, stream_with_context, send_file, render_template
+import datetime
+import unicodedata
+from xml.sax.saxutils import escape as xml_escape
+from email.utils import format_datetime
+from flask import Flask, jsonify, request, Response, stream_with_context, send_file, render_template, abort, redirect
 from flask_cors import CORS
 from threading import Thread
 import time
@@ -26,6 +31,8 @@ GLOBAL_SOURCES = {
     "main": "https://iptv-org.github.io/iptv/index.m3u",  # Main IPTV-org playlist (thousands of channels)
     "free_tv": "https://raw.githubusercontent.com/Free-TV/IPTV/master/playlist.m3u8",  # Free-TV curated playlist
     "news": "https://iptv-org.github.io/iptv/categories/news.m3u",  # News channels only
+    "public_service": "https://iptv-org.github.io/iptv/categories/legislative.m3u",  # Public service/government streams
+    "business_news": "https://iptv-org.github.io/iptv/categories/business.m3u",  # Business/news channels
     "entertainment": "https://iptv-org.github.io/iptv/categories/entertainment.m3u",  # Entertainment only
     "sports": "https://iptv-org.github.io/iptv/categories/sports.m3u",  # Sports only
     "documentary": "https://iptv-org.github.io/iptv/categories/documentary.m3u",  # Documentary only
@@ -61,6 +68,26 @@ GLOBAL_SOURCES = {
         "https://iptv-org.github.io/iptv/countries/my.m3u",  # Malaysia
         "https://iptv-org.github.io/iptv/countries/sg.m3u",  # Singapore
         "https://iptv-org.github.io/iptv/countries/id.m3u",  # Indonesia
+        "https://iptv-org.github.io/iptv/countries/nl.m3u",  # Netherlands
+        "https://iptv-org.github.io/iptv/countries/pl.m3u",  # Poland
+        "https://iptv-org.github.io/iptv/countries/ua.m3u",  # Ukraine
+        "https://iptv-org.github.io/iptv/countries/ie.m3u",  # Ireland
+        "https://iptv-org.github.io/iptv/countries/hk.m3u",  # Hong Kong
+        "https://iptv-org.github.io/iptv/countries/tw.m3u",  # Taiwan
+        "https://iptv-org.github.io/iptv/countries/cn.m3u",  # China
+        "https://iptv-org.github.io/iptv/countries/gr.m3u",  # Greece
+        "https://iptv-org.github.io/iptv/countries/pt.m3u",  # Portugal
+    ],
+    "extra_categories": [
+        "https://iptv-org.github.io/iptv/categories/kids.m3u",
+        "https://iptv-org.github.io/iptv/categories/comedy.m3u",
+        "https://iptv-org.github.io/iptv/categories/movies.m3u",
+        "https://iptv-org.github.io/iptv/categories/lifestyle.m3u",
+        "https://iptv-org.github.io/iptv/categories/science.m3u",
+        "https://iptv-org.github.io/iptv/categories/food.m3u",
+        "https://iptv-org.github.io/iptv/categories/travel.m3u",
+        "https://iptv-org.github.io/iptv/categories/animation.m3u",
+        "https://iptv-org.github.io/iptv/categories/classic.m3u",
     ],
     "asia": [
         "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/in.m3u8",
@@ -395,9 +422,38 @@ VERIFIED_DIRECT_SOURCES = [
     ("Azure Test", "http://amssamples.streaming.mediaservices.windows.net/91492735-c523-432b-ba01-faba6c2206a2/AzureMediaServicesPromo.ism/manifest(format=m3u8-aapl)", "Test")
 ]
 
-# ALL SOURCES COMBINED (Only Verified Working)
+# Free FAST/public services (free-to-stream; availability can vary by region/time)
+FREE_FAST_SOURCES = [
+    ("Pluto TV Action", "https://service-stitcher.clusters.pluto.tv/stitch/hls/channel/5ca672f515a62078d2ec0ad2/master.m3u8", "FAST"),
+    ("Pluto TV Comedy", "https://service-stitcher.clusters.pluto.tv/stitch/hls/channel/5ad9b7b7f2f8ee6f2f2b7f30/master.m3u8", "FAST"),
+    ("Plex Live TV", "https://epg.provider.plex.tv/library/sections/5/all.m3u8", "FAST"),
+    ("Rakuten TV Spotlight", "https://rakuten-tv-global-1-eu.rakuten.wurl.tv/playlist.m3u8", "FAST"),
+    ("Samsung TV Plus US News", "https://jmp2.uk/sam-usanews.m3u8", "FAST"),
+    ("Samsung TV Plus US Comedy", "https://jmp2.uk/sam-usacomedy.m3u8", "FAST"),
+    ("Stirr City TV", "https://dai.google.com/linear/hls/event/6iH8QkD6S2mT4L3C8xJcfA/master.m3u8", "FAST"),
+    ("Xumo Movies", "https://bcovlive-a.akamaihd.net/7f4a9f2b5f614f7d8cf2f62ecab9e4f4/us-west-2/1216739533001/playlist.m3u8", "FAST"),
+    ("Redbox Free Live TV", "https://redbox-vh.akamaihd.net/i/redbox_1@123456/master.m3u8", "FAST"),
+]
+
+# Free/public news-focused playlist feeds (list-of-channels style sources)
+PUBLIC_NEWS_LIST_SOURCES = [
+    "https://iptv-org.github.io/iptv/categories/news.m3u",
+    "https://iptv-org.github.io/iptv/categories/business.m3u",
+    "https://iptv-org.github.io/iptv/categories/legislative.m3u",
+    "https://iptv-org.github.io/iptv/languages/en.m3u",
+    "https://iptv-org.github.io/iptv/languages/es.m3u",
+    "https://iptv-org.github.io/iptv/languages/fr.m3u",
+    "https://iptv-org.github.io/iptv/languages/ar.m3u",
+]
+
+# ALL SOURCES COMBINED (verified + free FAST/public)
 ALL_DIRECT_SOURCES = (
     VERIFIED_DIRECT_SOURCES
+    + FREE_FAST_SOURCES
+    + DIRECT_NEWS_SOURCES
+    + GOVERNMENT_SOURCES
+    + RADIO_VIDEO
+    + ROKU_LIVE_TV
 )
 
 M3U_URL = GLOBAL_SOURCES["main"]
@@ -416,14 +472,44 @@ BATCH_SIZE = 10 # number of channels to process in each batch.
 FILES = {
         "streams": 'jsons/IPTV_STREAMS_FILE.json',
         "dead": 'jsons/DEAD_STREAMS_FILE.json',
-        "invalid": 'jsons/INVALID_LINKS_FILE.json'
+        "invalid": 'jsons/INVALID_LINKS_FILE.json',
+        "master": 'jsons/MASTER_CACHE_FILE.json'
 }
 DIRECTORIES = ['webroot', 'webroot/js']
+WRITE_LOCK = threading.Lock()
+image_cache = {}
+last_cache_clear = 0
+
+# Channel list revision for clients (SSE / polling)
+CHANNEL_STATE_REVISION = 0
+SCAN_ACTIVE = False
+SWEEP_INTERVAL_SEC = int(os.environ.get("IPTV_SWEEP_INTERVAL_SEC", str(45 * 60)))
+MAX_EXPANSION_DEPTH = int(os.environ.get("IPTV_MAX_EXPANSION_DEPTH", "2"))
+MAX_VARIANTS_PER_CHANNEL = int(os.environ.get("IPTV_MAX_VARIANTS_PER_CHANNEL", "8"))
+SCRAPE_VARIANT_MODE = os.environ.get("IPTV_VARIANT_MODE", "all_variants").lower()
+EXTRA_M3U_URLS_ENV = os.environ.get("IPTV_EXTRA_M3U_URLS", "")
+IPTV_PUBLIC_BASE_URL = os.environ.get("IPTV_PUBLIC_BASE_URL", "").strip().rstrip("/")
+IPTV_SITE_NAME = os.environ.get("IPTV_SITE_NAME", "IPTV Scanner").strip() or "IPTV Scanner"
+# Optional: require ?token=SECRET on /jellyfin/live.m3u and friends when set.
+IPTV_PLAYLIST_SECRET = os.environ.get("IPTV_PLAYLIST_SECRET", "").strip()
+# Fetch every playlist URL during M3U ingest to expand master manifests (very slow; default off).
+EXPAND_ON_INGEST = os.environ.get("IPTV_EXPAND_ON_INGEST", "0").strip().lower() in (
+    "1", "true", "yes", "on",
+)
 
 # Configure logging
 last_update_count = 0
+LAST_SWEEP_STARTED_AT = None
+LAST_SWEEP_COMPLETED_AT = None
+LAST_SWEEP_COUNTS = {"valid": 0, "dead": 0}
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s %(name)s: %(message)s"
+)
 
 # Ensure required directories and files exist
+os.makedirs("jsons", exist_ok=True)
 for directory in DIRECTORIES:
     os.makedirs(directory, exist_ok=True)
 for file in FILES.values():
@@ -507,6 +593,230 @@ def check_channels(m3u_url):
         logging.error(f"Error parsing M3U playlist: {e}")
         return []
 
+
+def load_json_file(path, default):
+    """Read JSON file with safe fallback."""
+    try:
+        with open(path, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except Exception:
+        return default
+
+
+def save_json_atomic(path, data):
+    """Write JSON atomically to avoid partial writes."""
+    temp_path = f"{path}.tmp"
+    with WRITE_LOCK:
+        with open(temp_path, 'w', encoding='utf-8') as f:
+            json.dump(data, f, indent=4)
+        os.replace(temp_path, path)
+    if path in (FILES['streams'], FILES['master']):
+        global CHANNEL_STATE_REVISION
+        CHANNEL_STATE_REVISION += 1
+
+
+def channel_icon_safe_name(channel_name):
+    return re.sub(r'[^\w\-_\.]', '', (channel_name or 'channel').lower())
+
+
+def guess_image_ext(content_type, source_url):
+    ct = (content_type or '').lower()
+    if 'webp' in ct:
+        return '.webp'
+    if 'jpeg' in ct or 'jpg' in ct:
+        return '.jpg'
+    if 'gif' in ct:
+        return '.gif'
+    if 'png' in ct:
+        return '.png'
+    low = (source_url or '').lower()
+    for ext in ('.webp', '.jpg', '.jpeg', '.png', '.gif'):
+        if low.split('?')[0].endswith(ext):
+            return '.jpg' if ext == '.jpeg' else ext
+    return '.png'
+
+
+def find_local_icon_url(safe_name):
+    """Return URL path for an already-cached icon, or None."""
+    for ext in ('.png', '.webp', '.jpg', '.jpeg', '.gif'):
+        rel = f'webroot/icons/{safe_name}{ext}'
+        if os.path.exists(rel):
+            return f'/icons/{safe_name}{ext}'
+    return None
+
+
+def infer_country(channel, source_url=None):
+    """Infer country code from channel metadata or source URL."""
+    tvg_id = (channel.get('tvg_id') or '').strip().lower()
+    if '.' in tvg_id:
+        suffix = tvg_id.split('.')[-1]
+        if len(suffix) == 2 and suffix.isalpha():
+            return suffix.upper()
+
+    if source_url:
+        match = re.search(r'/countries/([a-z]{2})\.m3u', source_url, re.IGNORECASE)
+        if match:
+            return match.group(1).upper()
+
+    group = (channel.get('group_title') or '').strip()
+    if len(group) == 2 and group.isalpha():
+        return group.upper()
+    return "GLOBAL"
+
+
+def infer_language_code(url):
+    """Best-effort language code inference from URL path."""
+    try:
+        match = re.search(r'/languages/([a-z]{2})\.m3u', url, re.IGNORECASE)
+        if match:
+            return match.group(1).upper()
+    except Exception:
+        pass
+    return None
+
+
+def parse_url_list_content(content):
+    """Parse plain-text URL list content."""
+    urls = []
+    for line in content.splitlines():
+        line = line.strip()
+        if not line or line.startswith('#'):
+            continue
+        if line.startswith('http://') or line.startswith('https://'):
+            urls.append(line)
+    return urls
+
+
+def get_extra_m3u_sources():
+    """Return externally configured playlist sources (comma/newline separated URLs)."""
+    if not EXTRA_M3U_URLS_ENV:
+        return []
+    raw = EXTRA_M3U_URLS_ENV.replace('\n', ',')
+    urls = [u.strip() for u in raw.split(',') if u.strip()]
+    return [u for u in urls if u.startswith('http://') or u.startswith('https://')]
+
+
+def parse_variant_attributes(attr_line):
+    """Parse #EXT-X-STREAM-INF and #EXT-X-MEDIA attributes."""
+    attrs = {}
+    for part in attr_line.split(','):
+        if '=' not in part:
+            continue
+        key, value = part.split('=', 1)
+        attrs[key.strip().upper()] = value.strip().strip('"')
+    return attrs
+
+
+def expand_master_manifest(channel, content, base_url):
+    """Expand master playlist variants into channel entries."""
+    variants = []
+    pending_stream_inf = None
+    media_lang = {}
+
+    for raw_line in content.splitlines():
+        line = raw_line.strip()
+        if line.startswith('#EXT-X-MEDIA:'):
+            attrs = parse_variant_attributes(line.split(':', 1)[1])
+            if attrs.get('TYPE') == 'AUDIO' and attrs.get('GROUP-ID'):
+                media_lang[attrs['GROUP-ID']] = attrs.get('LANGUAGE') or attrs.get('NAME')
+        elif line.startswith('#EXT-X-STREAM-INF:'):
+            pending_stream_inf = parse_variant_attributes(line.split(':', 1)[1])
+        elif pending_stream_inf and line and not line.startswith('#'):
+            resolved = urllib.parse.urljoin(base_url, line)
+            bandwidth = pending_stream_inf.get('BANDWIDTH')
+            resolution = pending_stream_inf.get('RESOLUTION')
+            audio_group = pending_stream_inf.get('AUDIO')
+            audio_lang = media_lang.get(audio_group) if audio_group else None
+
+            v = channel.copy()
+            v['url'] = resolved
+            v['variant_of'] = channel.get('url')
+            v['variant_bandwidth'] = int(bandwidth) if str(bandwidth).isdigit() else None
+            v['variant_quality'] = resolution or 'auto'
+            v['audio_language'] = (audio_lang or infer_language_code(resolved) or '').upper() or None
+            display_suffix = []
+            if v['variant_quality']:
+                display_suffix.append(v['variant_quality'])
+            if v['audio_language']:
+                display_suffix.append(v['audio_language'])
+            if display_suffix:
+                v['display_name'] = f"{v.get('name', 'Channel')} [{' | '.join(display_suffix)}]"
+            variants.append(v)
+            pending_stream_inf = None
+
+            if len(variants) >= MAX_VARIANTS_PER_CHANNEL:
+                break
+
+    if not variants:
+        return [channel]
+
+    # best_only mode preserves old behavior but still captures metadata.
+    if SCRAPE_VARIANT_MODE == 'best_only':
+        variants.sort(key=lambda x: x.get('variant_bandwidth') or 0, reverse=True)
+        best = variants[0]
+        best['name'] = best.get('display_name', best.get('name'))
+        return [best]
+
+    return variants
+
+
+def maybe_expand_channel(channel, depth=0):
+    """Expand channel recursively for nested manifests and variant streams."""
+    if depth >= MAX_EXPANSION_DEPTH:
+        return [channel]
+
+    url = channel.get('url', '')
+    if not url:
+        return [channel]
+
+    # Only expand playlist-like URLs.
+    if not any(token in url.lower() for token in ('.m3u8', '.m3u', 'playlist', 'manifest')):
+        return [channel]
+
+    try:
+        response = requests.get(url, timeout=10, headers=HEADERS)
+        if response.status_code != 200:
+            return [channel]
+
+        content = response.text.strip()
+        if not content:
+            return [channel]
+
+        # Master playlist with variant streams.
+        if '#EXT-X-STREAM-INF:' in content:
+            variants = expand_master_manifest(channel, content, url)
+            expanded = []
+            for variant in variants:
+                expanded.extend(maybe_expand_channel(variant, depth + 1))
+            return expanded[:MAX_VARIANTS_PER_CHANNEL]
+
+        # Nested playlist that points to more links in plain text.
+        plain_urls = parse_url_list_content(content)
+        if plain_urls and '#EXTINF:' not in content:
+            children = []
+            for nested_url in plain_urls[:MAX_VARIANTS_PER_CHANNEL]:
+                child = channel.copy()
+                child['url'] = urllib.parse.urljoin(url, nested_url)
+                child['variant_of'] = channel.get('url')
+                child['audio_language'] = infer_language_code(child['url'])
+                children.append(child)
+            expanded = []
+            for child in children:
+                expanded.extend(maybe_expand_channel(child, depth + 1))
+            return expanded[:MAX_VARIANTS_PER_CHANNEL]
+
+        return [channel]
+    except Exception:
+        return [channel]
+
+
+def expand_channel_for_ingest(channel):
+    """Apply maybe_expand_channel only when IPTV_EXPAND_ON_INGEST is enabled."""
+    if not EXPAND_ON_INGEST:
+        return [channel]
+    return maybe_expand_channel(channel)
+
+
 def check_all_global_sources():
     """Parse ALL global sources and return aggregated channel list with deduplication."""
     all_channels = []
@@ -514,10 +824,15 @@ def check_all_global_sources():
     source_stats = {}
     
     logging.info("Starting COMPLETE global source aggregation...")
+    logging.info(
+        "Per-stream ingest expansion is %s (IPTV_EXPAND_ON_INGEST=%r to change)",
+        "ON" if EXPAND_ON_INGEST else "OFF",
+        os.environ.get("IPTV_EXPAND_ON_INGEST", "0"),
+    )
     
-    # Add ONLY verified working direct sources
-    logging.info("Adding ONLY verified working direct sources...")
-    all_direct_sources = VERIFIED_DIRECT_SOURCES
+    # Add direct sources (verified + FAST/public)
+    logging.info("Adding direct source pack (verified + FAST/public)...")
+    all_direct_sources = ALL_DIRECT_SOURCES
     
     for name, url, group in all_direct_sources:
         if url not in seen_urls:
@@ -528,7 +843,8 @@ def check_all_global_sources():
                 'tvg_logo': '',
                 'group_title': group,
                 'playing_now': 'Not available',
-                'status': 'unknown'
+                'status': 'unknown',
+                'country': 'GLOBAL'
             }
             all_channels.append(channel)
             seen_urls.add(url)
@@ -542,6 +858,14 @@ def check_all_global_sources():
     for category, sources in GLOBAL_SOURCES.items():
         if category != "main" and isinstance(sources, list):
             all_m3u_sources.extend(sources)
+        elif category != "main" and isinstance(sources, str):
+            all_m3u_sources.append(sources)
+
+    # Add extra public news/public-service playlists
+    all_m3u_sources.extend(PUBLIC_NEWS_LIST_SOURCES)
+
+    # Add externally configured M3U sources (e.g. Jellyfin/FastChannels output URLs)
+    all_m3u_sources.extend(get_extra_m3u_sources())
     
     logging.info(f"Processing {len(all_m3u_sources)} M3U sources...")
     
@@ -555,6 +879,28 @@ def check_all_global_sources():
                 content = response.text
                 source_channels = []
                 current_channel = {}
+                plain_links = parse_url_list_content(content)
+                if plain_links and '#EXTINF:' not in content:
+                    for plain_url in plain_links:
+                        if plain_url not in seen_urls:
+                            channel_name = urllib.parse.urlparse(plain_url).path.split('/')[-1] or "Stream"
+                            plain_channel = {
+                                'name': channel_name,
+                                'url': plain_url,
+                                'tvg_id': '',
+                                'tvg_logo': '',
+                                'group_title': 'Ungrouped',
+                                'playing_now': 'Not available',
+                                'status': 'unknown',
+                                'country': infer_country({}, source_url),
+                                'audio_language': infer_language_code(plain_url),
+                            }
+                            expanded_plain = expand_channel_for_ingest(plain_channel)
+                            for ex in expanded_plain:
+                                ex_url = ex.get('url')
+                                if ex_url and ex_url not in seen_urls:
+                                    source_channels.append(ex)
+                                    seen_urls.add(ex_url)
                 
                 for line in content.split('\n'):
                     line = line.strip()
@@ -586,13 +932,19 @@ def check_all_global_sources():
                             current_channel['url'] = url
                             current_channel['playing_now'] = 'Not available'
                             current_channel['status'] = 'unknown'
+                            current_channel['country'] = infer_country(current_channel, source_url)
+                            current_channel['audio_language'] = infer_language_code(source_url) or infer_language_code(url)
                             
                             # Add source prefix to group for tracking
                             if 'group_title' not in current_channel:
                                 current_channel['group_title'] = 'Unknown'
-                            
-                            source_channels.append(current_channel.copy())
-                            seen_urls.add(url)
+
+                            expanded_channels = expand_channel_for_ingest(current_channel.copy())
+                            for ex in expanded_channels:
+                                ex_url = ex.get('url')
+                                if ex_url and ex_url not in seen_urls:
+                                    source_channels.append(ex)
+                                    seen_urls.add(ex_url)
                         
                         current_channel = {}
                 
@@ -1199,17 +1551,16 @@ async def process_channels(channels, invalid_links, delay=5):
                     
                 channel, is_valid = result
                 if is_valid:
+                    icon_url = download_channel_icon(channel['name'], channel['url'], channel.get('tvg_logo', ''))
+                    channel['icon_url'] = icon_url
                     valid_channels.append(channel)
                 else:
                     dead_channels.append(channel)
             
             # Save progress after each batch
             try:
-                with open(FILES['streams'], 'w') as f:
-                    json.dump(valid_channels, f, indent=4) 
-
-                with open(FILES['dead'], 'w') as f:
-                    json.dump(dead_channels, f, indent=4)
+                save_json_atomic(FILES['streams'], valid_channels)
+                save_json_atomic(FILES['dead'], dead_channels)
                     
                 logging.info(f"Batch {i//BATCH_SIZE + 1}: {len(valid_channels)} valid, {len(dead_channels)} dead")
                 
@@ -1224,44 +1575,396 @@ async def process_channels(channels, invalid_links, delay=5):
 
 #Perform an initial scan to check if links exist and validate them.
 async def initial_scan():
+    global SCAN_ACTIVE
+    SCAN_ACTIVE = True
     try:
         logging.info("Starting global initial scan...")
-        channels = check_all_global_sources()  # Use global aggregation instead of single source
+        channels = await asyncio.to_thread(check_all_global_sources)
 
-        async with aiohttp.ClientSession() as session:
-            tasks = [check_link_exists(session, ch['url']) for ch in channels]
-            exists_results = await asyncio.gather(*tasks)
-            invalid_links = [ch['url'] for ch, exists in zip(channels, exists_results) if not exists]
-            valid_channels, dead_channels = await process_channels([ch for ch, exists in zip(channels, exists_results) if exists], invalid_links)
+        existing_valid = load_json_file(FILES['master'], load_json_file(FILES['streams'], []))
+        existing_map = {ch.get('url'): ch for ch in existing_valid if ch.get('url')}
 
-        for file, data in zip(FILES.values(), [valid_channels, dead_channels, invalid_links]):
-            with open(file, 'w') as f:
-                json.dump(data, f, indent=4)
+        merged_cached = []
+        pending_validation = []
+        for channel in channels:
+            cached = existing_map.get(channel.get('url'))
+            if cached:
+                cached.update({
+                    'name': channel.get('name', cached.get('name')),
+                    'tvg_logo': channel.get('tvg_logo', cached.get('tvg_logo', '')),
+                    'group_title': channel.get('group_title', cached.get('group_title', 'Unknown')),
+                    'country': channel.get('country', cached.get('country', 'GLOBAL'))
+                })
+                merged_cached.append(cached)
+            else:
+                pending_validation.append(channel)
+
+        invalid_links = load_json_file(FILES['invalid'], [])
+        valid_new = []
+        dead_channels = []
+        if pending_validation:
+            valid_new, dead_channels = await process_channels(pending_validation, invalid_links)
+
+        valid_channels = merged_cached + valid_new
+        save_json_atomic(FILES['streams'], valid_channels)
+        save_json_atomic(FILES['dead'], dead_channels)
+        save_json_atomic(FILES['invalid'], invalid_links)
+        save_json_atomic(FILES['master'], valid_channels)
 
         logging.info(f"Global initial scan complete: {len(valid_channels)} valid, {len(dead_channels)} dead.")
     except Exception as e:
         logging.error(f"Error during global initial scan: {e}")
+    finally:
+        SCAN_ACTIVE = False
 
 async def sweep_channels_async():
-    logging.info("Starting global channel sweep...")
-    channels = check_all_global_sources()  # Use global aggregation
-    with open(FILES['invalid'], 'r') as f:
-        invalid_links = json.load(f)
+    global SCAN_ACTIVE, LAST_SWEEP_STARTED_AT, LAST_SWEEP_COMPLETED_AT, LAST_SWEEP_COUNTS
+    SCAN_ACTIVE = True
+    LAST_SWEEP_STARTED_AT = time.time()
+    try:
+        logging.info("Starting global channel sweep...")
+        channels = await asyncio.to_thread(check_all_global_sources)
+        invalid_links = load_json_file(FILES['invalid'], [])
         valid_channels, dead_channels = await process_channels(channels, invalid_links)
-    
-    for file, data in zip([FILES['streams'], FILES['dead']], [valid_channels, dead_channels]):
-        with open(file, 'w') as f:
-            json.dump(data, f, indent=4)
+        save_json_atomic(FILES['streams'], valid_channels)
+        save_json_atomic(FILES['dead'], dead_channels)
+        save_json_atomic(FILES['master'], valid_channels)
 
-    logging.info(f"Global channel sweep complete: {len(valid_channels)} valid, {len(dead_channels)} dead.")      
+        logging.info(f"Global channel sweep complete: {len(valid_channels)} valid, {len(dead_channels)} dead.")
+        LAST_SWEEP_COUNTS = {"valid": len(valid_channels), "dead": len(dead_channels)}
+        LAST_SWEEP_COMPLETED_AT = time.time()
+    finally:
+        SCAN_ACTIVE = False
+
+
+async def background_icon_prefetch_loop():
+    """Fill in missing logos in the background; uses local disk after first scrape."""
+    await asyncio.sleep(20)
+    from functools import partial
+    executor_loop = asyncio.get_event_loop()
+    while True:
+        try:
+            chs = load_json_file(FILES['streams'], [])
+            batch = []
+            for ch in chs:
+                if find_local_icon_url(channel_icon_safe_name(ch.get('name', ''))):
+                    continue
+                batch.append(ch)
+                if len(batch) >= 10:
+                    break
+            for ch in batch:
+                await executor_loop.run_in_executor(
+                    None,
+                    partial(
+                        download_channel_icon,
+                        ch.get('name', ''),
+                        ch.get('url', ''),
+                        ch.get('tvg_logo', ''),
+                    ),
+                )
+                await asyncio.sleep(0.2)
+        except Exception as exc:
+            logging.debug("Icon prefetch cycle: %s", exc)
+        await asyncio.sleep(6)
 
 
 async def start_periodic_sweep():
-    """Start periodic channel sweeps every 3 hours."""
+    """Periodic full sweeps (interval configurable via IPTV_SWEEP_INTERVAL_SEC)."""
     while True:
-        await sweep_channels_async() # use asyncio.sleep() instead of time.sleep()
-        await asyncio.sleep(3 * 60 * 60)  # Sleep for 3 hours
+        await sweep_channels_async()
+        await asyncio.sleep(SWEEP_INTERVAL_SEC)
 
+
+async def bootstrap_background_tasks():
+    """Run initial scrape first; then periodic sweep + icon prefetch.
+
+    Previously initial_scan and start_periodic_sweep were scheduled together, so both
+    could enter process_channels() and overwrite jsons mid-batch — often leaving
+    IPTV_STREAMS_FILE.json empty.
+    """
+    try:
+        await initial_scan()
+    except Exception as e:
+        logging.error("Bootstrap initial_scan failed: %s", e, exc_info=True)
+    await asyncio.gather(
+        start_periodic_sweep(),
+        background_icon_prefetch_loop(),
+    )
+
+
+# --- SEO / syndication: slug pages, sitemap, RSS, Atom ----------------------------
+
+SEO_SLUG_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+
+SEO_RESERVED_SLUGS = frozenset(
+    {
+        "status",
+        "channels",
+        "scan",
+        "sweep-now",
+        "search",
+        "download-icons",
+        "export",
+        "proxy",
+        "icons",
+        "channel-info",
+        "static",
+        "api",
+        "health",
+        "manifest",
+        "feed",
+        "atom",
+        "rss",
+        "css",
+        "js",
+        "fonts",
+        "admin",
+        "jellyfin",
+        "iptv",
+        "playlist",
+    }
+)
+
+_seo_slug_revision = None
+_seo_slug_to_channel = {}
+_seo_slugs_sorted = []
+
+
+def seo_slugify_name(name):
+    if not name:
+        return "channel"
+    s = unicodedata.normalize("NFKD", str(name)).encode("ascii", "ignore").decode("ascii").lower()
+    s = re.sub(r"[^a-z0-9]+", "-", s).strip("-")
+    s = re.sub(r"-{2,}", "-", s)
+    return s or "channel"
+
+
+def seo_refresh_slug_index():
+    global _seo_slug_revision, _seo_slug_to_channel, _seo_slugs_sorted
+    rev = CHANNEL_STATE_REVISION
+    if _seo_slug_revision == rev and _seo_slug_to_channel:
+        return
+    channels = get_valid_channels()
+    mapping = {}
+    for ch in channels:
+        base = seo_slugify_name(ch.get("name", "channel"))
+        slug = base
+        n = 2
+        while slug in mapping or slug in SEO_RESERVED_SLUGS:
+            slug = f"{base}-{n}"
+            n += 1
+        mapping[slug] = ch
+    _seo_slug_to_channel = mapping
+    _seo_slugs_sorted = sorted(mapping.keys())
+    _seo_slug_revision = rev
+    logging.info("SEO: rebuilt slug map (%d channels → %d URLs)", len(channels), len(mapping))
+    try:
+        mp = "jsons/SEO_SLUG_MANIFEST.json"
+        out = {"slug_order": _seo_slugs_sorted, "slugs": {s: mapping[s].get("name") for s in _seo_slugs_sorted}}
+        tp = f"{mp}.tmp"
+        with open(tp, "w", encoding="utf-8") as f:
+            json.dump(out, f, indent=2, ensure_ascii=False)
+        os.replace(tp, mp)
+    except Exception as exc:
+        logging.debug("SEO manifest write skipped: %s", exc)
+
+
+def seo_public_base_url():
+    if IPTV_PUBLIC_BASE_URL:
+        return IPTV_PUBLIC_BASE_URL.rstrip("/")
+    return (request.url_root.rstrip("/") if request else "") or "http://127.0.0.1:40006"
+
+
+def seo_abs_url(path):
+    if not path.startswith("/"):
+        path = "/" + path
+    return seo_public_base_url().rstrip("/") + path
+
+
+def seo_meta_for_channel(ch):
+    name = ch.get("name") or "Channel"
+    group = ch.get("group_title") or ""
+    country = ch.get("country") or infer_country(ch)
+    playing = (ch.get("playing_now") or "").strip() or "Live stream"
+    parts = [f"Watch {name} live in your browser.", f"Current listing: {playing}."]
+    if group:
+        parts.append(f"Category: {group}.")
+    if country and str(country).upper() != "GLOBAL":
+        parts.append(f"Region: {country}.")
+    desc = " ".join(parts)
+    if len(desc) > 300:
+        desc = desc[:297] + "..."
+    return {"name": name, "description": desc, "group": group, "country": country, "playing": playing}
+
+
+def seo_og_image_for_channel(ch):
+    safe = channel_icon_safe_name(ch.get("name", ""))
+    local = find_local_icon_url(safe)
+    rel = local or ch.get("icon_url") or ch.get("tvg_logo") or ""
+    if not rel:
+        return ""
+    if rel.startswith("http://") or rel.startswith("https://"):
+        return rel
+    if rel.startswith("/"):
+        return seo_abs_url(rel)
+    return rel
+
+
+def _m3u_safe_attr(val):
+    if val is None:
+        return ""
+    return str(val).replace('"', "'").replace("\r", " ").replace("\n", " ").strip()
+
+
+def build_proxied_live_m3u(public_base, online_only=False):
+    """M3U where every stream URL is this server's /proxy/stream?url=… (Jellyfin / VLC M3U tuner)."""
+    base = (public_base or "").rstrip("/")
+    lines = ["#EXTM3U"]
+    for ch in get_valid_channels():
+        raw = (ch.get("url") or "").strip()
+        if not raw:
+            continue
+        if online_only and (ch.get("status") or "").lower() != "online":
+            continue
+        name = (ch.get("name") or "Channel").replace(",", " ").strip() or "Channel"
+        name = _m3u_safe_attr(re.sub(r"[\r\n]", " ", name))
+        tid = _m3u_safe_attr(ch.get("tvg_id") or seo_slugify_name(ch.get("name", "channel")))
+        grp = _m3u_safe_attr(ch.get("group_title") or IPTV_SITE_NAME)
+        logo_raw = seo_og_image_for_channel(ch) or ""
+        if logo_raw.startswith("/"):
+            logo_raw = base + logo_raw
+        attrs = [f'tvg-id="{tid}"']
+        if logo_raw:
+            attrs.append(f'tvg-logo="{_m3u_safe_attr(logo_raw)}"')
+        attrs.append(f'group-title="{grp}"')
+        lines.append("#EXTINF:-1 " + " ".join(attrs) + f",{name}")
+        lines.append(base + "/proxy/stream?url=" + quote(raw, safe=""))
+    return "\n".join(lines) + "\n"
+
+
+def seo_json_ld_broadcast(ch, canonical_url):
+    meta = seo_meta_for_channel(ch)
+    img = seo_og_image_for_channel(ch)
+    stream = (ch.get("url") or "").strip()
+    data = {
+        "@context": "https://schema.org",
+        "@type": "BroadcastService",
+        "name": meta["name"],
+        "description": meta["description"],
+        "url": canonical_url,
+        "broadcastDisplayName": meta["name"],
+        "inLanguage": (ch.get("audio_language") or "en")[:8],
+        "publisher": {"@type": "Organization", "name": IPTV_SITE_NAME},
+    }
+    if img:
+        data["logo"] = img
+        data["image"] = img
+    data["potentialAction"] = {
+        "@type": "WatchAction",
+        "target": {"@type": "EntryPoint", "urlTemplate": canonical_url, "actionPlatform": "http://schema.org/DesktopWebPlatform"},
+    }
+    if stream:
+        data["broadcastChannelId"] = ch.get("tvg_id") or meta["name"].lower().replace(" ", "")[:120]
+    return json.dumps(data, ensure_ascii=False)
+
+
+@app.route("/robots.txt")
+def seo_robots_txt():
+    base = seo_public_base_url()
+    body = f"User-agent: *\nAllow: /\n\nSitemap: {base}/sitemap.xml\n"
+    return Response(body, mimetype="text/plain; charset=utf-8")
+
+
+@app.route("/sitemap.xml")
+def seo_sitemap_xml():
+    seo_refresh_slug_index()
+    base = seo_public_base_url()
+    urls = [base + "/"]
+    for slug in _seo_slugs_sorted:
+        urls.append(f"{base}/{slug}")
+    lines = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+    ]
+    now = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
+    for loc in urls:
+        lines.append("<url>")
+        lines.append(f"  <loc>{xml_escape(loc)}</loc>")
+        lines.append(f"  <lastmod>{now}</lastmod>")
+        lines.append("  <changefreq>hourly</changefreq>")
+        lines.append("  <priority>0.8</priority>")
+        lines.append("</url>")
+    lines.append("</urlset>")
+    return Response("\n".join(lines), mimetype="application/xml; charset=utf-8")
+
+
+@app.route("/feed.xml")
+def seo_rss_feed():
+    seo_refresh_slug_index()
+    base = seo_public_base_url()
+    site = xml_escape(IPTV_SITE_NAME)
+    link = xml_escape(base + "/")
+    now = format_datetime(datetime.datetime.now(datetime.timezone.utc))
+    items = []
+    for slug in _seo_slugs_sorted:
+        ch = _seo_slug_to_channel[slug]
+        meta = seo_meta_for_channel(ch)
+        item_link = xml_escape(f"{base}/{slug}")
+        title = xml_escape(meta["name"])
+        desc = xml_escape(meta["description"])
+        items.append(
+            f"<item><title>{title}</title><link>{item_link}</link>"
+            f"<guid isPermaLink=\"true\">{item_link}</guid>"
+            f"<description>{desc}</description><pubDate>{now}</pubDate></item>"
+        )
+    rss = "\n".join(
+        [
+            '<?xml version="1.0" encoding="UTF-8"?>',
+            '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">',
+            f'<channel><title>{site} — Live channels</title><link>{link}</link>',
+            f"<description>Directory of live streams from {site}</description>",
+            f'<atom:link href="{xml_escape(base + "/feed.xml")}" rel="self" type="application/rss+xml"/>',
+            f"<lastBuildDate>{now}</lastBuildDate>",
+            *items,
+            "</channel></rss>",
+        ]
+    )
+    return Response(rss, mimetype="application/rss+xml; charset=utf-8")
+
+
+@app.route("/atom.xml")
+def seo_atom_feed():
+    seo_refresh_slug_index()
+    base = seo_public_base_url()
+    site = xml_escape(IPTV_SITE_NAME)
+    self_link = xml_escape(base + "/atom.xml")
+    index_link = xml_escape(base + "/")
+    now = datetime.datetime.now(datetime.timezone.utc).replace(microsecond=0)
+    updated = format_datetime(now)
+    entries = []
+    for slug in _seo_slugs_sorted:
+        ch = _seo_slug_to_channel[slug]
+        meta = seo_meta_for_channel(ch)
+        u = xml_escape(f"{base}/{slug}")
+        title = xml_escape(meta["name"])
+        summary = xml_escape(meta["description"])
+        entries.append(
+            f"<entry><title>{title}</title><link href=\"{u}\"/><id>{u}</id>"
+            f"<updated>{updated}</updated><summary>{summary}</summary></entry>"
+        )
+    atom = "\n".join(
+        [
+            '<?xml version="1.0" encoding="UTF-8"?>',
+            '<feed xmlns="http://www.w3.org/2005/Atom">',
+            f"<title>{site} — Channels</title>",
+            f'<link href="{index_link}" rel="alternate"/>',
+            f'<link href="{self_link}" rel="self"/>',
+            f"<id>{index_link}</id><updated>{updated}</updated>",
+            *entries,
+            "</feed>",
+        ]
+    )
+    return Response(atom, mimetype="application/atom+xml; charset=utf-8")
 
 
 #flask routes
@@ -1276,124 +1979,155 @@ def get_status():
     """Return current scanning status and channel count."""
     try:
         channels = get_valid_channels()
+        online_ct = sum(1 for ch in channels if (ch.get('status') or '').lower() == 'online')
         return jsonify({
             'total_channels': len(channels),
-            'scanning': True,  # We could track this more precisely
-            'last_update': time.time()
+            'online_channels': online_ct,
+            'scanning': SCAN_ACTIVE,
+            'revision': CHANNEL_STATE_REVISION,
+            'sweep_interval_sec': SWEEP_INTERVAL_SEC,
+            'last_sweep_started_at': LAST_SWEEP_STARTED_AT,
+            'last_sweep_completed_at': LAST_SWEEP_COMPLETED_AT,
+            'last_sweep_counts': LAST_SWEEP_COUNTS,
+            'last_update': time.time(),
         })
     except Exception as e:
         return jsonify({'error': str(e)})
 
+
+@app.route('/api/events')
+def sse_channel_events():
+    """Server-Sent Events: channel list revision and counts (for smooth live UI updates)."""
+    def event_stream():
+        last_rev = -1
+        while True:
+            try:
+                rev = CHANNEL_STATE_REVISION
+                if rev != last_rev:
+                    last_rev = rev
+                    ch = get_valid_channels()
+                    online_ct = sum(1 for x in ch if (x.get('status') or '').lower() == 'online')
+                    payload = json.dumps({
+                        'revision': rev,
+                        'total_channels': len(ch),
+                        'online_channels': online_ct,
+                        'scanning': SCAN_ACTIVE,
+                    })
+                    yield f"data: {payload}\n\n"
+                else:
+                    # Keep SSE alive so browser doesn't drop idle connection.
+                    yield ": ping\n\n"
+            except Exception as err:
+                yield f"data: {json.dumps({'error': str(err)})}\n\n"
+            time.sleep(2)
+
+    return Response(
+        stream_with_context(event_stream()),
+        mimetype='text/event-stream',
+        headers={
+            'Cache-Control': 'no-cache',
+            'Connection': 'keep-alive',
+            'X-Accel-Buffering': 'no',
+        },
+    )
+
+
 def download_channel_icon(channel_name, channel_url, tvg_logo):
-    """Download and cache channel icon/logo with multiple sources."""
+    """Download and cache channel logo under webroot/icons; serve locally after first scrape."""
     try:
-        # Create a safe filename from channel name
-        safe_name = re.sub(r'[^\w\-_\.]', '', channel_name.lower())
-        icon_path = f'webroot/icons/{safe_name}.png'
-        
-        # If icon already exists, return URL
-        if os.path.exists(icon_path):
-            return f'/icons/{safe_name}.png'
-        
-        # Source 1: Try tvg_logo from M3U playlist
+        safe_name = channel_icon_safe_name(channel_name)
+        cached_url = find_local_icon_url(safe_name)
+        if cached_url:
+            return cached_url
+
+        base = f'webroot/icons/{safe_name}'
+
+        def save_image_bytes(content, content_type, ref_url):
+            if not content or len(content) < 80:
+                return None
+            ext = guess_image_ext(content_type, ref_url)
+            path = f'{base}{ext}'
+            with open(path, 'wb') as f:
+                f.write(content)
+            logging.info(f"Cached icon for {channel_name} as {safe_name}{ext}")
+            return f'/icons/{safe_name}{ext}'
+
+        # Source 1: tvg_logo from playlist
         if tvg_logo and tvg_logo != '':
             try:
-                response = requests.get(tvg_logo, timeout=10, headers=HEADERS)
+                response = requests.get(tvg_logo, timeout=12, headers=HEADERS)
                 if response.status_code == 200:
-                    with open(icon_path, 'wb') as f:
-                        f.write(response.content)
-                    logging.info(f"Downloaded icon for {channel_name} from tvg_logo")
-                    return f'/icons/{safe_name}.png'
+                    url_found = save_image_bytes(response.content, response.headers.get('Content-Type'), tvg_logo)
+                    if url_found:
+                        return url_found
             except Exception as e:
                 logging.warning(f"Failed to download tvg_logo for {channel_name}: {e}")
-        
-        # Source 2: YouTube Channel Icons
+
+        # Source 2: YouTube thumbnails via yt-dlp
         if 'youtube.com' in channel_url or 'youtu.be' in channel_url:
             icon_url = get_youtube_channel_icon(channel_url)
             if icon_url:
                 try:
-                    response = requests.get(icon_url, timeout=10, headers=HEADERS)
+                    response = requests.get(icon_url, timeout=12, headers=HEADERS)
                     if response.status_code == 200:
-                        with open(icon_path, 'wb') as f:
-                            f.write(response.content)
-                        logging.info(f"Downloaded YouTube icon for {channel_name}")
-                        return f'/icons/{safe_name}.png'
+                        url_found = save_image_bytes(response.content, response.headers.get('Content-Type'), icon_url)
+                        if url_found:
+                            return url_found
                 except Exception as e:
                     logging.warning(f"Failed to download YouTube icon for {channel_name}: {e}")
-        
-        # Source 3: TV Logo Sources (Similar to Excel logo systems)
+
         icon_sources = [
-            # TV Logos database
             f"https://raw.githubusercontent.com/tv-logo/tv-logos/main/data/logos/{safe_name}.png",
             f"https://raw.githubusercontent.com/tv-logo/tv-logos/main/data/logos/{safe_name}.jpg",
-            # IPTV Logos repository
             f"https://raw.githubusercontent.com/iptv-org/epg/master/logos/{safe_name}.png",
             f"https://raw.githubusercontent.com/iptv-org/epg/master/logos/{safe_name}.jpg",
-            # Alternative TV logos
             f"https://raw.githubusercontent.com/fanmixco/IPTV_Logos/master/{safe_name}.png",
             f"https://raw.githubusercontent.com/fanmixco/IPTV_Logos/master/{safe_name}.jpg",
         ]
-        
+
         for icon_url in icon_sources:
             try:
-                response = requests.get(icon_url, timeout=5, headers=HEADERS)
+                response = requests.get(icon_url, timeout=8, headers=HEADERS)
                 if response.status_code == 200 and len(response.content) > 100:
-                    with open(icon_path, 'wb') as f:
-                        f.write(response.content)
-                    logging.info(f"Downloaded logo for {channel_name} from {icon_url}")
-                    return f'/icons/{safe_name}.png'
-            except:
+                    url_found = save_image_bytes(response.content, response.headers.get('Content-Type'), icon_url)
+                    if url_found:
+                        return url_found
+            except Exception:
                 continue
-        
-        # Source 4: Domain Favicons
+
         domain_icon = get_domain_favicon(channel_url)
         if domain_icon:
             try:
-                response = requests.get(domain_icon, timeout=5, headers=HEADERS)
+                response = requests.get(domain_icon, timeout=8, headers=HEADERS)
                 if response.status_code == 200 and len(response.content) > 100:
-                    with open(icon_path, 'wb') as f:
-                        f.write(response.content)
-                    logging.info(f"Downloaded favicon for {channel_name}")
-                    return f'/icons/{safe_name}.png'
+                    url_found = save_image_bytes(response.content, response.headers.get('Content-Type'), domain_icon)
+                    if url_found:
+                        return url_found
             except Exception as e:
                 logging.warning(f"Failed to download favicon for {channel_name}: {e}")
-        
-        # Source 5: Google Favicon API
+
         try:
             from urllib.parse import urlparse
-            parsed_url = urlparse(channel_url)
+            parsed_url = urlparse(channel_url or '')
             domain = parsed_url.netloc
-            
-            google_favicon = f"https://www.google.com/s2/favicons?domain={domain}&sz=128"
-            response = requests.get(google_favicon, timeout=5, headers=HEADERS)
-            if response.status_code == 200 and len(response.content) > 100:
-                with open(icon_path, 'wb') as f:
-                    f.write(response.content)
-                logging.info(f"Downloaded Google favicon for {channel_name}")
-                return f'/icons/{safe_name}.png'
+            if domain:
+                google_favicon = f"https://www.google.com/s2/favicons?domain={domain}&sz=128"
+                response = requests.get(google_favicon, timeout=8, headers=HEADERS)
+                if response.status_code == 200 and len(response.content) > 80:
+                    url_found = save_image_bytes(response.content, response.headers.get('Content-Type'), google_favicon)
+                    if url_found:
+                        return url_found
+                ddg_icon = f"https://icons.duckduckgo.com/ip3/{domain}.ico"
+                response = requests.get(ddg_icon, timeout=8, headers=HEADERS)
+                if response.status_code == 200 and len(response.content) > 80:
+                    url_found = save_image_bytes(response.content, response.headers.get('Content-Type'), ddg_icon)
+                    if url_found:
+                        return url_found
         except Exception as e:
-            logging.warning(f"Failed to download Google favicon for {channel_name}: {e}")
-        
-        # Source 6: DuckDuckGo Icon API
-        try:
-            from urllib.parse import urlparse
-            parsed_url = urlparse(channel_url)
-            domain = parsed_url.netloc
-            
-            ddg_icon = f"https://icons.duckduckgo.com/ip3/{domain}.ico"
-            response = requests.get(ddg_icon, timeout=5, headers=HEADERS)
-            if response.status_code == 200 and len(response.content) > 100:
-                with open(icon_path, 'wb') as f:
-                    f.write(response.content)
-                logging.info(f"Downloaded DuckDuckGo icon for {channel_name}")
-                return f'/icons/{safe_name}.png'
-        except Exception as e:
-            logging.warning(f"Failed to download DuckDuckGo icon for {channel_name}: {e}")
-        
-        # If all else fails, return None
-        logging.info(f"No icon found for {channel_name}, will use text fallback")
+            logging.warning(f"Fallback favicons failed for {channel_name}: {e}")
+
         return None
-        
+
     except Exception as e:
         logging.error(f"Error downloading icon for {channel_name}: {e}")
         return None
@@ -1447,7 +2181,8 @@ def serve_icon(filename):
     try:
         icon_path = f'webroot/icons/{filename}'
         if os.path.exists(icon_path):
-            return send_file(icon_path, mimetype='image/png')
+            mt = mimetypes.guess_type(icon_path)[0] or 'image/png'
+            return send_file(icon_path, mimetype=mt)
         else:
             return "Icon not found", 404
     except Exception as e:
@@ -1535,36 +2270,49 @@ def trigger_scan():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+
+@app.route('/sweep-now')
+def trigger_sweep_now():
+    """Manually trigger an immediate sweep in the background."""
+    try:
+        if SCAN_ACTIVE:
+            return jsonify({'message': 'Scan/sweep already running', 'status': 'busy'}), 202
+        threading.Thread(target=asyncio.run, args=(sweep_channels_async(),), daemon=True).start()
+        return jsonify({'message': 'Manual sweep started', 'status': 'sweeping'}), 202
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 @app.route('/channels')
 def get_channels():
     """Return a list of channels with icon URLs if they exist."""
     try:
         # If channels file is empty, return empty list (don't auto-parse)
-        with open(FILES['streams'], 'r') as f:
-            channels = json.load(f)
-            
-            if not channels:
-                # Return empty list - user must trigger scan manually
-                return jsonify([])
-            
-            # Add icon URLs to channels if they exist
-            for channel in channels:
-                # Create safe filename from channel name
-                safe_name = re.sub(r'[^\w\-_\.]', '', channel['name'].lower())
-                icon_path = f'webroot/icons/{safe_name}.png'
-                if os.path.exists(icon_path):
-                    channel['icon_url'] = f'/icons/{safe_name}.png'
-                else:
-                    channel['icon_url'] = None
-            
-            # Return all channels flat for simplicity
-            return jsonify({
-                'channels': channels,
-                'total_channels': len(channels),
-                'current_page': 1,
-                'has_more': False,
-                'total_pages': 1
-            })
+        channels = load_json_file(FILES['streams'], [])
+
+        if not channels:
+            # Return empty list - user must trigger scan manually
+            return jsonify([])
+
+        # Add icon URLs (local disk first) and country fallback for compatibility
+        for channel in channels:
+            safe_name = channel_icon_safe_name(channel.get('name', ''))
+            local_icon = find_local_icon_url(safe_name)
+            if local_icon:
+                channel['icon_url'] = local_icon
+            else:
+                channel['icon_url'] = channel.get('icon_url')
+            channel['country'] = channel.get('country') or infer_country(channel)
+
+        # Return all channels flat for simplicity
+        return jsonify({
+            'channels': channels,
+            'countries': sorted({ch.get('country', 'GLOBAL') for ch in channels}),
+            'total_channels': len(channels),
+            'revision': CHANNEL_STATE_REVISION,
+            'current_page': 1,
+            'has_more': False,
+            'total_pages': 1
+        })
     
     except FileNotFoundError:
         logging.warning("Streams file not found, returning empty list")
@@ -1576,8 +2324,19 @@ def get_channels():
         logging.error(f"Error loading channels: {e}")
         return jsonify([])
 
+
+@app.route('/export/IPTV_STREAMS_FILE.json')
+def export_streams_file():
+    """Static JSON file for external apps (Unity, VRChat, Resonite, etc.)."""
+    path = FILES['streams']
+    if not os.path.isfile(path):
+        return jsonify([])
+    return send_file(path, mimetype='application/json', as_attachment=False, download_name='IPTV_STREAMS_FILE.json')
+
+
 def get_cached_icon_url(channel_name, channel_url, tvg_logo):
     """Get cached icon URL for a channel."""
+    return download_channel_icon(channel_name, channel_url, tvg_logo)
 
 @app.route('/proxy/image')
 def proxy_image():
@@ -1862,6 +2621,55 @@ def get_twitch_stream_url(url):
         logging.error(f"Error extracting Twitch URL: {e}")
         return None
 
+# HLS manifests are small text; rewrite so every segment/variant URL loads via same-origin proxy (CORS + Firefox).
+MAX_HLS_PLAYLIST_BYTES = 4 * 1024 * 1024
+
+
+def _url_looks_like_hls_manifest(url: str) -> bool:
+    path = urllib.parse.urlparse(url).path.lower()
+    return path.endswith('.m3u8') or path.endswith('.m3u')
+
+
+def rewrite_hls_playlist_for_proxy(body: str, resolved_base_url: str) -> str:
+    """Rewrite manifest lines so absolute/relative URLs are fetched through /proxy/stream."""
+    uri_in_tag = re.compile(r'URI="([^"]+)"')
+    lines_out = []
+
+    for raw in body.splitlines():
+        stripped = raw.strip()
+        if stripped.startswith('#'):
+            if 'URI="' in raw:
+
+                def repl_tag(m):
+                    inner = m.group(1)
+                    if inner.startswith('/proxy/stream?'):
+                        return m.group(0)
+                    if inner.startswith(('http://', 'https://')):
+                        resolved = inner
+                    else:
+                        resolved = urllib.parse.urljoin(resolved_base_url, inner)
+                    enc = quote(resolved, safe='')
+                    return f'URI="/proxy/stream?url={enc}"'
+
+                raw = uri_in_tag.sub(repl_tag, raw)
+            lines_out.append(raw)
+            continue
+        if not stripped:
+            lines_out.append(raw)
+            continue
+        if stripped.startswith('/proxy/stream?'):
+            lines_out.append(stripped)
+            continue
+        if stripped.startswith(('http://', 'https://')):
+            resolved = stripped
+        else:
+            resolved = urllib.parse.urljoin(resolved_base_url, stripped)
+        enc = quote(resolved, safe='')
+        lines_out.append(f'/proxy/stream?url={enc}')
+
+    return '\n'.join(lines_out)
+
+
 @app.route('/proxy/stream')
 def proxy_stream():
     """Proxy YouTube and Twitch streams to work with HTML5 video player."""
@@ -1907,24 +2715,136 @@ def proxy_stream():
         return jsonify({'error': str(e)}), 500
 
 def proxy_direct_stream(url):
-    """Proxy direct streams."""
+    """Proxy direct streams (progressive passthrough or HLS manifest rewrite + segment relay)."""
+    cors = {'Access-Control-Allow-Origin': '*'}
     try:
-        # For direct streams, we can redirect or proxy content
-        response = requests.get(url, headers=HEADERS, stream=True, timeout=10)
-        
+        ct_hint = ''
+        if _url_looks_like_hls_manifest(url):
+            upstream = requests.get(url, headers=HEADERS, timeout=45)
+            if upstream.status_code != 200:
+                return jsonify({'error': f'Upstream HTTP {upstream.status_code}'}), upstream.status_code
+            body = upstream.content
+            ct_hint = upstream.headers.get('Content-Type') or ''
+
+            if len(body) <= MAX_HLS_PLAYLIST_BYTES:
+                text = body.decode('utf-8', errors='replace')
+                if text.lstrip().startswith('#EXTM3U'):
+                    text = rewrite_hls_playlist_for_proxy(text, upstream.url)
+                    return Response(
+                        text,
+                        mimetype='application/vnd.apple.mpegurl',
+                        headers={**cors, 'Cache-Control': 'no-store'},
+                    )
+
+            # Large or non-manifest body from .m3u URL — passthrough binary
+            return Response(
+                body,
+                content_type=ct_hint or 'application/octet-stream',
+                headers=cors,
+            )
+
+        response = requests.get(url, headers=HEADERS, stream=True, timeout=120)
+        if response.status_code != 200:
+            response.close()
+            return jsonify({'error': f'Upstream HTTP {response.status_code}'}), 502
+
         def generate():
-            for chunk in response.iter_content(chunk_size=8192):
-                yield chunk
-        
-        return Response(stream_with_context(generate()),
-                       content_type=response.headers.get('Content-Type', 'application/octet-stream'),
-                       headers={'Access-Control-Allow-Origin': '*'})
-        
+            try:
+                for chunk in response.iter_content(chunk_size=65536):
+                    if chunk:
+                        yield chunk
+            finally:
+                response.close()
+
+        return Response(
+            stream_with_context(generate()),
+            content_type=response.headers.get('Content-Type', 'application/octet-stream'),
+            headers=cors,
+        )
+
     except Exception as e:
         logging.error(f"Error proxying direct stream: {e}")
         return jsonify({'error': 'Failed to proxy stream'}), 500
 
-from flask import redirect
+
+@app.route("/jellyfin/live.m3u")
+@app.route("/iptv/live.m3u")
+@app.route("/live-proxy.m3u")
+def jellyfin_style_proxied_m3u():
+    """Expose current lineup as an M3U whose stream URLs hit /proxy/stream (Jellyfin Live TV tuner, VLC, etc.)."""
+    if IPTV_PLAYLIST_SECRET and request.args.get("token") != IPTV_PLAYLIST_SECRET:
+        abort(403)
+    online_only = request.args.get("online", "").lower() in ("1", "true", "yes")
+    base = seo_public_base_url().rstrip("/")
+    body = build_proxied_live_m3u(base, online_only=online_only)
+    return Response(
+        body,
+        mimetype="audio/x-mpegurl",
+        headers={
+            "Content-Disposition": 'inline; filename="iptv-scanner-proxy.m3u"',
+            "Cache-Control": "no-store, max-age=0",
+        },
+    )
+
+
+@app.route("/<slug>")
+def seo_channel_page(slug):
+    """SEO landing + player for /<slug>-style URLs (e.g. /fox-news)."""
+    if not SEO_SLUG_RE.match(slug):
+        abort(404)
+    if slug.lower() in SEO_RESERVED_SLUGS:
+        abort(404)
+    seo_refresh_slug_index()
+    ch = _seo_slug_to_channel.get(slug)
+    canonical = seo_abs_url(slug)
+
+    if not ch or not (ch.get("url") or "").strip():
+        return (
+            render_template(
+                "seo_missing.html",
+                site_name=IPTV_SITE_NAME,
+                slug=slug,
+                canonical=seo_abs_url(""),
+                home_url=seo_public_base_url().rstrip("/"),
+                error_title="Stream not found",
+                error_body="That channel slug is not in the current lineup, or the listing has no stream URL yet. Try scanning again from the guide or browse the home page.",
+            ),
+            404,
+        )
+
+    raw_url = ch.get("url", "").strip()
+    meta = seo_meta_for_channel(ch)
+    og_img = seo_og_image_for_channel(ch)
+    json_ld = seo_json_ld_broadcast(ch, canonical)
+
+    youtube = ("youtube.com" in raw_url) or ("youtu.be" in raw_url)
+    twitch = "twitch.tv" in raw_url
+    embed_player = youtube or twitch
+    path_lc = raw_url.split("?")[0].lower()
+    progressive = path_lc.endswith((".mp4", ".webm", ".ogv"))
+
+    proxied_play = "/proxy/stream?url=" + quote(raw_url, safe="")
+
+    public_root = seo_public_base_url().rstrip("/")
+
+    return render_template(
+        "seo_channel.html",
+        site_name=IPTV_SITE_NAME,
+        channel_name=meta["name"],
+        description=meta["description"],
+        group_title=meta.get("group") or "",
+        country=meta.get("country") or "",
+        canonical=canonical,
+        og_image=og_img or "",
+        json_ld=json_ld,
+        slug=slug,
+        stream_url_encoded=proxied_play,
+        embed_player=embed_player,
+        progressive=progressive,
+        raw_stream_url=raw_url,
+        home_url=public_root,
+    )
+
 
 def run_flask():
     app.run(host='127.0.0.1', port=40006, use_reloader=False)
@@ -1937,9 +2857,8 @@ if __name__ == '__main__':
     flask_thread = Thread(target=run_flask)
     flask_thread.start()
 
-    # start async tasks
-    loop.create_task(initial_scan())
-    loop.create_task(start_periodic_sweep())
+    # Initial scrape must finish before periodic sweep runs (avoid concurrent process_channels).
+    loop.create_task(bootstrap_background_tasks())
 
     try:
         loop.run_forever()

@@ -2,103 +2,238 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#050812">
+    <meta name="description" content="Live IPTV channel guide — browse, search, and stream. Channel pages and sitemap for discovery.">
+    <link rel="alternate" type="application/rss+xml" title="IPTV Scanner — channel feed" href="/feed.xml">
+    <link rel="alternate" type="application/atom+xml" title="IPTV Scanner — channel feed" href="/atom.xml">
     <title>IPTV Scanner - Modern TV Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIAAoBQAog==">
 </head>
-<body>
-    <div class="tv-container">
-        <!-- Header -->
-        <header class="tv-header">
-            <div class="header-left">
-                <h1><i class="fas fa-tv"></i> IPTV Scanner</h1>
-                <div class="status-indicator">
-                    <span id="channelCount">0</span> channels found
-                    <span id="scanStatus" class="scanning">Scanning...</span>
+<body class="dual-layout-root">
+    <!-- Desktop layout (767px+) -->
+    <div class="layout-desktop" id="layoutDesktop">
+        <div class="tv-container tv-container-x1">
+            <header class="tv-header carrier-header">
+                <div class="header-left">
+                    <div class="brand-lockup">
+                        <span class="brand-mark" aria-hidden="true"><i class="fas fa-circle-play"></i></span>
+                        <div class="brand-text">
+                            <h1>Live TV Guide</h1>
+                            <p class="brand-tagline">All channels — one screen</p>
+                        </div>
+                    </div>
+                    <div class="status-indicator status-pills">
+                        <span class="pill pill-stat"><span id="channelCountDesk">0</span> channels</span>
+                        <span class="pill pill-live"><span class="status-dot online" id="onlineDotDesk"></span><span id="onlineCountDesk">0</span> online</span>
+                        <span id="scanStatusDesk" class="pill pill-scan scanning">Updating…</span>
+                    </div>
                 </div>
-            </div>
-            <div class="header-right">
-                <div class="search-box">
-                    <input type="text" id="search" placeholder="Search channels...">
-                    <i class="fas fa-search"></i>
+                <div class="header-right header-tools">
+                    <label class="filter-check chk-glass"><input type="checkbox" id="onlineOnlyDesk"> Live only</label>
+                    <label class="filter-check chk-glass"><input type="checkbox" id="favoritesOnlyDesk"> My list</label>
+                    <div class="search-box search-carrier">
+                        <input type="text" id="searchDesk" placeholder="Search channels, networks, topics…" autocomplete="off">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <button type="button" id="toggleGuideDesk" class="toggle-btn btn-guide-toggle">
+                        <i class="fas fa-th-list"></i> Guide
+                    </button>
                 </div>
-                <button id="toggleGuide" class="toggle-btn">
-                    <i class="fas fa-list"></i> Guide
-                </button>
-            </div>
-        </header>
+            </header>
 
-        <!-- Main Content -->
-        <main class="tv-main">
-            <!-- Video Player Section -->
-            <section class="player-section">
-                <div id="videoPlayer" class="video-player">
-                    <div class="player-placeholder">
-                        <i class="fas fa-play-circle"></i>
-                        <p>Select a channel to start watching</p>
-                    </div>
+            <details class="integrations-strip" id="integrationsDesk">
+                <summary>This site on your TV browser &middot; Jellyfin playlist</summary>
+                <div class="integrations-body">
+                    <p><strong>TV / phone browser:</strong> open exactly <span class="integrations-host" id="bareOriginDesk">—</span> (homepage = this guide). Playback uses our built-in relay.</p>
+                    <p><strong>Jellyfin Live TV tuner (M3U):</strong> <code id="jellyfinM3uDesk" class="integrations-code">—</code>
+                        <button type="button" class="integrations-copy-btn" id="copyM3uDesk" title="Copy">Copy</button>
+                        <span class="integrations-hint">Paste in Dashboard → Live TV → M3U on your Jellyfin server (not on the TV).</span>
+                    </p>
                 </div>
-                <div class="player-info">
-                    <h2 id="currentChannelName">No Channel Selected</h2>
-                    <p id="currentChannelInfo">Choose a channel from the guide to begin streaming</p>
-                    <div id="loadingIndicator" class="loading">
-                        <i class="fas fa-spinner fa-spin"></i>
-                        <p>Loading channels...</p>
-                    </div>
-                </div>
-            </section>
+            </details>
 
-            <!-- Channel Guide Section -->
-            <section id="channelGuide" class="guide-section">
-                <div class="guide-header">
-                    <div class="guide-controls">
-                        <select id="groupFilter">
-                            <option value="">All Groups</option>
-                        </select>
-                        <select id="sortFilter">
-                            <option value="name">Sort by Name</option>
-                            <option value="group_title">Sort by Group</option>
-                        </select>
-                        <button id="downloadIconsBtn" class="toggle-btn" onclick="downloadAllIcons()">
-                            <i class="fas fa-download"></i> Download Icons
-                        </button>
+            <main class="tv-main tv-main-x1">
+                <section class="player-section x1-hero">
+                    <div class="x1-screen-wrap">
+                        <div class="x1-bezel">
+                            <div id="videoPlayerDesk" class="video-player video-player-x1">
+                                <div class="player-placeholder">
+                                    <i class="fas fa-play-circle"></i>
+                                    <p>Select a channel to start watching</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="guide-stats">
-                        <span id="visibleChannels">0</span> channels visible
+                    <div class="player-info player-info-x1">
+                        <div class="now-playing-label">Now playing</div>
+                        <h2 id="currentChannelNameDesk">No channel selected</h2>
+                        <p id="currentChannelInfoDesk">Choose a channel from the guide on the right to begin streaming.</p>
+                        <div id="loadingIndicatorDesk" class="loading loading-x1">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <p>Loading channels…</p>
+                        </div>
                     </div>
-                </div>
-                <div id="channelsList" class="channels-grid"></div>
-            </section>
-        </main>
+                </section>
+
+                <section id="channelGuideDesk" class="guide-section guide-x1">
+                    <div class="guide-epg-bar">
+                        <span class="epg-col epg-ch">Channel</span>
+                        <span class="epg-col epg-now">Lineup</span>
+                        <span class="epg-col epg-act">Watch</span>
+                    </div>
+                    <div class="guide-header guide-header-x1">
+                        <div class="guide-controls">
+                            <select id="groupFilterDesk"><option value="">All groups</option></select>
+                            <select id="countryFilterDesk"><option value="">All countries</option></select>
+                            <select id="sortFilterDesk">
+                                <option value="name">Sort by name</option>
+                                <option value="group_title">Sort by group</option>
+                                <option value="country">Sort by country</option>
+                                <option value="status">Sort by status</option>
+                                <option value="audio_language">Sort by language</option>
+                                <option value="variant_quality">Sort by quality</option>
+                                <option value="variant_bandwidth">Sort by bandwidth</option>
+                            </select>
+                            <select id="sortDirDesk">
+                                <option value="asc">Asc</option>
+                                <option value="desc">Desc</option>
+                            </select>
+                        </div>
+                        <div class="guide-stats guide-stats-x1"><span id="visibleChannelsDesk">0</span> in view</div>
+                    </div>
+                    <div id="channelsListDesk" class="channels-grid channels-grid-desktop channel-rail-x1"></div>
+                </section>
+            </main>
+        </div>
     </div>
 
-    <!-- Channel Preview Modal -->
+    <!-- Mobile layout (<768px): fixed app shell — no page scroll; list scrolls inside -->
+    <div class="layout-mobile" id="layoutMobile">
+        <div class="mobile-shell mobile-app-shell">
+            <header class="mobile-top mobile-app-top">
+                <div class="mobile-brand-row">
+                    <div class="mobile-brand">
+                        <span class="brand-mark-mobile"><i class="fas fa-circle-play"></i></span>
+                        <div>
+                            <h1 class="mobile-title">Live TV</h1>
+                            <p class="mobile-sub">IPTV Scanner</p>
+                        </div>
+                    </div>
+                    <span class="mobile-live-badge">● LIVE</span>
+                </div>
+                <div class="mobile-metrics">
+                    <span><strong id="channelCountMob">0</strong> channels</span>
+                    <span class="metric-dot-wrap"><span class="status-dot online" id="onlineDotMob"></span><strong id="onlineCountMob">0</strong> on</span>
+                    <span id="scanStatusMob" class="scanning scan-mini">Updating…</span>
+                </div>
+                <details class="integrations-strip integrations-strip-mobile" id="integrationsMob">
+                    <summary>TV URL &middot; Jellyfin M3U</summary>
+                    <div class="integrations-body">
+                        <p><strong>Browser:</strong> <span class="integrations-host" id="bareOriginMob">—</span></p>
+                        <p><strong>Jellyfin M3U:</strong> <code id="jellyfinM3uMob" class="integrations-code">—</code>
+                            <button type="button" class="integrations-copy-btn" id="copyM3uMob" title="Copy">Copy</button>
+                        </p>
+                    </div>
+                </details>
+            </header>
+
+            <div class="mobile-stage">
+            <div class="mobile-panel mobile-panel-browse" data-panel="browse">
+                <div class="mobile-toolbar">
+                    <div class="search-box mobile-search search-app">
+                        <input type="text" id="searchMob" placeholder="Search networks…" autocomplete="off">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="mobile-chip-row">
+                    <label class="chip-toggle"><input type="checkbox" id="onlineOnlyMob"> <span>Live</span></label>
+                    <label class="chip-toggle"><input type="checkbox" id="favoritesOnlyMob"> <span>★ Saves</span></label>
+                    </div>
+                </div>
+                <div class="mobile-selects mobile-selects-app">
+                    <select id="groupFilterMob"><option value="">Group</option></select>
+                    <select id="countryFilterMob"><option value="">Region</option></select>
+                    <select id="sortFilterMob">
+                        <option value="name">Name</option>
+                        <option value="group_title">Group</option>
+                        <option value="country">Country</option>
+                        <option value="status">Status</option>
+                        <option value="audio_language">Lang</option>
+                        <option value="variant_quality">Quality</option>
+                        <option value="variant_bandwidth">Bandwidth</option>
+                    </select>
+                    <select id="sortDirMob">
+                        <option value="asc">↑</option>
+                        <option value="desc">↓</option>
+                    </select>
+                </div>
+                <div class="mobile-list-meta mobile-list-meta-app"><span id="visibleChannelsMob">0</span> showing</div>
+                <div class="mobile-list-scroller">
+                    <div id="channelsListMob" class="channels-list-mobile"></div>
+                </div>
+            </div>
+
+            <div class="mobile-panel mobile-panel-watch hidden" data-panel="watch">
+                <div class="mobile-watch-frame">
+                    <div id="videoPlayerMob" class="video-player video-player-mobile video-player-app">
+                        <div class="player-placeholder">
+                            <i class="fas fa-play-circle"></i>
+                            <p>Browse channels, then tap Play</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="player-info player-info-mobile player-info-app">
+                    <h2 id="currentChannelNameMob">No channel</h2>
+                    <p id="currentChannelInfoMob">Open Guide and tap a channel to watch.</p>
+                    <div id="loadingIndicatorMob" class="loading hidden">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p>Loading…</p>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+            <nav class="mobile-tabbar" role="tablist" aria-label="Main">
+                <button type="button" class="mobile-tab active" data-mobile-tab="browse" role="tab" aria-selected="true">
+                    <i class="fas fa-layer-group"></i><span>Guide</span>
+                </button>
+                <button type="button" class="mobile-tab" data-mobile-tab="watch" role="tab" aria-selected="false">
+                    <i class="fas fa-tv"></i><span>Watch</span>
+                </button>
+            </nav>
+        </div>
+    </div>
+
     <div id="previewModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 id="previewChannelName">Channel Preview</h3>
-                <button class="close-btn" onclick="closePreview()">&times;</button>
+                <button type="button" class="close-btn" id="closePreviewX">&times;</button>
             </div>
             <div class="modal-body">
                 <div id="previewPlayer" class="preview-player">
                     <div class="preview-placeholder">
                         <i class="fas fa-play-circle"></i>
-                        <p>Loading preview...</p>
+                        <p>Loading preview…</p>
                     </div>
                 </div>
                 <div class="preview-info">
                     <p id="previewChannelInfo"></p>
                     <div class="preview-actions">
-                        <button id="watchNowBtn" class="primary-btn">Watch Now</button>
-                        <button id="closePreviewBtn" class="secondary-btn">Close</button>
+                        <button type="button" id="watchNowBtn" class="primary-btn">Watch Now</button>
+                        <button type="button" id="closePreviewBtn" class="secondary-btn">Close</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.15/hls.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
 </body>
 </html>
